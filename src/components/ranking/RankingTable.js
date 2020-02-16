@@ -121,7 +121,7 @@ const EnhancedTableToolbar = props => {
     <Toolbar
     >
         <Typography className={classes.title} variant="h6" id="tableTitle">
-          ランキング
+          全体ランキング
         </Typography>
     </Toolbar>
   );
@@ -244,7 +244,7 @@ function RankingTable(props) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 50]}
+          rowsPerPageOptions={10}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

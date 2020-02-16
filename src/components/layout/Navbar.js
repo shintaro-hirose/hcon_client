@@ -45,7 +45,6 @@ class Navbar extends Component {
               width={50}
               height={50}
               display="inline"
-              maxWidth="100%"
               />
               </Box>
               <Box flexGrow={1}>
@@ -63,7 +62,7 @@ class Navbar extends Component {
                 設定
               </Button>
               </Box>
-              <Button color="inherit" onClick={this.handleLogout}>
+              <Button color="inherit" component={Link} to="/" onClick={this.handleLogout} variant="outlined">
                 ログアウト
               </Button>
             </Fragment>
@@ -74,22 +73,21 @@ class Navbar extends Component {
               width={50}
               height={50}
               display="inline"
-              maxWidth="100%"
               />
               </Box>
               <Box flexGrow={1}> 
-              <Button color="inherit" component={Link} to={`/result`} size="large">
+              <Button color="inherit" component={Link} to={`/result`} >
                 昨日の結果
               </Button>
-              <Button color="inherit" component={Link} to="/ranking" size="large">
+              <Button color="inherit" component={Link} to="/ranking">
                 ランキング
               </Button>
               </Box>
               <Box>
-              <Button color="inherit" component={Link} to="/login" size="large" >
+              <Button color="inherit" component={Link} to="/login" >
                 ログイン
               </Button>
-              <Button color="inherit" component={Link} to="/signup" size="large" variant="outlined">
+              <Button color="inherit" component={Link} to="/signup" variant="outlined">
                 登録
               </Button>
               </Box>

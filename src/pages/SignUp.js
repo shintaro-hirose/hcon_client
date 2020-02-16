@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -68,7 +67,6 @@ function SignUp(props) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -85,6 +83,7 @@ function SignUp(props) {
             name="handle"
             label="ユーザ名"
             id="handle"
+            autoFocus
             helperText={errors.handle}
             error={errors.handle ? true : false}
             onChange={handleChange4}
@@ -98,7 +97,6 @@ function SignUp(props) {
             id="email"
             label="メールアドレス"
             name="email"
-            autoFocus
             helperText={errors.email}
             error={errors.email ? true : false}
             onChange={handleChange1}
