@@ -1,20 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import Radio from '@material-ui/core/Radio';
 import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import {red} from '@material-ui/core/colors';
+import {red, yellow} from '@material-ui/core/colors';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Loading from '../util/Loading';
 
 import { connect } from 'react-redux';
-import { postContestResult } from '../redux/actions/userActions';
+import { postContestResult, getContest } from '../redux/actions/userActions';
 
 const useStyles = makeStyles(theme => ({
   root: {
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    position: 'relative',
+  },
+  progress: {
+    position: 'absolute'
   },
 }));
 
@@ -23,10 +35,14 @@ const RedRadio = withStyles({
     checked: {color: red[600]},
 })(props => <Radio color="default" {...props} />);
 
+const YellowRadio = withStyles({
+    
+  checked: {color: yellow[600]},
+})(props => <Radio color="default" {...props} />);
+
 function Contest(props) {
   const classes = useStyles();
-  const [form, setForm] = React.useState({
-      contestId: props.match.params.contestId,
+  const [form, setForm] = useState({
       firstInput:"",
       secondInput:"",
       thirdInput:"",
@@ -36,13 +52,21 @@ function Contest(props) {
       firstDnfReason:"",
       secondDnfReason:"",
       thirdDnfReason:""
-
   });
+
+  useEffect(() => {
+    props.getContest();
+  },[]);
+
+  const loading = props.user.loading; 
+  const errors = props.UI.errors;
+  const uiLoading = props.UI.uiLoading;
 
   const handleChange = event => {
     setForm({
         ...form,
-        [event.target.name]: event.target.value
+        [event.target.name]: event.target.value,
+        contestId: props.user.contest.contestId
     });
   };
 
@@ -51,8 +75,19 @@ function Contest(props) {
     props.postContestResult(form, props.history);
   };
 
+  let contestmarkup = !loading ? (
+    <React.Fragment>
+      <Box>{props.user.contest.contestId}</Box>
+      <Typography>scramble1: {props.user.contest.scrambles.first}</Typography>
+      <Typography>scramble2: {props.user.contest.scrambles.second}</Typography>
+      <Typography>scramble3: {props.user.contest.scrambles.third}</Typography>
+    </React.Fragment>
+  ) : (
+    <Loading />
+  );
   return (
     <React.Fragment>
+      {contestmarkup}
       <form className={classes.root} noValidate onSubmit={handleSubmit}>
       <Grid container spacing={3}>
         <Grid item sm={4} xs={12}>
@@ -68,7 +103,7 @@ function Contest(props) {
               <FormControl component="fieldset">
                   <RadioGroup aria-label="condition" name="firstStatus" value={form.firstStatus} onChange={handleChange}>
                       <FormControlLabel value="success" control={<Radio color="primary"/>} label="OK" />
-                      <FormControlLabel value="plusTwo" control={<Radio />} label="+2" />
+                      <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
                       <FormControlLabel value="DNF" control={<RedRadio />} label="DNF"/>
                   </RadioGroup>
               </FormControl>
@@ -95,7 +130,7 @@ function Contest(props) {
               <FormControl component="fieldset">
                   <RadioGroup aria-label="condition" name="secondStatus" value={form.secondStatus} onChange={handleChange}>
                       <FormControlLabel value="success" control={<Radio color="primary"/>} label="OK" />
-                      <FormControlLabel value="plusTwo" control={<Radio />} label="+2" />
+                      <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
                       <FormControlLabel value="DNF" control={<RedRadio />} label="DNF" />
                   </RadioGroup>
               </FormControl>
@@ -122,7 +157,7 @@ function Contest(props) {
               <FormControl component="fieldset">
                   <RadioGroup aria-label="condition" name="thirdStatus" value={form.thirdStatus} onChange={handleChange}>
                       <FormControlLabel value="success" control={<Radio color="primary"/>} label="OK" />
-                      <FormControlLabel value="plusTwo" control={<Radio />} label="+2" />
+                      <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
                       <FormControlLabel value="DNF" control={<RedRadio />} label="DNF" />
                   </RadioGroup>
               </FormControl>
@@ -137,15 +172,24 @@ function Contest(props) {
           </div>
         </Grid>    
       </Grid>
-      </form>
+      {errors.error && (
+              <Typography variant="body2" color="error">
+                {errors.error}
+              </Typography>
+            )}
       <Button
         type="submit"
         variant="contained"
         color="primary"
         className={classes.submit}
+        disabled={uiLoading}
       >
-        Login
+        結果を送信
+        {uiLoading && (
+                <CircularProgress size={30} className={classes.progress}/>
+              )}
       </Button>
+      </form>
     </React.Fragment>
   );
 }
@@ -153,17 +197,19 @@ function Contest(props) {
 
 Contest.propTypes = {
   postContestResult: PropTypes.func.isRequired,
+  getContest: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired
+  UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  UI: state.UI
+  UI: state.UI,
 });
 
 const mapActionsToProps = {
-  postContestResult
+  postContestResult,
+  getContest
 };
 
 export default connect(

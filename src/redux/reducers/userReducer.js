@@ -3,11 +3,10 @@ import {
     SET_UNAUTHENTICATED,
     LOADING_USER,
     UNLOADING_USER,
-    LIKE_SCREAM,
-    UNLIKE_SCREAM,
     SET_USER_SUMMARIES,
     SET_AUTH_USER_SUMMARY,
     SET_USER_RESULTS,
+    SET_CONTEST,
     } from '../types';
   
   const initialState = {
@@ -16,7 +15,15 @@ import {
     authorizedUserSummary:{},
     userSummaries: [],
     authorizedUserCredential:{},
-    selectedUserResults: []
+    selectedUserResults: [],
+    contest: {
+      contestId:"",
+      scrambles: {
+        first:"",
+        second:"",
+        third:""
+      }
+    }
   };
   
   export default function(state = initialState, action) {
@@ -56,30 +63,18 @@ import {
             ...state,
             loading: false
           };
-      case LIKE_SCREAM:
-        return {
-          ...state,
-          likes: [
-            ...state.likes,
-            {
-              userHandle: state.credentials.handle,
-              screamId: action.payload.screamId
-            }
-          ]
-        };
-      case UNLIKE_SCREAM:
-        return {
-          ...state,
-          likes: state.likes.filter(
-            (like) => like.screamId !== action.payload.screamId
-          )
-        };
       case SET_USER_SUMMARIES:
         return {
           ...state,
           loading: false,
           userSummaries: action.payload,
         };
+      case SET_CONTEST:
+        return{
+          ...state,
+          loading:false,
+          contest: action.payload,
+        }
       default:
             return state;
     }

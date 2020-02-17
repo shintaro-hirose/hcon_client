@@ -244,7 +244,6 @@ function RankingTable(props) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={10}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

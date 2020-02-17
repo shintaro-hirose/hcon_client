@@ -38,7 +38,7 @@ function ContestField(props) {
   const authenticated = props.user.authenticated;
   let contentMarkup = authenticated ? (
     <div align="center">
-      <Button component={Link} to={`/contest/${contestId}`} color="secondary">
+      <Button component={Link} to={`/contest`} color="secondary">
         <Typography variant="h6">コンテストに参加する</Typography>
       </Button>
     </div>

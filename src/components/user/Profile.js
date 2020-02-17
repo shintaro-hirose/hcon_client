@@ -6,7 +6,6 @@ import EditDetails from './EditDetails';
 import MyButton from '../../util/MyButton';
 // MUI stuff
 import Typography from '@material-ui/core/Typography';
-import MuiLink from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 // Icons
 import LocationOn from '@material-ui/icons/LocationOn';
@@ -113,14 +112,14 @@ function Profile(props) {
             </div>
             <hr />
             <div className="profile-details">
-              <MuiLink
+              <Typography
                 component={Link}
                 to={`/user/${userHandle}`}
                 color="primary"
                 variant="h5"
               >
                 {userHandle}
-              </MuiLink>
+              </Typography>
               <hr />
               {rating && <Typography variant="body2">Rating: {rating}</Typography>}
               <hr />

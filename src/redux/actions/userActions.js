@@ -8,6 +8,7 @@ import {
     SET_AUTH_USER_SUMMARY,
     SET_USER_RESULTS,
     OPEN_SUCCESSBAR,
+    SET_CONTEST,
   } from '../types';
 import axios from 'axios';
   
@@ -130,7 +131,7 @@ import axios from 'axios';
   export const postContestResult = (form, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios
-      .post(`/contest`, form)
+      .post('/contest', form)
       .then((res) => {
         dispatch({ type: CLEAR_ERRORS });
         history.push('/');
@@ -142,3 +143,21 @@ import axios from 'axios';
         });
       });
   };
+
+  export const getContest = () => (dispatch) => {
+    dispatch({ type: LOADING_USER});
+    axios
+    .get('/contest')
+    .then(res => {
+      dispatch({
+        type: SET_CONTEST,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+          payload: err.response.data
+      })
+    })
+  }

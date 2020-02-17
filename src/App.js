@@ -57,7 +57,7 @@ class App extends Component {
                     <AuthRoute exact path="/signup" component={SignUp} />
                     <Route exact path="/result/:contestId" component={Results} />
                     <Route exact path="/ranking" component={Rankings} />
-                    <Route exact path="/contest/:contestId" component={Contest} />
+                    <Route exact path="/contest" component={Contest} />
                     <Route exact path="/settings" component={Settings} />
                   </Switch>
                 </div>
