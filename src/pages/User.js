@@ -1,8 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import {makeStyles} from '@material-ui/core/styles'
 
 import UserBestTable from '../components/user/UserBestTable';
 import UserChart from '../components/user/UserChart';
@@ -13,24 +11,7 @@ import Loading from '../util/Loading';
 import { connect } from 'react-redux';
 import { getUserResults } from '../redux/actions/userActions';
 
-
-const useStyles = makeStyles(theme => ({
-    paper: {
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-        height: 240,
-        width:"100%",
-    padding: "10px 0",
-    boxShadow: theme.shadows[5],
-    margin :"10px 0 0 0"
-
-
-      },
-}));
-
 const  User = (props) => {
-  const classes = useStyles();
 
   const userHandle = props.match.params.userId;
   useEffect(() => {
@@ -58,9 +39,7 @@ const  User = (props) => {
                         <UserBestTable userData={userData}/>
                     </Grid>
                 </Grid>
-                <Paper className={classes.paper}>
-                    <UserChart userData={userData} />
-                </Paper>
+                <UserChart userData={userData} />
             </Grid>
         </Grid>
       )}

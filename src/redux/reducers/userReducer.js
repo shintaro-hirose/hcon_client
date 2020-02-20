@@ -9,11 +9,13 @@ import {
     SET_CONTEST,
     SET_RESULT,
     SET_USER_CREDENTIAL,
+    SET_NOTIFICATIONS,
     } from '../types';
   
   const initialState = {
     authenticated: false,
     loading: false,
+    notifications: [],
     authorizedUserSummary:{},
     userSummaries: [],
     authorizedUserCredential:{},
@@ -118,6 +120,12 @@ import {
           loading:false,
           authorizedUserCredential: action.payload,
         };
+        case SET_NOTIFICATIONS:
+          return{
+            ...state,
+            loading:false,
+            notifications: action.payload,
+          };
 
       default:
             return state;

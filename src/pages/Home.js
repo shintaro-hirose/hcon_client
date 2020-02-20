@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 
@@ -6,20 +6,23 @@ import PropTypes from 'prop-types';
 import Profile from '../components/user/Profile';
 import ContestField from '../components/contest/ContestField';
 import RankingTable from '../components/ranking/RankingTable';
-import ProfileSkelton from '../util/ProfileSkelton';
 import SuccessBar from '../util/SuccessBar';
 import Loading from '../util/Loading';
 import About from '../util/About';
+import Notifications from '../util/Notifications';
 
 
 import { connect } from 'react-redux';
 import { getAllUserSummary } from '../redux/actions/userActions';
 
 function Home(props){
-  useEffect(() => {
+  function f() {
     props.getAllUserSummary();
+  }
+  useEffect(() => {
+    f();
   },[]);
-  const {loading, authenticated} = props.user;
+  const {loading, authenticated, notifications} = props.user;
 
   let profileMarkup = !loading ? (
     authenticated ? (
@@ -30,6 +33,7 @@ function Home(props){
             <Grid item sm={8} xs={12} >
               <ContestField />
               <RankingTable />
+              <Notifications notifications={notifications}/>
             </Grid>
           </Grid>
     ) : (
@@ -40,6 +44,7 @@ function Home(props){
             <Grid item sm={8} xs={12} >
               <ContestField />
               <RankingTable />
+              <Notifications notifications={notifications}/>
             </Grid>
           </Grid>
     )

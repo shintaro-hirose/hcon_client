@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -22,25 +22,42 @@ month = ('0'+ month).slice(-2);
 date = ('0'+ date).slice(-2);
 const contestId = year+month+date;
 
-class Navbar extends Component {
-    handleLogout = () => {
-        this.props.logoutUser();
-        this.props.openSuccessbar("ログアウトしました");
+function Navbar(props) {
+    const handleLogout = () => {
+        props.logoutUser();
+        props.openSuccessbar("ログアウトしました");
       };
-    
-    handleImgClick = () => {
-
+    const { authenticated, authorizedUserSummary } = props;
+    const user = authorizedUserSummary.userHandle;
+    const [selected, setSelected] = useState("");
+    const handleSelected0 = () => {
+      setSelected("");
+    }
+    const handleSelected1 = () => {
+      setSelected("results");
+    }
+    const handleSelected2 = () => {
+      setSelected("ranking");
+    }
+    const handleSelected3 = () => {
+      setSelected("mypage");
+    }
+    const handleSelected4 = () => {
+      setSelected("settings");
+    }
+    const handleSelected5 = () => {
+      setSelected("login");
+    }
+    const handleSelected6 = () => {
+      setSelected("signup");
     }
 
-  render() {
-    const { authenticated, authorizedUserSummary } = this.props;
-    const user = authorizedUserSummary.userHandle
     return (
       <AppBar>
         <Toolbar className="nav-container">
           {authenticated ? (
             <Fragment>
-              <Box component={Link} to="/" edge="start" flexGrow={1}>
+              <Box component={Link} to="/" edge="start" flexGrow={1} onClick={handleSelected0}>
               <img src={logo} alt="logo"
               width={50}
               height={50}
@@ -48,27 +65,40 @@ class Navbar extends Component {
               />
               </Box>
               <Box flexGrow={1}>
-              <Button color="inherit" component={Link} to={`/result/${contestId}`}>
+              <Button 
+              color={selected === "results" ? "secondary" : "inherit"} 
+              onClick={handleSelected1}
+              component={Link} 
+              to={`/result/${contestId}`}>
                 昨日の結果
               </Button>
-              <Button color="inherit" component={Link} to="/ranking">
+              <Button 
+              color={selected === "ranking" ? "secondary" : "inherit"} 
+              onClick={handleSelected2} 
+              component={Link} to="/ranking">
                 ランキング
               </Button>
-              <Button color="inherit" component={Link} to={`/user/${user}`}>
+              <Button 
+              color={selected === "mypage" ? "secondary" : "inherit"} 
+              onClick={handleSelected3}
+              component={Link} to={`/user/${user}`}>
                 マイページ
               </Button>
 
-              <Button color="inherit" component={Link} to="/settings">
+              <Button 
+              color={selected === "settings" ? "secondary" : "inherit"} 
+              onClick={handleSelected4}
+              component={Link} to="/settings">
                 設定
               </Button>
               </Box>
-              <Button color="inherit" component={Link} to="/" onClick={this.handleLogout} variant="outlined">
+              <Button color="inherit" component={Link} to="/" onClick={handleLogout} variant="outlined">
                 ログアウト
               </Button>
             </Fragment>
           ) : (
             <Fragment>
-              <Box component={Link} to="/" flexGrow={1}>
+              <Box component={Link} to="/" flexGrow={1} onClick={handleSelected0}>
               <img src={logo} alt="logo"
               width={50}
               height={50}
@@ -76,18 +106,30 @@ class Navbar extends Component {
               />
               </Box>
               <Box flexGrow={1}> 
-              <Button color="inherit" component={Link} to={`/result/${contestId}`} >
+              <Button
+              color={selected === "results" ? "secondary" : "inherit"} 
+              onClick={handleSelected1}
+              component={Link} to={`/result/${contestId}`} >
                 昨日の結果
               </Button>
-              <Button color="inherit" component={Link} to="/ranking">
+              <Button
+              color={selected === "ranking" ? "secondary" : "inherit"} 
+              onClick={handleSelected2}
+              component={Link} to="/ranking">
                 ランキング
               </Button>
               </Box>
               <Box>
-              <Button color="inherit" component={Link} to="/login" >
+              <Button 
+              color={selected === "login" ? "secondary" : "inherit"} 
+              onClick={handleSelected5}
+              component={Link} to="/login" >
                 ログイン
               </Button>
-              <Button color="inherit" component={Link} to="/signup" variant="outlined">
+              <Button
+              color={selected === "signup" ? "secondary" : "inherit"} 
+              onClick={handleSelected6}
+              component={Link} to="/signup" variant="outlined">
                 登録
               </Button>
               </Box>
@@ -96,7 +138,6 @@ class Navbar extends Component {
         </Toolbar>
       </AppBar>
     );
-  }
 }
 
 const mapActionsToProps = { logoutUser, openSuccessbar };

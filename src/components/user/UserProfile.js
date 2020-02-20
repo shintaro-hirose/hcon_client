@@ -1,11 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import Loading from '../../util/Loading';
 // MUI stuff
 import Typography from '@material-ui/core/Typography';
-import MuiLink from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 // Icons
 
@@ -74,14 +71,12 @@ function UserProfile(props) {
             </div>
             <hr />
             <div className="profile-details">
-              <MuiLink
-                component={Link}
-                to={`/user/${userData.userHandle}`}
+              <Typography
                 color="primary"
                 variant="h5"
               >
                 {userData.userHandle}
-              </MuiLink>
+              </Typography>
               <hr />
               <Typography variant="body2">レート: {userData.rating}</Typography>
               <Typography variant="body2">ランク: {userData.rated}</Typography>
@@ -123,4 +118,4 @@ UserProfile.propTypes = {
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)((UserProfile));
+)(UserProfile);

@@ -2,20 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useTheme } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
 import { LineChart, Line, XAxis, YAxis, Legend, Tooltip , ResponsiveContainer, CartesianGrid } from 'recharts';
 
 import { connect } from 'react-redux';
 
 
-// Generate Sales Data
-
+const useStyles = makeStyles(theme => ({
+  paper: {
+      display: 'flex',
+      overflow: 'auto',
+      flexDirection: 'column',
+      height: 330,
+      width:"100%",
+      padding: "10px 0",
+      boxShadow: theme.shadows[5],
+      margin :"10px 0 0 0"
+    },
+}));
 
 const  UserChart = (props) => {
   const theme = useTheme();
   const results = props.userData.results;
+  const classes = useStyles();
 
   return (
     <React.Fragment>
+      <Paper className={classes.paper}>
       <ResponsiveContainer>
         <LineChart
           data={results}
@@ -40,6 +54,7 @@ const  UserChart = (props) => {
           <Legend />
         </LineChart>
       </ResponsiveContainer>
+      </Paper>
     </React.Fragment>
   );
 }

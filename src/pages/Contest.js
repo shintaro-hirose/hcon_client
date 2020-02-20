@@ -66,19 +66,6 @@ function getSteps() {
   return ['1試技目', '2試技目', '3試技目', '確認画面'];
 }
 
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return 'Select campaign settings...';
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown stepIndex';
-  }
-}
-
 const RedRadio = withStyles({
     
     checked: {color: red[600]},
@@ -112,23 +99,28 @@ function Contest(props) {
       thirdStatus:"",
       firstDnfReason:"",
       secondDnfReason:"",
-      thirdDnfReason:""
+      thirdDnfReason:"",
   });
 
-  useEffect(() => {
+  function f(){
     props.getContest();
+  }
+  useEffect(() => {
+    f();
   },[]);
 
   const loading = props.user.loading; 
   const errors = props.UI.errors;
   const uiLoading = props.UI.uiLoading;
   const contestId = props.user.contest.contestId;
+  const imageUrl = props.user.authorizedUserSummary.imageUrl
 
   const handleChange = event => {
     setForm({
         ...form,
         [event.target.name]: event.target.value,
-        contestId: contestId
+        contestId: contestId,
+        imageUrl: imageUrl,
     });
   };
 

@@ -81,7 +81,6 @@ const UserBestTable = (props) => {
 
 UserBestTable.propTypes = {
     user: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
   };
   
   const mapStateToProps = (state) => ({

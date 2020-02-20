@@ -43,6 +43,29 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map(el => el[0]);
 }
+function getColorByRated(rated) {
+  if(rated === "GodEater"){
+    return "#4a148c";
+  } else if (rated === "God") {
+    return "#8e24aa";
+  } else if (rated === "Grand Master") {
+    return "#880e4f";
+  } else if (rated === "Master") {
+    return "#e91e63"
+  } else if (rated === "Diamond") {
+    return "#00bcd4"
+  } else if (rated === "Platinum") {
+    return "#448aff"
+  } else if (rated === "Gold") {
+    return "#fdd835"
+  } else if (rated === "Silver") {
+    return "#9e9e9e"
+  } else if (rated === "Bronze") {
+    return "#795548"
+  } else {
+    return "#212121"
+  }
+};
 
 const headCells = [
   { id: 'rank', numeric: false, disablePadding: true, label: '順位' },
@@ -135,7 +158,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginBottom: theme.spacing(2),
     boxShadow: theme.shadows[5],
-
   },
   table: {
     padding:0,
@@ -173,6 +195,7 @@ function RankingTable(props) {
       rating: userSummary.rating,
       time: userSummary.bestTime1.time,
       imageUrl:userSummary.imageUrl,
+      rated: userSummary.rated,
     })
   });
   const [order, setOrder] = React.useState('desc');
@@ -194,8 +217,6 @@ function RankingTable(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -221,19 +242,18 @@ function RankingTable(props) {
 
                   return (
                     <TableRow
-                      
                       key={row.userHandle}
                     >
                       <TableCell align="center" padding="none" >{index+1}</TableCell>
-                      <TableCell component="th" scope="row" padding="none" align="center" >
-                          <img src={row.imageUrl} alt="profile" className={classes.profileImage}/>
-                        <Button  color="inherit" component={Link} to={`/user/${row.userHandle}`}>
-                          {row.userHandle}
+                      <TableCell component="th" scope="row" padding="none" align="center"  >
+                          <img src={row.imageUrl} alt="profile" className={classes.profileImage} />
+                        <Button  color="primary" component={Link} to={`/user/${row.userHandle}`}>
+                         {row.userHandle}
                         </Button>
                       </TableCell>
 
                       <TableCell align="center" padding="none" >{row.rating}</TableCell>
-                      <TableCell align="center" padding="none">
+                      <TableCell align="center" padding="none" >
                         { row.time===3600 ? "-" : (
                           row.time >= 60 ? `${Math.floor(row.time/60)}:${row.time - 60*Math.floor(row.time/60)}`
                           : row.time

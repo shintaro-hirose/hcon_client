@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import {makeStyles} from '@material-ui/core/styles'
 import PropTypes from 'prop-types';
 import ResultTable from '../components/results/ResultTable';
 import Loading from '../util/Loading';
@@ -17,24 +16,13 @@ import {
 import { connect } from 'react-redux';
 import { getResult } from '../redux/actions/userActions';
 
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        padding: 0,
-        backgroundColor: theme.palette.background.paper,
-      },
-    title: {
-        padding:'10px 22px 0 22px',
-      },
-}));
-
 const Results = (props) => {
-    const classes = useStyles();
     const contestId = props.match.params.contestId;
+    function getResult(a) {
+      props.getResult(a);
+    }
     useEffect(() => {
-        props.getResult(contestId);
+        getResult(contestId);
     }, []);
     let day = new Date();
     day.setDate(day.getDate() - 1);

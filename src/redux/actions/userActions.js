@@ -11,6 +11,7 @@ import {
     SET_CONTEST,
     SET_RESULT,
     SET_USER_CREDENTIAL,
+    SET_NOTIFICATIONS,
   } from '../types';
 import axios from 'axios';
   
@@ -74,6 +75,15 @@ import axios from 'axios';
         payload: res.data
       });
     })
+    .then(() => {
+      axios.get('/getNotifications')
+      .then(res => {
+        dispatch({
+          type: SET_NOTIFICATIONS,
+          payload: res.data
+        });
+      })
+    })
     .catch(err => console.log(err));
   }
 
@@ -136,6 +146,10 @@ import axios from 'axios';
       .post('/contest', form)
       .then((res) => {
         dispatch({ type: CLEAR_ERRORS });
+        dispatch({
+          type: OPEN_SUCCESSBAR,
+          payload: "コンテスト結果の送信に成功しました"
+        });
         history.push('/');
       })
       .catch((err) => {

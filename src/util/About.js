@@ -26,6 +26,7 @@ export default function About() {
         <div>
             <Paper className={classes.paper}>
                 <img 
+                alt="logo"
                 src="hcon-icon@2x.png"
                 className={classes.logo}
                 />

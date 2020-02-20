@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
-import { Link as RouterLink } from 'react-router-dom';
 import EditDetails from './EditDetails';
 import MyButton from '../../util/MyButton';
 // MUI stuff
@@ -15,14 +14,14 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 //ratedIcons;
-import bronze from '../../images/bronze.png';
-import diamond from '../../images/diamond.png';
-import god from '../../images/god.png';
-import gold from '../../images/gold.png';
-import grandmaster from '../../images/grandmaster.png';
-import iron from '../../images/iron.png';
-import master from '../../images/master.png';
-import platinum from '../../images/platinum.png';
+// import bronze from '../../images/bronze.png';
+// import diamond from '../../images/diamond.png';
+// import god from '../../images/god.png';
+// import gold from '../../images/gold.png';
+// import grandmaster from '../../images/grandmaster.png';
+// import iron from '../../images/iron.png';
+// import master from '../../images/master.png';
+// import platinum from '../../images/platinum.png';
 
 //Redux
 import { connect } from 'react-redux';
@@ -132,8 +131,6 @@ function Profile(props) {
             <div className="profile-details">
               <Box>
               <Typography
-                component={RouterLink}
-                to={`/user/${userHandle}`}
                 color="primary"
                 variant="h5"
               >
