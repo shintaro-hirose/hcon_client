@@ -25,7 +25,7 @@ import axios from 'axios';
         dispatch({ type: CLEAR_ERRORS });
         dispatch({
           type: OPEN_SUCCESSBAR,
-          payload: "ログインに成功しました"
+          payload: "ログインしました"
         });
         history.push('/');
       })
@@ -63,6 +63,10 @@ import axios from 'axios';
     localStorage.removeItem('FBIdToken');
     delete axios.defaults.headers.common['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
+    dispatch({
+      type: OPEN_SUCCESSBAR,
+      payload: "ログアウトしました"
+    });
   };
   
   export const getAllUserSummary = () => (dispatch) => {

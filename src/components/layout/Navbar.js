@@ -11,7 +11,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
 import { logoutUser } from '../../redux/actions/userActions';
-import { openSuccessbar } from '../../redux/actions/uiActions';
 
 const now = new Date();
 now.setDate(now.getDate() -1);
@@ -25,7 +24,6 @@ const contestId = year+month+date;
 function Navbar(props) {
     const handleLogout = () => {
         props.logoutUser();
-        props.openSuccessbar("ログアウトしました");
       };
     const { authenticated, authorizedUserSummary } = props;
     const user = authorizedUserSummary.userHandle;
@@ -140,13 +138,12 @@ function Navbar(props) {
     );
 }
 
-const mapActionsToProps = { logoutUser, openSuccessbar };
+const mapActionsToProps = { logoutUser };
 
 Navbar.propTypes = {
   authorizedUserSummary: PropTypes.object.isRequired,
   authenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  openSuccessbar: PropTypes.func.isRequired
 
 };
 
