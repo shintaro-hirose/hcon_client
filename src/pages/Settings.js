@@ -94,7 +94,7 @@ function Settings(props) {
                     <ListItemIcon>
                         <AccountCircleIcon />
                     </ListItemIcon>
-                    <ListItemText primary="ユーザー名" />
+                    <ListItemText primary="ユーザ名" />
                 </ListItem>
                 <ListItem button onClick={handleActiveChange2} selected={active === 2}>
                     <ListItemIcon>
@@ -116,7 +116,7 @@ function Settings(props) {
               //userIdの変更
               <Paper className={classes.paper}>
             <Box padding="20px">
-              <Typography variant="h5">ユーザー名の変更</Typography>
+              <Typography variant="h5">ユーザ名の変更</Typography>
             </Box>                <form className={classes.form} noValidate onSubmit={handleSubmit1}>
           <TextField
             variant="outlined"
@@ -124,7 +124,7 @@ function Settings(props) {
             required
             fullWidth
             id="userId"
-            label="ユーザー名"
+            label="ユーザ名"
             name="userId"
             autoFocus
             helperText={errors.userId}
