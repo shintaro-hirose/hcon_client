@@ -9,6 +9,8 @@ import {
     SET_USER_RESULTS,
     OPEN_SUCCESSBAR,
     SET_CONTEST,
+    SET_RESULT,
+    SET_USER_CREDENTIAL,
   } from '../types';
 import axios from 'axios';
   
@@ -161,3 +163,39 @@ import axios from 'axios';
       })
     })
   }
+
+export const getResult = (contestId) => (dispatch) => {
+  dispatch({type: LOADING_USER});
+  axios
+  .get(`/result/${contestId}`)
+  .then(res => {
+    dispatch({
+      type: SET_RESULT,
+      payload: res.data
+    });
+  })
+  .catch(err => {
+    dispatch({
+      type:SET_ERRORS,
+      payload: err.response.data
+    })
+  })
+}
+
+export const getUserCredential = () => (dispatch) => {
+  dispatch({type: LOADING_USER});
+  axios
+  .get('/getUserCredential')
+  .then(res => {
+    dispatch({
+      type: SET_USER_CREDENTIAL,
+      payload: res.data
+    });
+  })
+  .catch(err => {
+    dispatch({
+      type:SET_ERRORS,
+      payload: err.response.data
+    })
+  })
+}

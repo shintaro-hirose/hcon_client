@@ -224,7 +224,7 @@ function RankingTable(props) {
                       
                       key={row.userHandle}
                     >
-                      <TableCell align="center" padding="none" >{row.rank}</TableCell>
+                      <TableCell align="center" padding="none" >{index+1}</TableCell>
                       <TableCell component="th" scope="row" padding="none" align="center" >
                           <img src={row.imageUrl} alt="profile" className={classes.profileImage}/>
                         <Button  color="inherit" component={Link} to={`/user/${row.userHandle}`}>
@@ -234,7 +234,10 @@ function RankingTable(props) {
 
                       <TableCell align="center" padding="none" >{row.rating}</TableCell>
                       <TableCell align="center" padding="none">
-                        { row.time===3600 ? "-" : row.time}
+                        { row.time===3600 ? "-" : (
+                          row.time >= 60 ? `${Math.floor(row.time/60)}:${row.time - 60*Math.floor(row.time/60)}`
+                          : row.time
+                        )}
                       </TableCell>
                     </TableRow>
                   );

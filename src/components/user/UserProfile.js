@@ -1,21 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import EditDetails from './EditDetails';
-import MyButton from '../../util/MyButton';
+import Loading from '../../util/Loading';
 // MUI stuff
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 // Icons
-import LocationOn from '@material-ui/icons/LocationOn';
+
+import GroupIcon from '@material-ui/icons/Group';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import EditIcon from '@material-ui/icons/Edit';
-import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+
 //Redux
 import { connect } from 'react-redux';
-import { logoutUser, uploadImage } from '../../redux/actions/userActions';
+import { getUserResults } from '../../redux/actions/userActions';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -63,72 +62,42 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function UserProfile(props) {
-  const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    const formData = new FormData();
-    formData.append('image', image, image.name);
-    props.uploadImage(formData);
-  };
-  const handleEditPicture = () => {
-    const fileInput = document.getElementById('imageInput');
-    fileInput.click();
-  };
-  const handleLogout = () => {
-    props.logoutUser();
-  };
-  
+  const userData = props.userData;
   const classes = useStyles();
-    const {
-      user: {
-        authorizedUserSummary: { userHandle, imageUrl, rating,  belong, twitter },
-        loading,
-        authenticated
-      }
-    } = props;
 
   return(
     <Fragment>
-      {
-        (() => {
-          if(!loading){
-            if(authenticated){
-              return(
-<Paper className={classes.paper}>
+      <Paper className={classes.paper}>
           <div className={classes.profile}>
             <div className="image-wrapper">
-              <img src={imageUrl} alt="profile" className="profile-image" />
-              <input
-                type="file"
-                id="imageInput"
-                hidden="hidden"
-                onChange={handleImageChange}
-              />
+              <img src={userData.imageUrl} alt="profile" className="profile-image" />
             </div>
             <hr />
             <div className="profile-details">
               <MuiLink
                 component={Link}
-                to={`/user/${userHandle}`}
+                to={`/user/${userData.userHandle}`}
                 color="primary"
                 variant="h5"
               >
-                {userHandle}
+                {userData.userHandle}
               </MuiLink>
               <hr />
-              {rating && <Typography variant="body2">Rating: {rating}</Typography>}
+              <Typography variant="body2">レート: {userData.rating}</Typography>
+              <Typography variant="body2">ランク: {userData.rated}</Typography>
               <hr />
-              {belong && (
+              {userData.belong && (
                 <Fragment>
-                  <LocationOn color="primary" /> <span>{belong}</span>
+                  <GroupIcon color="primary" /> <span>{userData.belong}</span>
                   <hr />
                 </Fragment>
               )}
-              {twitter && (
+              {userData.twitter && (
                 <Fragment>
                   <TwitterIcon color="primary" />
-                  <a href={`https://twitter.com/${twitter}`} target="_blank" rel="noopener noreferrer">
+                  <a href={`https://twitter.com/${userData.twitter}`} target="_blank" rel="noopener noreferrer">
                     {' '}
-                    {twitter}
+                    {userData.twitter}
                   </a>
                   <hr />
                 </Fragment>
@@ -136,19 +105,6 @@ function UserProfile(props) {
             </div>
           </div>
         </Paper>
-              );
-            } else {
-              return(
-                <p>loading</p>
-              );
-            }
-          } else {
-            return(
-              <p>loading</p>
-            );
-          }
-        })()
-      }
     </Fragment>
   )
 }
@@ -157,11 +113,10 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 
-const mapActionsToProps = { logoutUser, uploadImage };
+const mapActionsToProps = { getUserResults };
 
 UserProfile.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  uploadImage: PropTypes.func.isRequired,
+  getUserResults: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
 };
 

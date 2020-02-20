@@ -7,6 +7,9 @@ export const SET_AUTH_USER_SUMMARY = 'SET_AUTH_USER_SUMMARY';
 export const SET_USER_RESULTS = 'SET_USER_RESULTS';
 export const UNLOADING_USER = 'UNLOADING_USER';
 export const SET_CONTEST = 'SET_CONTEST';
+export const SET_RESULT = 'SET_RESULT';
+export const SET_USER_CREDENTIAL = 'SET_USER_CREDENTIAL';
+
 
 
 // UI reducer types

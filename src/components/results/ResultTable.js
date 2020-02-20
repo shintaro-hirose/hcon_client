@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,12 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import UserSummary from '../user/UserSummary'
 
 const useStyles = makeStyles(theme =>({
   table: {
@@ -30,77 +27,59 @@ const useStyles = makeStyles(theme =>({
   },
 }));
 
-const StyledTableCell = withStyles({
-    root:{
-        padding:5,
-        wordWrap:'break-word',
-        fontSize:'13px',
-    },
-
-})(TableCell);
-
-function createData(rank, name, single, all) {
-  return { rank, name, single, all };
-}
-
-const rows = [
-  createData(1, "massan", 24.19, "24.19 28.42 DNF"),
-  createData(20, "JackJackJackJack", "1:26.19", "1:26.19 28.42 DNF"),
-  createData(3, "Hshi", 27.19, "27.19 28.42 DNF"),
-];
-
-export default function ResultTable() {
+export default function ResultTable(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const contestData = props.contestData;
+  const results = contestData.results;
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="caption table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>順位</StyledTableCell>
-            <StyledTableCell align="center">ユーザ名</StyledTableCell>
-            <StyledTableCell align="center">単発</StyledTableCell>
-            <StyledTableCell align="center">全記録</StyledTableCell>
+            <TableCell>順位</TableCell>
+            <TableCell align="center">ユーザ名</TableCell>
+            <TableCell align="center">単発</TableCell>
+            <TableCell align="center">記録</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.rank}>
-              <StyledTableCell component="th" scope="row">
-                {row.rank}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-              <Button className={classes.button} onClick={handleOpen}>
-                {row.name}
-              </Button>
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 500,
-                }}
-              >
-                <Fade in={open}>
-                  <UserSummary />
-                </Fade>
-              </Modal>
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.single}</StyledTableCell>
-              <StyledTableCell align="center">{row.all}</StyledTableCell>
+          {results.map((row, index) => (
+            <TableRow key={row.userHandle}>
+              <TableCell component="th" scope="row">
+                {index+1}
+              </TableCell>
+              <TableCell component="th" scope="row" padding="none" align="center" >
+                <Button  color="inherit" component={Link} to={`/user/${row.userHandle}`}>
+                  {row.userHandle}
+                </Button>
+              </TableCell>
+              <TableCell align="center" padding="none" >
+              { row.bestTime===3600 ? "DNF" : (
+                          row.bestTime >= 60 ? `${Math.floor(row.bestTime/60)}:${(row.bestTime - 60*Math.floor(row.bestTime/60)).toFixed(2)}`
+                          : row.bestTime
+                        )}
+              </TableCell>
+              <TableCell align="center" padding="none">
+                <Box display="inline" marginRight="10px">
+                { row.firstTime===3600 ? "DNF" : (
+                          row.firstTime >= 60 ? `${Math.floor(row.firstTime/60)}:${(row.firstTime - 60*Math.floor(row.firstTime/60)).toFixed(2)}`
+                          : row.firstTime
+                        )}
+                </Box>
+                <Box  display="inline" marginRight="10px">
+                { row.secondTime===3600 ? "DNF" : (
+                          row.secondTime >= 60 ? `${Math.floor(row.secondTime/60)}:${(row.secondTime - 60*Math.floor(row.secondTime/60)).toFixed(2)}`
+                          : row.secondTime
+                        )} 
+                </Box>
+                <Box  display="inline">
+                { row.thirdTime===3600 ? "DNF" : (
+                          row.thirdTime >= 60 ? `${Math.floor(row.thirdTime/60)}:${(row.thirdTime - 60*Math.floor(row.thirdTime/60)).toFixed(2)}`
+                          : row.thirdTime
+                        )}
+                 </Box>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

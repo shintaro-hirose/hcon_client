@@ -48,7 +48,7 @@ class Navbar extends Component {
               />
               </Box>
               <Box flexGrow={1}>
-              <Button color="inherit" component={Link} to={`/result`}>
+              <Button color="inherit" component={Link} to={`/result/${contestId}`}>
                 昨日の結果
               </Button>
               <Button color="inherit" component={Link} to="/ranking">
@@ -76,7 +76,7 @@ class Navbar extends Component {
               />
               </Box>
               <Box flexGrow={1}> 
-              <Button color="inherit" component={Link} to={`/result`} >
+              <Button color="inherit" component={Link} to={`/result/${contestId}`} >
                 昨日の結果
               </Button>
               <Button color="inherit" component={Link} to="/ranking">

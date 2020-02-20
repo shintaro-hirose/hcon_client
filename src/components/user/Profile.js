@@ -1,17 +1,29 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import EditDetails from './EditDetails';
 import MyButton from '../../util/MyButton';
 // MUI stuff
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
 // Icons
-import LocationOn from '@material-ui/icons/LocationOn';
+import GroupIcon from '@material-ui/icons/Group';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+//ratedIcons;
+import bronze from '../../images/bronze.png';
+import diamond from '../../images/diamond.png';
+import god from '../../images/god.png';
+import gold from '../../images/gold.png';
+import grandmaster from '../../images/grandmaster.png';
+import iron from '../../images/iron.png';
+import master from '../../images/master.png';
+import platinum from '../../images/platinum.png';
+
 //Redux
 import { connect } from 'react-redux';
 import { logoutUser, uploadImage } from '../../redux/actions/userActions';
@@ -29,8 +41,8 @@ const useStyles = makeStyles(theme => ({
       position: 'relative',
       '& button': {
         position: 'absolute',
-        top: '80%',
-        left: '70%'
+        top: '60%',
+        left: '65%'
       }
     },
     '& .profile-image': {
@@ -46,7 +58,7 @@ const useStyles = makeStyles(theme => ({
         verticalAlign: 'middle'
       },
       '& a': {
-        color: '#00bcd4'
+        // color: '#00bcd4'
       }
     },
     '& hr': {
@@ -58,6 +70,12 @@ const useStyles = makeStyles(theme => ({
         cursor: 'pointer'
       }
     }
+  },
+  ratedIcon: {
+    width: 40,
+      height: 40,
+      borderRadius: '50%',
+      verticalAlign: 'middle'
   }
 }));
 
@@ -79,7 +97,7 @@ function Profile(props) {
   const classes = useStyles();
     const {
       user: {
-        authorizedUserSummary: { userHandle, imageUrl, rating,  belong, twitter },
+        authorizedUserSummary: { userHandle, imageUrl, rating,  belong, twitter, rated },
         loading,
         authenticated
       }
@@ -103,7 +121,7 @@ function Profile(props) {
                 onChange={handleImageChange}
               />
               <MyButton
-                tip="Edit profile picture"
+                tip="プロフィール画像を変更する"
                 onClick={handleEditPicture}
                 btnClassName="button"
               >
@@ -112,30 +130,39 @@ function Profile(props) {
             </div>
             <hr />
             <div className="profile-details">
+              <Box>
               <Typography
-                component={Link}
+                component={RouterLink}
                 to={`/user/${userHandle}`}
                 color="primary"
                 variant="h5"
               >
                 {userHandle}
               </Typography>
+              </Box>
               <hr />
-              {rating && <Typography variant="body2">Rating: {rating}</Typography>}
+              <Typography variant="body2">レート: {rating}</Typography>
+              <Typography variant="body2">ランク: {rated}</Typography>
               <hr />
               {belong && (
                 <Fragment>
-                  <LocationOn color="primary" /> <span>{belong}</span>
+                  <GroupIcon color="primary" /> <span>{belong}</span>
                   <hr />
                 </Fragment>
               )}
               {twitter && (
                 <Fragment>
                   <TwitterIcon color="primary" />
-                  <a href={`https://twitter.com/${twitter}`} target="_blank" rel="noopener noreferrer">
+                  <Typography display="inline">
+                    <Link href={`https://twitter.com/${twitter}`} 
+                    color="primary" 
+                    underline="none" 
+                    component="a"
+                    target="_blank" rel="noopener noreferrer">
                     {' '}
                     {twitter}
-                  </a>
+                    </Link>
+                  </Typography>
                   <hr />
                 </Fragment>
               )}

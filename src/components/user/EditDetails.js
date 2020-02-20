@@ -56,7 +56,7 @@ function EditDetails(props) {
   return (
       <Fragment>
         <MyButton
-          tip="Edit Details"
+          tip="プロフィールを編集する"
           onClick={handleOpen}
           btnClassName={classes.button}
         >
@@ -68,14 +68,14 @@ function EditDetails(props) {
           fullWidth
           maxWidth="sm"
         >
-          <DialogTitle>Edit your details</DialogTitle>
+          <DialogTitle>プロフィールを編集する</DialogTitle>
           <DialogContent>
             <form>
             <TextField
                 name="belong"
                 tpye="text"
-                label="Belong"
-                placeholder="Where do you belong?"
+                label="所属団体"
+                placeholder=""
                 className={classes.textField}
                 value={form.belong}
                 onChange={handleChange}
@@ -85,7 +85,7 @@ function EditDetails(props) {
                 name="twitter"
                 tpye="text"
                 label="Twitter"
-                placeholder="@twitterId"
+                placeholder="@"
                 className={classes.textField}
                 value={form.twitter}
                 onChange={handleChange}
@@ -95,10 +95,10 @@ function EditDetails(props) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
-              Cancel
+              キャンセル
             </Button>
-            <Button onClick={handleSubmit} color="primary">
-              Save
+            <Button onClick={handleSubmit} color="primary" variant="contained">
+              保存
             </Button>
           </DialogActions>
         </Dialog>

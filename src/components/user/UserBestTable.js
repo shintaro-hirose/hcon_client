@@ -26,19 +26,19 @@ const useStyles = makeStyles(theme => ({
 
 
 const UserBestTable = (props) => {
-    const profile = props.profile;
-    const bestTime1 = profile.bestTime1.time
-    const bestTime2 = profile.bestTime2.time
-    const bestTime3 = profile.bestTime3.time
-    const bestTime4 = profile.bestTime4.time
-    const bestTime5 = profile.bestTime5.time
+    const userData = props.userData;
+    const bestTime1 = userData.bestTime1
+    const bestTime2 = userData.bestTime2
+    const bestTime3 = userData.bestTime3
+    const bestTime4 = userData.bestTime4
+    const bestTime5 = userData.bestTime5
     
     const rows = [
-        {rank:1, time: bestTime1},
-        {rank:2, time: bestTime2},
-        {rank:3, time: bestTime3},
-        {rank:4, time: bestTime4},
-        {rank:5, time: bestTime5}
+        {rank:1, time: bestTime1.time, date: bestTime1.contestId},
+        {rank:2, time: bestTime2.time, date: bestTime2.contestId},
+        {rank:3, time: bestTime3.time, date: bestTime3.contestId},
+        {rank:4, time: bestTime4.time, date: bestTime4.contestId},
+        {rank:5, time: bestTime5.time, date: bestTime5.contestId}
     ] 
   const classes = useStyles();
 
@@ -49,7 +49,8 @@ const UserBestTable = (props) => {
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
-                        <TableCell >Recent Best</TableCell>
+                        <TableCell >単発ベスト</TableCell>
+                        <TableCell>日付</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -59,7 +60,13 @@ const UserBestTable = (props) => {
                                 {row.rank}.
                             </TableCell>
                             <TableCell component="th" scope="row">
-                                {row.time}
+                            { row.time===3600 ? "-" : (
+                          row.time >= 60 ? `${Math.floor(row.time/60)}:${(row.time - 60*Math.floor(row.time/60)).toFixed(2)}`
+                          : row.time
+                        )}
+                            </TableCell>
+                            <TableCell component="th" scope="row">
+                            {(row.date).substr(0,4)}/{(row.date).substr(4,2)}/{(row.date).substr(6,2)}
                             </TableCell>
                         </TableRow>
                         

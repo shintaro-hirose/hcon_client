@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Radio from '@material-ui/core/Radio';
 import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -52,6 +53,12 @@ const useStyles = makeStyles(theme => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  paper2: {
+    width:"100%",
+    height: "146px",
+    boxShadow: theme.shadows[5],
+
   },
 }));
 
@@ -173,6 +180,7 @@ function Contest(props) {
               placeholder="-:--.--"
               name="firstInput"
               onChange={handleChange}
+              value={form.firstInput}
               disabled={form.firstStatus === "DNF" ? true: false}
                 />
             </Box>
@@ -241,6 +249,7 @@ function Contest(props) {
               placeholder="-:--.--"
               name="secondInput"
               onChange={handleChange}
+              value={form.secondInput}
               disabled={form.secondStatus === "DNF" ? true: false}
                 />
             </Box>
@@ -317,6 +326,7 @@ function Contest(props) {
               placeholder="-:--.--"
               name="thirdInput"
               onChange={handleChange}
+              value={form.thirdInput}
               disabled={form.thirdStatus === "DNF" ? true: false}
                 />
             </Box>
@@ -381,49 +391,82 @@ function Contest(props) {
       </div>
           ) : (
             <div>
-            <Typography variant="h5" align="center">
-              今回の結果
-            </Typography>
-                <Box textAlign="center" marginTop="20px">
-                  <Typography variant="h5">{
-                    form.firstStatus === "DNF" ? (
-                      `1試技目: DNF(${dnfCorrespond[form.firstDnfReason]})`
+              <Grid container spacing={2}>
+                <Grid item sm={4} xs={12}>
+                  <Paper className={classes.paper2}>
+                  <Box textAlign="center" padding="15px">
+                  <Typography variant="h5">1試技目</Typography>
+                  <Box paddingTop="20px">
+                  {
+                    form.firstStatus === "DNF" ? (<div>
+                      <Typography variant="h6">DNF</Typography>
+                      <Typography variant="h6">({dnfCorrespond[form.firstDnfReason]})</Typography>
+                      </div>
                     ) : (
                       form.firstStatus === "plusTwo" ? (
-                        `1試技目: ${String(form.firstInput)} + 2`
+                        <Typography variant="h5">{String(form.firstInput)} + 2</Typography>
+                        
                       ) : (
-                        `1試技目: ${form.firstInput}`
+                        <Typography variant="h5">{form.firstInput}</Typography>
+                        
                       )
                     )
-                  }</Typography>
+                  }
+                  </Box>
                 </Box>
-                <Box textAlign="center" marginTop="20px">
-                  <Typography variant="h5">{
-                    form.secondStatus === "DNF" ? (
-                      `2試技目: DNF(${dnfCorrespond[form.secondDnfReason]})`
+                  </Paper>
+                  
+                </Grid>
+                <Grid item sm={4} xs={12}>
+                  <Paper className={classes.paper2}>
+                  <Box textAlign="center" padding="15px">
+                  <Typography variant="h5">2試技目</Typography>
+                  <Box paddingTop="20px">
+                  {
+                    form.secondStatus === "DNF" ? (<div>
+                      <Typography variant="h6">DNF</Typography>
+                      <Typography variant="h6">({dnfCorrespond[form.secondDnfReason]})</Typography>
+                      </div>
                     ) : (
                       form.secondStatus === "plusTwo" ? (
-                        `2試技目: ${String(form.secondInput)} + 2`
+                        <Typography variant="h5">{String(form.secondInput)} + 2</Typography>
+                        
                       ) : (
-                        `2試技目: ${form.secondInput}`
+                        <Typography variant="h5">{form.secondInput}</Typography>
+                        
                       )
                     )
-                  }</Typography>
+                  }
+                  </Box>
                 </Box>
-                <Box textAlign="center" marginTop="20px">
-                  <Typography variant="h5">{
-                    form.thirdStatus === "DNF" ? (
-                      `3試技目: DNF(${dnfCorrespond[form.thirdDnfReason]})`
+                  </Paper>
+                </Grid>
+                <Grid item sm={4} xs={12}>
+                  <Paper className={classes.paper2}>
+                  <Box textAlign="center" padding="15px">
+                  <Typography variant="h5">3試技目</Typography>
+                  <Box paddingTop="20px">
+                  {
+                    form.thirdStatus === "DNF" ? (<div>
+                      <Typography variant="h6">DNF</Typography>
+                      <Typography variant="h6">({dnfCorrespond[form.thirdDnfReason]})</Typography>
+                      </div>
                     ) : (
                       form.thirdStatus === "plusTwo" ? (
-                        `3試技目: ${String(form.thirdInput)} + 2`
+                        <Typography variant="h5">{String(form.thirdInput)} + 2</Typography>
+                        
                       ) : (
-                        `3試技目: ${form.thirdInput}`
+                        <Typography variant="h5">{form.thirdInput}</Typography>
+                        
                       )
                     )
-                  }</Typography>
+                  }
+                  </Box>
                 </Box>
-          <Box textAlign="center" marginBottom="10px">
+                  </Paper>
+                </Grid>
+              </Grid>
+          <Box textAlign="center" margin="20px 0">
           <Button
                 onClick={handleBack}
                 variant="contained"
@@ -445,6 +488,13 @@ function Contest(props) {
                       )}
               </Button>
               </Box>
+              {errors.error && (
+                  <Box textAlign="center" margin="20px 0"> 
+                    <Typography variant="h5" color="error">
+                      {errors.error}
+                    </Typography>
+                  </Box>
+                )}
       </div>
           )
         ) )}

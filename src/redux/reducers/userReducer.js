@@ -7,6 +7,8 @@ import {
     SET_AUTH_USER_SUMMARY,
     SET_USER_RESULTS,
     SET_CONTEST,
+    SET_RESULT,
+    SET_USER_CREDENTIAL,
     } from '../types';
   
   const initialState = {
@@ -15,7 +17,28 @@ import {
     authorizedUserSummary:{},
     userSummaries: [],
     authorizedUserCredential:{},
-    selectedUserResults: [],
+    selectedUserData: {
+      bestTime1:{
+        time:"",
+        contestId:""
+      },
+      bestTime2:{
+        time:"",
+        contestId:""
+      },
+      bestTime3:{
+        time:"",
+        contestId:""
+      },
+      bestTime4:{
+        time:"",
+        contestId:""
+      },
+      bestTime5:{
+        time:"",
+        contestId:""
+      }
+    },
     contest: {
       contestId:"",
       scrambles: {
@@ -23,6 +46,14 @@ import {
         second:"",
         third:""
       }
+    },
+    contestData: {
+      scrambles: {
+        first: "",
+        second: "",
+        third: ""
+      },
+      results:[]
     }
   };
   
@@ -51,7 +82,7 @@ import {
           return {
             ...state,
             loading: false,
-            selectedUserResults: action.payload
+            selectedUserData: action.payload
           };
       case LOADING_USER:
         return {
@@ -74,7 +105,20 @@ import {
           ...state,
           loading:false,
           contest: action.payload,
-        }
+        };
+      case SET_RESULT:
+        return{
+          ...state,
+          loading:false,
+          contestData: action.payload,
+        };
+      case SET_USER_CREDENTIAL:
+        return{
+          ...state,
+          loading:false,
+          authorizedUserCredential: action.payload,
+        };
+
       default:
             return state;
     }
