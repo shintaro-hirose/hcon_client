@@ -69,7 +69,7 @@ function getColorByRated(rated) {
 
 const headCells = [
   { id: 'rank', numeric: false, disablePadding: true, label: '順位' },
-  { id: 'userHandle', numeric: false, disablePadding: true, label: 'ユーザー' },
+  { id: 'userHandle', numeric: false, disablePadding: true, label: 'ユーザ名' },
   { id: 'rating', numeric: true, disablePadding: false, label: 'レート' },
   { id: 'time', numeric: true, disablePadding: false, label: '単発' },
 ];
