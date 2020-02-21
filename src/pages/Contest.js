@@ -54,11 +54,23 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-  paper2: {
+  success: {
     width:"100%",
     height: "146px",
     boxShadow: theme.shadows[5],
-
+    border: '3px solid #383B55',
+  },
+  plusTwo: {
+    width:"100%",
+    height: "146px",
+    boxShadow: theme.shadows[5],
+    border: '3px solid #ffeb3b',
+  },
+  dnf: {
+    width:"100%",
+    height: "146px",
+    boxShadow: theme.shadows[5],
+    border: '3px solid #e53935',
   },
 }));
 
@@ -75,6 +87,7 @@ const YellowRadio = withStyles({
     
   checked: {color: yellow[600]},
 })(props => <Radio color="default" {...props} />);
+
 
 function Contest(props) {
   const classes = useStyles();
@@ -385,8 +398,9 @@ function Contest(props) {
             <div>
               <Grid container spacing={2}>
                 <Grid item sm={4} xs={12}>
-                  <Paper className={classes.paper2}>
-                  <Box textAlign="center" padding="15px">
+                  <Paper className={ form.firstStatus === "DNF" ? (classes.dnf) : ( form.firstStatus === "plusTwo" ? (classes.plusTwo) : (classes.success) )}
+                  >
+                  <Box textAlign="center" padding="15px" backgroundColor="#e91e63">
                   <Typography variant="h5">1試技目</Typography>
                   <Box paddingTop="20px">
                   {
@@ -399,7 +413,7 @@ function Contest(props) {
                         <Typography variant="h5">{String(form.firstInput)} + 2</Typography>
                         
                       ) : (
-                        <Typography variant="h5">{form.firstInput}</Typography>
+                        <Typography variant="h4">{form.firstInput}</Typography>
                         
                       )
                     )
@@ -410,7 +424,7 @@ function Contest(props) {
                   
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                  <Paper className={classes.paper2}>
+                  <Paper className={ form.secondStatus === "DNF" ? (classes.dnf) : ( form.secondStatus === "plusTwo" ? (classes.plusTwo) : (classes.success) )}>
                   <Box textAlign="center" padding="15px">
                   <Typography variant="h5">2試技目</Typography>
                   <Box paddingTop="20px">
@@ -424,7 +438,7 @@ function Contest(props) {
                         <Typography variant="h5">{String(form.secondInput)} + 2</Typography>
                         
                       ) : (
-                        <Typography variant="h5">{form.secondInput}</Typography>
+                        <Typography variant="h4">{form.secondInput}</Typography>
                         
                       )
                     )
@@ -434,7 +448,7 @@ function Contest(props) {
                   </Paper>
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                  <Paper className={classes.paper2}>
+                  <Paper className={ form.thirdStatus === "DNF" ? (classes.dnf) : ( form.thirdStatus === "plusTwo" ? (classes.plusTwo) : (classes.success) )}>
                   <Box textAlign="center" padding="15px">
                   <Typography variant="h5">3試技目</Typography>
                   <Box paddingTop="20px">
@@ -448,7 +462,7 @@ function Contest(props) {
                         <Typography variant="h5">{String(form.thirdInput)} + 2</Typography>
                         
                       ) : (
-                        <Typography variant="h5">{form.thirdInput}</Typography>
+                        <Typography variant="h4">{form.thirdInput}</Typography>
                         
                       )
                     )
