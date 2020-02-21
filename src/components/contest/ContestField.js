@@ -17,9 +17,9 @@ date = ('0'+ date).slice(-2);
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
+    width: "100%",
     marginBottom: 20,
-    padding:20,
+    padding:"20px 0",
     boxShadow: theme.shadows[5],
 
   },
