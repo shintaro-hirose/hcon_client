@@ -14,11 +14,10 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
-      height: 330,
+      height: 443,
       width:"100%",
       padding: "10px 0",
       boxShadow: theme.shadows[5],
-      margin :"10px 0 0 0"
     },
 }));
 

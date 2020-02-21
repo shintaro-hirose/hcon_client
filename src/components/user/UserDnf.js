@@ -21,9 +21,9 @@ const renderCustomizedLabel = ({
 };
 
 const style = {
-    top: 180,
+    top: 330,
     left: 0,
-    lineHeight: '24px',
+    lineHeight: '30px',
   };
 
 function UserDnf(props) {
@@ -38,15 +38,15 @@ function UserDnf(props) {
 
 
     return (
-      <ResponsiveContainer height={180} width="100%">
+      <ResponsiveContainer height={419} width="100%">
         <PieChart>
           <Pie
             cx="50%"
-            cy={80}
+            cy={150}
             data={data}
             labelLine={false}
             label={renderCustomizedLabel}
-            outerRadius="85%"
+            outerRadius="60%"
             fill="#8884d8"
             dataKey="value"
           >
@@ -55,7 +55,7 @@ function UserDnf(props) {
             }
           </Pie>
           <Tooltip />
-          <Legend iconSize={10} width="100%" height={20}  verticalAlign="middle" wrapperStyle={style} />
+          <Legend  width="100%" height={100}  verticalAlign="middle" wrapperStyle={style} />
         </PieChart>
       </ResponsiveContainer>
     );
