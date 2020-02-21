@@ -12,6 +12,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import moment from 'moment';
+import 'moment/locale/ja';
+
 const useStyles = makeStyles(theme => ({
     paper: {
         width:"100%",
@@ -25,6 +28,7 @@ const useStyles = makeStyles(theme => ({
 function Notifications(props) {
     const classes = useStyles();
     const notifications = props.notifications;
+
     return (
         <Paper className={classes.paper}>
             <Box paddingLeft="10px">
@@ -40,7 +44,7 @@ function Notifications(props) {
                             <ListItemAvatar>
                                 <Avatar alt="Remy Sharp" src={item.imageUrl}/>
                             </ListItemAvatar>
-                            <ListItemText primary={`${item.userHandle}さんが今日のコンテストに参加しました`} secondary={item.createdAt}/>
+                            <ListItemText primary={`${item.userHandle}さんが今日のコンテストに参加しました`} secondary={moment(item.createdAt).fromNow()}/>
                         </ListItem>
                         </Tooltip>
                         </div>

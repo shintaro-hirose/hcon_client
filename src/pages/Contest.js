@@ -161,7 +161,7 @@ function Contest(props) {
       {loading ? (
         <Loading />
       ) : (
-        <Typography  variant="h4">{contestId.substr(0,4)}/{contestId.substr(4,2)}/{contestId.substr(6,2)} のコンテスト</Typography> 
+        <Typography  variant="h4" align="center">{contestId.substr(0,4)}/{contestId.substr(4,2)}/{contestId.substr(6,2)} のコンテスト</Typography> 
       )}
       <Stepper activeStep={activeStep} alternativeLabel className={classes.stepper}>
         {steps.map(label => (
