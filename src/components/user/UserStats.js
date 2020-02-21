@@ -11,7 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
     paper: {
         width:"100%",
-        height: "302px",
         padding: "10px 0",
         boxShadow: theme.shadows[5],
     
@@ -32,7 +31,7 @@ function UserStats(props) {
                 </Typography>
                 {userData.totalDnfs === 0 ? (
                     <Box marginTop="50px">
-                        <Typography >まだDNFをしていません。</Typography>
+                        <Typography >まだDNFがありません。</Typography>
                         <Typography >詳細がここに表示されます。</Typography>
                     </Box>
                 ) : (
