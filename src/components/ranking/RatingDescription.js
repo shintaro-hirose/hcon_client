@@ -19,6 +19,8 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      overflow:'scroll'
+
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
@@ -116,6 +118,11 @@ export default function RatingDescription() {
                         </Box>
                     </Typography>
                     <SimpleTable />
+                    <Box display="flex" justifyContent="center" marginTop="20px">
+                      <Button variant="contained" color="primary" onClick={handleClose} >
+                        OK
+                      </Button>
+                    </Box>
                 </div>
             </Fade>
             </Modal>
