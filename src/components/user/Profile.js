@@ -138,8 +138,8 @@ function Profile(props) {
               </Typography>
               </Box>
               <hr />
-              <Typography variant="body2">レート: {rating}</Typography>
-              <Typography variant="body2">ランク: {rated}</Typography>
+              <Typography variant="h6">レート: {rating}</Typography>
+              <Typography variant="h6">ランク: {rated}</Typography>
               <hr />
               {belong && (
                 <Fragment>
