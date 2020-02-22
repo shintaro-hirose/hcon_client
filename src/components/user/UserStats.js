@@ -26,17 +26,24 @@ function UserStats(props) {
         <div>
             <Paper className={classes.paper}>
                 <Box padding="0 10px" textAlign="center">
-                <Typography variant="body1">
-                    成功率 = {((a-b)*100/a).toFixed(1)}% ({a-b}/{a})
-                </Typography>
-                {userData.totalDnfs === 0 ? (
-                    <Box marginTop="50px">
-                        <Typography >まだDNFがありません。</Typography>
-                        <Typography >詳細がここに表示されます。</Typography>
-                    </Box>
-                ) : (
-                        <UserDnf userData={userData}/>
-                )}
+                    { a===0 ? (
+                        "まだデータがありません"
+                    ) : (
+                        b === 0　? (
+                            <div>
+                            <Typography variant="h5">
+                                成功率 = {((a-b)*100/a).toFixed(1)}% ({a-b}/{a})
+                            </Typography>
+                            </div>
+                        ) : (
+                            <div>
+                            <Typography variant="body1">
+                                成功率 = {((a-b)*100/a).toFixed(1)}% ({a-b}/{a})
+                            </Typography>
+                            <UserDnf userData={userData}/>
+                            </div>
+                        )
+                    ) }
                 </Box>
             </Paper>
         </div>

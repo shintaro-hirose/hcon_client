@@ -66,7 +66,10 @@ const UserBestTable = (props) => {
                         )}
                             </TableCell>
                             <TableCell component="th" scope="row">
-                            {(row.date).substr(0,4)}/{(row.date).substr(4,2)}/{(row.date).substr(6,2)}
+                              {row.time===3600 ? "-" : (
+                              `${(row.date).substr(0,4)}/${(row.date).substr(4,2)}/${(row.date).substr(6,2)}`
+                              )}
+                            
                             </TableCell>
                         </TableRow>
                         

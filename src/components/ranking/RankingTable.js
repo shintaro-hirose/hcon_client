@@ -257,7 +257,7 @@ function RankingTable(props) {
                       <TableCell align="center" padding="none" >{row.rating}</TableCell>
                       <TableCell align="center" padding="none" >
                         { row.time===3600 ? "-" : (
-                          row.time >= 60 ? `${Math.floor(row.time/60)}:${row.time - 60*Math.floor(row.time/60)}`
+                          row.time >= 60 ? `${Math.floor(row.time/60)}:${(row.time - 60*(Math.floor(row.time/60))).toFixed(2)}`
                           : row.time
                         )}
                       </TableCell>
