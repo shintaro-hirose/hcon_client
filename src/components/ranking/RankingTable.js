@@ -16,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
 
+
 import { connect } from 'react-redux';
 
 function descendingComparator(a, b, orderBy) {
@@ -134,7 +135,6 @@ const useToolbarStyles = makeStyles(theme => ({
           backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: '1 1 100%',
   },
 }));
 
@@ -146,6 +146,8 @@ const EnhancedTableToolbar = props => {
         <Typography className={classes.title} variant="h6" id="tableTitle">
           全体ランキング
         </Typography>
+
+        
     </Toolbar>
   );
 };
