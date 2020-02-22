@@ -4,6 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import logo from '../images/hcon-icon.svg';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -27,7 +28,7 @@ export default function About() {
             <Paper className={classes.paper}>
                 <img 
                 alt="logo"
-                src="hcon-icon@2x.png"
+                src={logo}
                 className={classes.logo}
                 />
                 <Box padding="10px">
