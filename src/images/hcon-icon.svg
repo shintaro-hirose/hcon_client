@@ -1,0 +1,10 @@
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>hcon-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="hcon-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" stroke="#383B55" stroke-width="30" fill="#FFFFFF" cx="256" cy="256" r="241"></circle>
+        <path d="M70.3242188,80.3359375 L171.140625,80.3359375 L216.089844,256 C242.696615,256 256,256 256,256 C256,256 269.59375,256 296.78125,256 L344.054688,80.3359375 L439.605469,80.3359375 L383.820312,476.179688 L335.628906,497.539063 L296.78125,357.242188 L216.089844,357.242188 L179.195313,497.539063 L124.140625,476.179688 L70.3242188,80.3359375 Z" id="Path" fill="#383B55"></path>
+        <polygon id="Path-2" stroke="#EE1616" fill="#EE1616" points="220 430.40666 253.791969 453 307 416 254.866435 434.5"></polygon>
+    </g>
+</svg>
