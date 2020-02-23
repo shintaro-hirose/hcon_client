@@ -31,7 +31,7 @@ function Notifications(props) {
 
     return (
         <Paper className={classes.paper}>
-            <Box paddingLeft="10px">
+            <Box paddingLeft="20px">
             <Typography variant="h6" >最近のアクティビティ</Typography>
             </Box>
             <List component="nav">

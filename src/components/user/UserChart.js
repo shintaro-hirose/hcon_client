@@ -56,7 +56,8 @@ const  UserChart = (props) => {
             tickFormatter={(tickItem) => moment(tickItem).format('MM/DD')} 
             />
             <YAxis stroke={theme.palette.text.secondary} />
-            <Line type="monotone" dataKey="bestTime" stroke={theme.palette.primary.main} activeDot={{ r: 8 }} />
+            <Line name="単発ベスト"
+            type="monotone" dataKey="bestTime" stroke={theme.palette.primary.main} activeDot={{ r: 8 }} />
             <CartesianGrid // ガイド線の表示
               stroke="#ccc"
               strokeDasharray="3 3"

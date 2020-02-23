@@ -37,8 +37,8 @@ function UserStats(props) {
                             </div>
                         ) : (
                             <div>
-                            <Typography variant="body1">
-                                成功率 = {((a-b)*100/a).toFixed(1)}% ({a-b}/{a})
+                            <Typography variant="h5">
+                                成功率 : {((a-b)*100/a).toFixed(1)}% ({a-b}/{a})
                             </Typography>
                             <UserDnf userData={userData}/>
                             </div>
