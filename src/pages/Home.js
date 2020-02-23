@@ -11,18 +11,29 @@ import Loading from '../util/Loading';
 import About from '../util/About';
 import Notifications from '../util/Notifications';
 
-
+//redux
 import { connect } from 'react-redux';
 import { getAllUserSummary } from '../redux/actions/userActions';
+//firestore
+import { useSelector } from 'react-redux'
+import { useFirestoreConnect } from 'react-redux-firebase'
+
 
 function Home(props){
+  useFirestoreConnect([
+    { collection: 'notifications',
+    orderBy: ['createdAt', 'desc'],
+    limit: 10
+   } 
+  ])
+  const notifications = useSelector(state => state.firestore.ordered.notifications)
   function f() {
     props.getAllUserSummary();
   }
   useEffect(() => {
     f();
   },[]);
-  const {loading, authenticated, notifications} = props.user;
+  const {loading, authenticated} = props.user;
 
   let profileMarkup = !loading ? (
     authenticated ? (
@@ -60,14 +71,14 @@ function Home(props){
 
 Home.propTypes = {
   getAllUserSummary: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
 });
 
 export default connect(
-  mapStateToProps,
+    mapStateToProps,
   { getAllUserSummary }
-)(Home);
+  )(Home);
