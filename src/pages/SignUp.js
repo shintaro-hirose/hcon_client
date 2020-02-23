@@ -81,7 +81,7 @@ function SignUp(props) {
             label="ユーザID"
             id="handle"
             autoFocus
-            helperText={errors.handle}
+            helperText={errors.handle ? errors.handle : "英数字6文字以上12文字以下(変更できません)"}
             error={errors.handle ? true : false}
             onChange={handleChange}
             value={form.handle}            
@@ -94,7 +94,7 @@ function SignUp(props) {
             name="displayName"
             label="表示名"
             id="displayName"
-            helperText={errors.displayName}
+            helperText={errors.displayName ? errors.displayName : "16文字以下(全体に表示されます)"}
             error={errors.displayName ? true : false}
             onChange={handleChange}
             value={form.displayName}            

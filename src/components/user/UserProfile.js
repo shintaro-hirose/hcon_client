@@ -103,7 +103,7 @@ function UserProfile(props) {
                 color="primary"
                 variant="h5"
               >
-                {userData.userHandle}
+                {userData.displayName}
               </Typography>
               <hr />
               <Typography variant="body2">レート: {userData.rating}</Typography>

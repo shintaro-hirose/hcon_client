@@ -16,14 +16,18 @@ const useStyles = makeStyles(theme =>({
     padding:0,
 
   },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   button:{
     padding:0,
     fontSize:'11px',
+  },
+  profileImage :{
+    width: 25,
+    height: 25,
+    objectFit: 'cover',
+    maxWidth: '100%',
+    borderRadius: '50%',
+    display: 'inline' ,
+    verticalAlign: 'middle'
   },
 }));
 
@@ -50,8 +54,9 @@ export default function ResultTable(props) {
                 {index+1}
               </TableCell>
               <TableCell component="th" scope="row" padding="none" align="center" >
+                <img src={row.imageUrl} alt="profile" className={classes.profileImage} />
                 <Button  color="inherit" component={Link} to={`/user/${row.userHandle}`}>
-                  {row.userHandle}
+                  {row.displayName}
                 </Button>
               </TableCell>
               <TableCell align="center" padding="none" >
