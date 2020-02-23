@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import Profile from '../components/user/Profile';
 import UserBestTable from '../components/user/UserBestTable';
 import UserChart from '../components/user/UserChart';
 import UserProfile from '../components/user/UserProfile';
@@ -45,7 +46,11 @@ const  User = (props) => {
       ) : (
         <Grid container spacing={1}>
             <Grid item xs={12} sm={4}>
-                <UserProfile userData={userData}/>
+              {props.user.authenticated ? ( 
+                userHandle === props.user.authorizedUserSummary.userHandle ? ( <Profile /> ) : ( <UserProfile userData={userData}/>)
+               ) : ( <UserProfile userData={userData}/>)
+              }
+                
             </Grid>
             <Grid item xs={12} sm={8}>
               <Paper className={classes.tab}>
