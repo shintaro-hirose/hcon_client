@@ -4,6 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 // MUI stuff
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 // Icons
 
 import GroupIcon from '@material-ui/icons/Group';
@@ -99,11 +100,10 @@ function UserProfile(props) {
             </div>
             <hr />
             <div className="profile-details">
-              <Typography
-                color="primary"
-                variant="h5"
-              >
+            <Typography component="div">
+                <Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
                 {userData.displayName}
+                </Box>
               </Typography>
               <hr />
               <Typography variant="body2">レート: {userData.rating}</Typography>

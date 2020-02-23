@@ -204,7 +204,6 @@ function RankingTable(props) {
   const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState('rating');
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -216,10 +215,6 @@ function RankingTable(props) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
   return (
     <div className={classes.root}>
@@ -240,7 +235,7 @@ function RankingTable(props) {
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .slice(page * 10, page * 10 + 10)
                 .map((row, index) => {
 
                   return (
@@ -259,7 +254,7 @@ function RankingTable(props) {
                       <TableCell align="center" padding="none" >
                         { row.time===3600 ? "-" : (
                           row.time >= 60 ? `${Math.floor(row.time/60)}:${(row.time - 60*(Math.floor(row.time/60))).toFixed(2)}`
-                          : row.time
+                          : row.time.toFixed(2)
                         )}
                       </TableCell>
                     </TableRow>
@@ -272,10 +267,10 @@ function RankingTable(props) {
         <TablePagination
           component="div"
           count={rows.length}
-          rowsPerPage={rowsPerPage}
+          rowsPerPage={10}
           page={page}
           onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
+          rowsPerPageOptions={[10]}
         />
       </Paper>
     </div>

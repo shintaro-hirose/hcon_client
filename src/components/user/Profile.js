@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
         verticalAlign: 'middle'
       },
       '& a': {
-        // color: '#00bcd4'
+        color: '#00bcd4'
       }
     },
     '& hr': {
@@ -181,16 +181,10 @@ function Profile(props) {
               {twitter && (
                 <Fragment>
                   <TwitterIcon color="primary" />
-                  <Typography display="inline">
-                    <Link href={`https://twitter.com/${twitter}`} 
-                    color="primary" 
-                    underline="none" 
-                    component="a"
-                    target="_blank" rel="noopener noreferrer">
+                  <a href={`https://twitter.com/${twitter}`} target="_blank" rel="noopener noreferrer">
                     {' '}
                     {twitter}
-                    </Link>
-                  </Typography>
+                  </a>
                   <hr />
                 </Fragment>
               )}

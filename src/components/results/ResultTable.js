@@ -62,26 +62,26 @@ export default function ResultTable(props) {
               <TableCell align="center" padding="none" >
               { row.bestTime===3600 ? "DNF" : (
                           row.bestTime >= 60 ? `${Math.floor(row.bestTime/60)}:${(row.bestTime - 60*Math.floor(row.bestTime/60)).toFixed(2)}`
-                          : row.bestTime
+                          : (row.bestTime).toFixed(2)
                         )}
               </TableCell>
               <TableCell align="center" padding="none">
                 <Box display="inline" marginRight="10px">
                 { row.firstTime===3600 ? "DNF" : (
                           row.firstTime >= 60 ? `${Math.floor(row.firstTime/60)}:${(row.firstTime - 60*Math.floor(row.firstTime/60)).toFixed(2)}`
-                          : row.firstTime
+                          : row.firstTime.toFixed(2)
                         )}
                 </Box>
                 <Box  display="inline" marginRight="10px">
                 { row.secondTime===3600 ? "DNF" : (
                           row.secondTime >= 60 ? `${Math.floor(row.secondTime/60)}:${(row.secondTime - 60*Math.floor(row.secondTime/60)).toFixed(2)}`
-                          : row.secondTime
+                          : row.secondTime.toFixed(2)
                         )} 
                 </Box>
                 <Box  display="inline">
                 { row.thirdTime===3600 ? "DNF" : (
                           row.thirdTime >= 60 ? `${Math.floor(row.thirdTime/60)}:${(row.thirdTime - 60*Math.floor(row.thirdTime/60)).toFixed(2)}`
-                          : row.thirdTime
+                          : row.thirdTime.toFixed(2)
                         )}
                  </Box>
               </TableCell>
