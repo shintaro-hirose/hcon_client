@@ -35,7 +35,7 @@ const  UserChart = (props) => {
 
   return (
     <React.Fragment>
-      { props.userData.totalAttempts === 0 ? (
+      { props.userData.totalAttempts-props.userData.totalDnfs === 0 ? (
         <Paper className={classes.noData}>
           <Box padding="0 10px" textAlign="center">
             まだデータがありません

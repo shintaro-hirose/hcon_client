@@ -193,6 +193,7 @@ function RankingTable(props) {
   userSummaries.forEach((userSummary,index) => {
     rows.push({
       rank: index+1,
+      displayName: userSummary.displayName,
       userHandle : userSummary.userHandle,
       rating: userSummary.rating,
       time: userSummary.bestTime1.time,
@@ -250,7 +251,7 @@ function RankingTable(props) {
                       <TableCell component="th" scope="row" padding="none" align="center"  >
                           <img src={row.imageUrl} alt="profile" className={classes.profileImage} />
                         <Button  color="primary" component={Link} to={`/user/${row.userHandle}`}>
-                         {row.userHandle}
+                         {row.displayName}
                         </Button>
                       </TableCell>
 
