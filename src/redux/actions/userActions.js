@@ -11,7 +11,7 @@ import {
     SET_CONTEST,
     SET_RESULT,
     SET_USER_CREDENTIAL,
-    SET_NOTIFICATIONS,
+    UNLOADING_USER,
   } from '../types';
 import axios from 'axios';
   
@@ -114,6 +114,10 @@ import axios from 'axios';
       .post('/settings/image', formData)
       .then(() => {
         dispatch(getAuthenticatedUserSummary());
+        dispatch({
+          type: OPEN_SUCCESSBAR,
+          payload: "プロフィール画像を更新しました"
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -124,6 +128,10 @@ import axios from 'axios';
       .post('/settings', userDetails)
       .then(() => {
         dispatch(getAuthenticatedUserSummary());
+        dispatch({
+          type: OPEN_SUCCESSBAR,
+          payload: "プロフィール情報を更新しました"
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -208,3 +216,24 @@ export const getUserCredential = () => (dispatch) => {
     })
   })
 }
+
+export const updateDisplayName = (form) => (dispatch) => {
+  dispatch({type: LOADING_UI});
+  axios
+  .post('/updateDisplayName', form)
+  .then(res => {
+    dispatch(getAuthenticatedUserSummary());
+    dispatch({ type: CLEAR_ERRORS });
+    dispatch({
+      type: OPEN_SUCCESSBAR,
+      payload: "表示名を変更しました"
+    });
+  })
+  .catch((err) => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: err.response.data
+    });
+  });
+}
+

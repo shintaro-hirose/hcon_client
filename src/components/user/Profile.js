@@ -124,7 +124,7 @@ function Profile(props) {
   const classes = useStyles();
     const {
       user: {
-        authorizedUserSummary: { userHandle, imageUrl, rating,  belong, twitter, rated },
+        authorizedUserSummary: { displayName, imageUrl, rating,  belong, twitter, rated },
         loading,
         authenticated
       }
@@ -158,16 +158,19 @@ function Profile(props) {
             <hr />
             <div className="profile-details">
               <Box>
-              <Typography
-                color="primary"
-                variant="h5"
-              >
-                {userHandle}
+              <Typography component="div">
+                <Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
+                {displayName}
+                </Box>
               </Typography>
               </Box>
               <hr />
               <Typography variant="h6">レート: {rating}</Typography>
-              <Typography variant="h6">{ratedToJapanese(rated)}</Typography>
+              <Typography component="div">
+                <Box fontWeight="fontWeightLight">
+                  {ratedToJapanese(rated)}
+                </Box>
+              </Typography>
               <hr />
               {belong && (
                 <Fragment>

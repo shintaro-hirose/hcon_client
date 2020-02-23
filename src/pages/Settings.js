@@ -15,9 +15,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import LockIcon from '@material-ui/icons/Lock';
+import Loading from '../util/Loading';
+import SuccessBar from '../util/SuccessBar';
+
 
 import { connect } from 'react-redux';
-import { getUserCredential} from '../redux/actions/userActions';
+import { getUserCredential, updateDisplayName} from '../redux/actions/userActions';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -47,8 +50,8 @@ function Settings(props) {
   const classes = useStyles();
   const [active, setActive] = useState(1);
   const [form, setForm] = useState({
-    userId: props.user.authorizedUserCredential.userHandle,
-    email: props.user.authorizedUserCredential.email,
+    displayName: props.user.authorizedUserSummary.displayName,
+    email: "",
     password: "",
     confirmPassword:""
   })
@@ -56,7 +59,10 @@ function Settings(props) {
   useEffect(() => {
     props.getUserCredential();
   }, [])
-  const { UI:{loading, errors} } = props;
+  
+  const loading = props.user.loading;
+  const uiLoading = props.UI.loading;
+  const errors = props.UI.errors;
 
   const handleChange = (event) => {
     setForm({
@@ -75,7 +81,7 @@ function Settings(props) {
   };
   const handleSubmit1 = (event) => {
     event.preventDefault();
-
+    props.updateDisplayName({displayName: form.displayName});
   };
   const handleSubmit2 = (event) => {
     event.preventDefault();
@@ -86,7 +92,15 @@ function Settings(props) {
  
   return (
     <React.Fragment>
-        <Grid container spacing={2}>
+      {loading ? (
+        <div>
+        <SuccessBar />
+        <Loading />
+        </div>
+      ):(
+        <div>
+          <SuccessBar />
+<Grid container spacing={2}>
           <Grid item sm={4} xs={12}>
           <Paper className={classes.paper}>
             <List component="nav" aria-label="setting selector">
@@ -94,7 +108,7 @@ function Settings(props) {
                     <ListItemIcon>
                         <AccountCircleIcon />
                     </ListItemIcon>
-                    <ListItemText primary="ユーザ名" />
+                    <ListItemText primary="表示名" />
                 </ListItem>
                 <ListItem button onClick={handleActiveChange2} selected={active === 2}>
                     <ListItemIcon>
@@ -116,21 +130,21 @@ function Settings(props) {
               //userIdの変更
               <Paper className={classes.paper}>
             <Box padding="20px">
-              <Typography variant="h5">ユーザ名の変更</Typography>
+              <Typography variant="h5">表示名の変更</Typography>
             </Box>                <form className={classes.form} noValidate onSubmit={handleSubmit1}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="userId"
-            label="ユーザ名"
-            name="userId"
+            id="displayName"
+            label="表示名"
+            name="displayName"
             autoFocus
-            helperText={errors.userId}
-            error={errors.userId ? true : false}
+            helperText={errors.displayName}
+            error={errors.displayName ? true : false}
             onChange={handleChange}
-            value={form.userId}
+            value={form.displayName}
           />
           <Button
             type="submit"
@@ -138,10 +152,10 @@ function Settings(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={loading}
+            disabled={uiLoading}
           >
             更新する
-            {loading && (
+            {uiLoading && (
                 <CircularProgress size={30} className={classes.progress}/>
               )}
           </Button>
@@ -175,10 +189,10 @@ function Settings(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={loading}
+            disabled={uiLoading}
           >
             更新する
-            {loading && (
+            {uiLoading && (
                 <CircularProgress size={30} className={classes.progress}/>
               )}
           </Button>
@@ -226,10 +240,10 @@ function Settings(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={loading}
+            disabled={uiLoading}
           >
             更新する
-            {loading && (
+            {uiLoading && (
                 <CircularProgress size={30} className={classes.progress}/>
               )}
           </Button>
@@ -242,12 +256,16 @@ function Settings(props) {
           
           </Grid>
         </Grid>
+        </div>
+      )}
+        
     </React.Fragment>
   );
 }
 
 Settings.propTypes = {
   getUserCredential: PropTypes.func.isRequired,
+  updateDisplayName: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired
   };
@@ -259,6 +277,7 @@ Settings.propTypes = {
   
   const mapActionsToProps = {
     getUserCredential,
+    updateDisplayName
   };
   
   export default connect(

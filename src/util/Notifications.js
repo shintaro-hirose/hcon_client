@@ -44,7 +44,7 @@ function Notifications(props) {
                             <ListItemAvatar>
                                 <Avatar alt="Remy Sharp" src={item.imageUrl}/>
                             </ListItemAvatar>
-                            <ListItemText primary={`${item.userHandle}さんが今日のコンテストに参加しました`} secondary={moment(item.createdAt).fromNow()}/>
+                            <ListItemText primary={`${item.displayName}さんが今日のコンテストに参加しました`} secondary={moment(item.createdAt).fromNow()}/>
                         </ListItem>
                         </Tooltip>
                         </div>
