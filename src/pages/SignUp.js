@@ -38,31 +38,29 @@ const useStyles = makeStyles(theme => ({
 
 function SignUp(props) {
   const classes = useStyles();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [handle, setHandle] = useState('');
+  const [form, setForm] = useState({
+    handle:"",
+    displayName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
 
   const { UI:{loading, errors} } = props;
 
+  const handleChange = (event) => {
+    setForm({
+      ...form,
+      [event.target.name] : event.target.value
+    })
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.signupUser({email, password, confirmPassword, handle}, props.history);
+    props.signupUser(form, props.history);
   };
-  const handleChange1 = (event) => {
-    setEmail(event.target.value);
-  };
-  const handleChange2 = (event) => {
-    setPassword(event.target.value);
-  };
-  const handleChange3 = (event) => {
-    setConfirmPassword(event.target.value);
-  };
-  const handleChange4 = (event) => {
-    setHandle(event.target.value);
-  };
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -80,13 +78,26 @@ function SignUp(props) {
             required
             fullWidth
             name="handle"
-            label="ユーザ名"
+            label="ユーザID"
             id="handle"
             autoFocus
             helperText={errors.handle}
             error={errors.handle ? true : false}
-            onChange={handleChange4}
-            value={handle}            
+            onChange={handleChange}
+            value={form.handle}            
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="displayName"
+            label="表示名"
+            id="displayName"
+            helperText={errors.displayName}
+            error={errors.displayName ? true : false}
+            onChange={handleChange}
+            value={form.displayName}            
           />
           <TextField
             variant="outlined"
@@ -98,8 +109,8 @@ function SignUp(props) {
             name="email"
             helperText={errors.email}
             error={errors.email ? true : false}
-            onChange={handleChange1}
-            value={email}
+            onChange={handleChange}
+            value={form.email}
           />
           <TextField
             variant="outlined"
@@ -112,8 +123,8 @@ function SignUp(props) {
             id="password"
             helperText={errors.password}
             error={errors.password ? true : false}
-            onChange={handleChange2}
-            value={password}            
+            onChange={handleChange}
+            value={form.password}            
           />
           <TextField
             variant="outlined"
@@ -126,8 +137,8 @@ function SignUp(props) {
             id="confirmPassword"
             helperText={errors.confirmPassword}
             error={errors.confirmPassword ? true : false}
-            onChange={handleChange3}
-            value={confirmPassword}            
+            onChange={handleChange}
+            value={form.confirmPassword}            
           />
           
           {errors.general && (
