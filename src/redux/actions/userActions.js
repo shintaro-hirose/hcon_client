@@ -79,15 +79,6 @@ import axios from 'axios';
         payload: res.data
       });
     })
-    .then(() => {
-      axios.get('/getNotifications')
-      .then(res => {
-        dispatch({
-          type: SET_NOTIFICATIONS,
-          payload: res.data
-        });
-      })
-    })
     .catch(err => console.log(err));
   }
 

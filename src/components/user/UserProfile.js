@@ -58,6 +58,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const ratedToJapanese = (rated) => {
+  if(rated === "God Eater"){
+    return "ゴッドイーター"
+  } else if(rated === "God"){
+    return "ゴッド"
+  } else if(rated === "Grand Master"){
+    return "グランドマスター"
+  }else if(rated === "Master"){
+    return "マスター"
+  } else if(rated === "Diamond"){
+    return "ダイアモンド"
+  } else if(rated === "Platinum"){
+    return "プラチナ"
+  } else if(rated === "Gold"){
+    return "ゴールド"
+  } else if(rated === "Silver"){
+    return "シルバー"
+  } else if(rated === "Bronze"){
+    return "ブロンズ"
+  } else if(rated === "Iron"){
+    return "アイアン"
+  } else if(rated === "beginner"){
+    return "ビギナー"
+  } else {
+    return "不明な称号"
+  }
+}
+
 function UserProfile(props) {
   const userData = props.userData;
   const classes = useStyles();
@@ -79,7 +107,7 @@ function UserProfile(props) {
               </Typography>
               <hr />
               <Typography variant="body2">レート: {userData.rating}</Typography>
-              <Typography variant="body2">ランク: {userData.rated}</Typography>
+              <Typography variant="body2">{ratedToJapanese(userData.rated)}</Typography>
               <hr />
               {userData.belong && (
                 <Fragment>
