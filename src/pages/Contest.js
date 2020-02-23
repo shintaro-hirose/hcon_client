@@ -126,14 +126,16 @@ function Contest(props) {
   const errors = props.UI.errors;
   const uiLoading = props.UI.uiLoading;
   const contestId = props.user.contest.contestId;
-  const imageUrl = props.user.authorizedUserSummary.imageUrl
+  const imageUrl = props.user.authorizedUserSummary.imageUrl;
+  const displayName = props.user.authorizedUserSummary.displayName;
 
   const handleChange = event => {
     setForm({
         ...form,
         [event.target.name]: event.target.value,
-        contestId: contestId,
-        imageUrl: imageUrl,
+        contestId,
+        imageUrl,
+        displayName,
     });
   };
 
