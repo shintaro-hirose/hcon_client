@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -36,11 +38,20 @@ function ContestField(props) {
   const classes = useStyles();
   const authenticated = props.user.authenticated;
   let contentMarkup = authenticated ? (
-    <div align="center">
-      <Button component={Link} to={`/contest`} color="secondary">
-        <Typography variant="h6">コンテストに参加する</Typography>
-      </Button>
-    </div>
+    <Grid container>
+      <Grid item sm={6} xs={12} align="center">
+        <Box marginBottom="10px">
+        <Button component={Link} to={`/contestUseTimer`} color="primary" variant="outlined" >
+          <Typography variant="h6">タイマーを使用して参加</Typography>
+        </Button>
+        </Box>
+      </Grid>
+      <Grid item sm={6} xs={12} align="center">
+        <Button component={Link} to={`/contest`} color="primary"  variant="outlined">
+          <Typography variant="h6">タイムを手入力して参加</Typography>
+        </Button>
+      </Grid>
+    </Grid>    
   ) : (
       <div align="center">
         <Button component={Link} to="/login" variant="contained" color="primary"
