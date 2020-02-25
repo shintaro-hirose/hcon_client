@@ -71,6 +71,20 @@ const YellowRadio = withStyles({
 })(props => <Radio color="default" {...props} />);
 
 function ContestUseTimer(props) {
+  const now = new Date();
+  let year = String(now.getFullYear());
+  let month = String(now.getMonth() + 1) ;
+  let date = String(now.getDate());
+  month = ('0'+ month).slice(-2);
+  date = ('0'+ date).slice(-2);
+  const conId = year+month+date;
+
+  if (props.user.authorizedUserSummary.lastPostedDate){
+    if (conId === props.user.authorizedUserSummary.lastPostedDate){
+      window.location.href = '/';
+    }
+  }
+
   const classes = useStyles();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
