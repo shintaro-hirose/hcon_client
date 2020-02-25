@@ -29,6 +29,12 @@ const useStyles = makeStyles(theme =>({
     display: 'inline' ,
     verticalAlign: 'middle'
   },
+  imgBox: {
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: "25%"
+      },
+      display: "inline"
+    }
 }));
 
 export default function ResultTable(props) {
@@ -53,8 +59,10 @@ export default function ResultTable(props) {
               <TableCell component="th" scope="row">
                 {index+1}
               </TableCell>
-              <TableCell component="th" scope="row" padding="none" align="center" >
+              <TableCell component="th" scope="row" padding="none" align="left" >
+                <Box className={classes.imgBox}>
                 <img src={row.imageUrl} alt="profile" className={classes.profileImage} />
+                </Box>
                 <Button  color="inherit" component={Link} to={`/user/${row.userHandle}`}>
                   {row.displayName}
                 </Button>

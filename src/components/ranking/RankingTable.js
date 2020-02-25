@@ -14,6 +14,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 
 
@@ -184,6 +185,12 @@ const useStyles = makeStyles(theme => ({
     display: 'inline' ,
     verticalAlign: 'middle'
   },
+  imgBox: {
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: "30%"
+    },
+    display: "inline"
+  }
 }));
 
 function RankingTable(props) {
@@ -243,8 +250,10 @@ function RankingTable(props) {
                       key={row.userHandle}
                     >
                       <TableCell align="center" padding="none" >{index+1}</TableCell>
-                      <TableCell component="th" scope="row" padding="none" align="center"  >
+                      <TableCell component="th" scope="row" padding="none" align="left"  >
+                        <Box className={classes.imgBox}>
                           <img src={row.imageUrl} alt="profile" className={classes.profileImage} />
+                          </Box>
                         <Button  color="primary" component={Link} to={`/user/${row.userHandle}`}>
                          {row.displayName}
                         </Button>
