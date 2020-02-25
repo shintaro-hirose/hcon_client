@@ -8,6 +8,9 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import TimerIcon from '@material-ui/icons/Timer';
+import CreateIcon from '@material-ui/icons/Create';
+
 import { connect } from 'react-redux';
 
 const now = new Date();
@@ -42,13 +45,17 @@ function ContestField(props) {
       <Grid item sm={6} xs={12} align="center">
         <Box marginBottom="10px">
         <Button component={Link} to={`/contestUseTimer`} color="primary" variant="outlined" >
-          <Typography variant="h6">タイマーを使用して参加</Typography>
+          <TimerIcon />
+          <Typography variant="h6">
+            タイマーを使用する
+            </Typography>
         </Button>
         </Box>
       </Grid>
       <Grid item sm={6} xs={12} align="center">
         <Button component={Link} to={`/contest`} color="primary"  variant="outlined">
-          <Typography variant="h6">タイムを手入力して参加</Typography>
+          <CreateIcon />
+          <Typography variant="h6">タイムを手入力する</Typography>
         </Button>
       </Grid>
     </Grid>    

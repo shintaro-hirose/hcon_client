@@ -189,7 +189,7 @@ function Profile(props) {
                 </Fragment>
               )}
             </div>
-            <MyButton tip="Logout" onClick={handleLogout}>
+            <MyButton tip="ログアウト" onClick={handleLogout}>
               <KeyboardReturn color="primary" />
             </MyButton>
             <EditDetails />
