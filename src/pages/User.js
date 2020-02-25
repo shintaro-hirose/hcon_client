@@ -30,7 +30,7 @@ const  User = (props) => {
   const userHandle = props.match.params.userId;
   useEffect(() => {
     props.getUserResults(userHandle);
-  }, []);
+  }, [props.match.params.userId]);
 
   const loading = props.user.loading;
   const userData = props.user.selectedUserData;
