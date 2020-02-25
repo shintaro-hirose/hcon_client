@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
@@ -19,6 +19,7 @@ let month = String(now.getMonth() + 1) ;
 let date = String(now.getDate());
 month = ('0'+ month).slice(-2);
 date = ('0'+ date).slice(-2);
+const contestId = year+month+date
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,10 +39,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ContestField(props) {
+  const [isPostable, setIsPostable] = useState(true);
   const classes = useStyles();
   const authenticated = props.user.authenticated;
+  if(isPostable){
+    if(props.user.authorizedUserSummary.lastPostedDate){
+      const lastPostedDate = props.user.authorizedUserSummary.lastPostedDate;
+      if(contestId === lastPostedDate)  setIsPostable(false);
+    }
+  }
+  
+  console.log(isPostable);
+  
   let contentMarkup = authenticated ? (
-    <Grid container>
+    isPostable ? (
+<Grid container>
       <Grid item sm={6} xs={12} align="center">
         <Box marginBottom="10px">
         <Button component={Link} to={`/contestUseTimer`} color="primary" variant="outlined" >
@@ -58,7 +70,15 @@ function ContestField(props) {
           <Typography variant="h6">タイムを手入力する</Typography>
         </Button>
       </Grid>
-    </Grid>    
+    </Grid>   
+    ) : (
+      <Box textAlign="center" color="#4caf50" >
+          <Typography variant="h5" display="inline" fontWeight="bold">
+            参加済み
+            </Typography>
+        </Box>
+    )
+     
   ) : (
       <div align="center">
         <Button component={Link} to="/login" variant="contained" color="primary"

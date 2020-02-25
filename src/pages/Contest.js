@@ -25,6 +25,8 @@ import Loading from '../util/Loading';
 import { connect } from 'react-redux';
 import { postContestResult, getContest } from '../redux/actions/userActions';
 
+
+
 const useStyles = makeStyles(theme => ({
   root: {
   },
@@ -128,6 +130,21 @@ function Contest(props) {
   const contestId = props.user.contest.contestId;
   const imageUrl = props.user.authorizedUserSummary.imageUrl;
   const displayName = props.user.authorizedUserSummary.displayName;
+
+  const now = new Date();
+  let year = String(now.getFullYear());
+  let month = String(now.getMonth() + 1) ;
+  let date = String(now.getDate());
+  month = ('0'+ month).slice(-2);
+  date = ('0'+ date).slice(-2);
+  const conId = year+month+date;
+
+  if (props.user.authorizedUserSummary.lastPostedDate){
+    if (conId === props.user.authorizedUserSummary.lastPostedDate){
+      window.location.href = '/';
+    }
+  }
+  
 
   const handleChange = event => {
     setForm({
