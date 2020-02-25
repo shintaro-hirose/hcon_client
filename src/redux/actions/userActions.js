@@ -237,3 +237,41 @@ export const updateDisplayName = (form) => (dispatch) => {
   });
 }
 
+export const sendToEmail = (userData) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post('/sendToEmail', userData)
+    .then((res) => {
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({
+        type: OPEN_SUCCESSBAR,
+        payload: "指定のメールアドレスにメールを送信しました"
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const finishSignup = () => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+    axios
+      .get('/finishSigninFlow')
+      .then((res) => {
+        setAuthorizationHeader(res.data.token);
+        dispatch({ type: CLEAR_ERRORS });
+        dispatch({
+          type: OPEN_SUCCESSBAR,
+          payload: "アカウント登録に成功しました"
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err.response.data
+        });
+      });
+}

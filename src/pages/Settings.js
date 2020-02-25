@@ -166,7 +166,7 @@ function Settings(props) {
               active === 2 ? (
                 <Paper className={classes.paper}>
 <Box padding="20px">
-              <Typography variant="h5">メールアドレスの変更</Typography>
+              <Typography variant="h5">メールアドレスの変更(未実装)</Typography>
             </Box>                <form className={classes.form} noValidate onSubmit={handleSubmit2}>
           <TextField
             variant="outlined"
@@ -202,7 +202,7 @@ function Settings(props) {
               ) : (
 <Paper className={classes.paper}>
             <Box padding="20px">
-              <Typography variant="h5">パスワードの変更</Typography>
+              <Typography variant="h5">パスワードの変更（未実装）</Typography>
             </Box>
                 <form className={classes.form} noValidate onSubmit={handleSubmit3}>
           <TextField

@@ -61,7 +61,7 @@ const UserBestTable = (props) => {
                             </TableCell>
                             <TableCell component="th" scope="row">
                             { row.time===3600 || row.time === "" ? "-" : (
-                          row.time >= 60 ? `${Math.floor(row.time/60)}:${(row.time - 60*Math.floor(row.time/60)).toFixed(2)}`
+                          row.time >= 60 ? `${Math.floor(row.time/60)}:${('0'+String((row.time - 60*(Math.floor(row.time/60))).toFixed(2))).substr(-5)}`
                           : row.time.toFixed(2)
                         )}
                             </TableCell>
