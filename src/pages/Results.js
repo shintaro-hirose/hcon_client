@@ -17,7 +17,23 @@ import { connect } from 'react-redux';
 import { getResult } from '../redux/actions/userActions';
 
 const Results = (props) => {
+    const now = new Date();
+    let year = String(now.getFullYear());
+    let month = String(now.getMonth() + 1) ;
+    let date = String(now.getDate());
+    month = ('0'+ month).slice(-2);
+    date = ('0'+ date).slice(-2);
+    const t = year+month+date;
+    const todayDate = new Date();
+    todayDate.setDate(todayDate.getDate() -1);
+
+
     const contestId = props.match.params.contestId;
+
+    if ((Number(t) - Number(contestId)) <= 0){
+      window.location.href = '/';
+    }
+
     function getResult(a) {
       props.getResult(a);
     }
@@ -35,11 +51,18 @@ const Results = (props) => {
         month = ('0'+ month).slice(-2);
         day = ('0'+ day).slice(-2);
         const contestId = year+month+day;
+        if ((Number(t) - Number(contestId)) <= 0){
+          window.location.href = '/';
+        }
         props.getResult(contestId);
+
+
     };
 
     const loading = props.user.loading;
     const contestData = props.user.contestData;
+
+    
     return(
       <React.Fragment>
       {loading ? (
@@ -47,7 +70,7 @@ const Results = (props) => {
       ) : (
         <div>
         <Box textAlign="center">
-        <Typography variant="h4" align="center" >Results</Typography>
+        <Typography variant="h4" align="center" >過去の大会結果</Typography>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
             disableToolbar
@@ -57,6 +80,8 @@ const Results = (props) => {
             id="date-picker-inline"
             label="日付を選択してください"
             value={selectedDate}
+            minDate={new Date(2020,1,22,12,12)}
+            maxDate={todayDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
                 'aria-label': 'change date',

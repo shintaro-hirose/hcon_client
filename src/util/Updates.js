@@ -28,9 +28,14 @@ function Updates() {
             </Box>
             <List component="nav">
                 <Divider />
+                    <ListItem > 
+                        <ListItemText primary="結果画面の日付選択範囲を制限しました" secondary="2020-2-25 20:30"/>
+                    </ListItem>
+                <Divider />
                 <ListItem > 
                     <ListItemText primary="タイマー機能を追加しました（スマホ未対応）" secondary="2020-2-25 8:54"/>
                 </ListItem>
+                
             </List>
         </Paper>
     )
