@@ -16,6 +16,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Timer from '../components/contest/Timer'
+import TimerForPhone from '../components/contest/TimerForPhone'
 
 import Loading from '../util/Loading';
 
@@ -150,6 +151,12 @@ function ContestUseTimer(props) {
     cornerExeMiss: "(コーナーの実行ミス)",
     recallMiss: "(違うレターペアの想起)"
   }
+
+  function isMobile(){
+    var regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    return (window.navigator.userAgent.search(regexp) !== -1);
+  }
+  console.log(isMobile());
   return (
     <React.Fragment>
       {loading ? (
@@ -178,12 +185,23 @@ function ContestUseTimer(props) {
           )
         )
       )}
+      {isMobile() ? (
+        <TimerForPhone 
+        setFirstInput={setFirstInput} 
+        setSecondInput={setSecondInput} 
+        setThirdInput={setThirdInput} 
+        setSituationPar={setSituationPar}
+        />
+        
+      ) : (
         <Timer 
         setFirstInput={setFirstInput} 
         setSecondInput={setSecondInput} 
         setThirdInput={setThirdInput} 
         setSituationPar={setSituationPar}
         />
+      )}
+        
         <form className={classes.root} noValidate onSubmit={handleSubmit}>
         <Grid container spacing={1}>
           <Grid item sm={4} xs={12}>
@@ -404,6 +422,7 @@ function ContestUseTimer(props) {
                 color="primary"
                 className={classes.submit}
                 disabled={uiLoading}
+                size="large"
               >
                 結果を送信する
                 {uiLoading && (

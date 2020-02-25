@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 
-const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) => {
+const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) => {
     const [started, setStarted] = useState(false);
     const [pressStartTime, setPressStartTime] = useState(false);
     const [timeLapse, setTimeLapse] = useState(0);
@@ -27,7 +27,7 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
         
     }
 
-    document.onkeydown = function(e) {
+    document.ontouchstart = function(e) {
         if(situation >= 3) return;
         if (!attemptStarted){
             let event;
@@ -55,7 +55,7 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
         
     };
 
-    document.onkeyup = function(e) {
+    document.ontouchend = function(e) {
         if(situation >= 3) return;
         let event;
         if (e){event = e};
@@ -82,7 +82,7 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
                   </Box>
                   { situation !== 3 ? (
                       <Box　fontSize="h5.fontSize">
-                      スペースキー長押しでスタート
+                      画面長押しでスタート
                   </Box>
                   ) : (<p></p>)}
                   
@@ -118,4 +118,4 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
     );
   };
 
-export default Timer;
+export default TimerForPhone;

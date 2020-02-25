@@ -31,12 +31,14 @@ export default function About() {
                 src={logo}
                 className={classes.logo}
                 />
-                <Box padding="10px">
+                <Box padding="0 10px">
                     <Typography variant="h5" color="secondary">
-                        Hcon とは?
+                        Hcon
                     </Typography>
+                </Box>
+                <Box marginTop="10px">
                     <Typography variant="body1">
-                        3BLDをするすべての人のための大会プラットフォームです。<br />
+                        3BLD競技者のための大会プラットフォームです。<br />
                         毎日24：00に更新します。
                     </Typography>
                 </Box>

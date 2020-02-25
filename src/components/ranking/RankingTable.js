@@ -201,8 +201,8 @@ function RankingTable(props) {
       rated: userSummary.rated,
     })
   });
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('rating');
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('rank');
   const [page, setPage] = React.useState(0);
 
   const handleRequestSort = (event, property) => {
