@@ -89,10 +89,16 @@ const Results = (props) => {
             />
         </MuiPickersUtilsProvider>
         </Box>
-        <Box textAlign="center" margin="30px 0"> 
-        <Typography variant="h6" margin="20px 0">1試技目: {contestData.scrambles.first}</Typography>
-        <Typography variant="h6" margin="20px 0">2試技目: {contestData.scrambles.second}</Typography>
-        <Typography variant="h6" margin="20px 0">3試技目: {contestData.scrambles.third}</Typography>
+        <Box textAlign="left" margin="30px 0"> 
+          <Box >
+            <Typography variant="h6" >1試技目: {contestData.scrambles.first}</Typography>
+          </Box>
+          <Box margin="20px 0">
+            <Typography variant="h6">2試技目: {contestData.scrambles.second}</Typography>
+          </Box>
+          <Box margin="20px 0">
+            <Typography variant="h6">3試技目: {contestData.scrambles.third}</Typography>
+          </Box>
         </Box>
         <Box textAlign="center">
         { contestData.results.length === 0 ? (
