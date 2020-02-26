@@ -123,18 +123,24 @@ import axios from 'axios';
   };
   
   export const editUserDetails = (userDetails) => (dispatch) => {
-    dispatch({ type: LOADING_USER });
+    dispatch({ type: LOADING_UI });
     axios
       .post('/settings', userDetails)
       .then(() => {
         dispatch(getAuthenticatedUserSummary());
+        dispatch({ type: CLEAR_ERRORS });
         dispatch({
           type: OPEN_SUCCESSBAR,
           payload: "プロフィール情報を更新しました"
         });
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err.response.data
+        });
+      }); 
+ };
   
   
   const setAuthorizationHeader = (token) => {
