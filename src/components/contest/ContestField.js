@@ -48,9 +48,7 @@ function ContestField(props) {
       if(contestId === lastPostedDate)  setIsPostable(false);
     }
   }
-  
-  console.log(isPostable);
-  
+    
   let contentMarkup = authenticated ? (
     isPostable ? (
 <Grid container>

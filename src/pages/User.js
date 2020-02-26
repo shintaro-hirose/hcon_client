@@ -11,6 +11,7 @@ import UserBestTable from '../components/user/UserBestTable';
 import UserChart from '../components/user/UserChart';
 import UserProfile from '../components/user/UserProfile';
 import UserStats from '../components/user/UserStats';
+import UserHistory from '../components/user/UserHistory';
 import Loading from '../util/Loading';
 
 import { connect } from 'react-redux';
@@ -69,7 +70,10 @@ const  User = (props) => {
                 </Tabs>
               </Paper>
               {value === 0 ? (
+                <div>
                 <UserBestTable userData={userData}/>
+                <UserHistory userData={userData}/>
+                </div>
               ) : (
                 value === 1 ? (
                   <UserStats userData={userData}/>

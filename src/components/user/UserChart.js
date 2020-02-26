@@ -31,8 +31,21 @@ const useStyles = makeStyles(theme => ({
 const  UserChart = (props) => {
   const theme = useTheme();
   const results = props.userData.results;
-  const classes = useStyles();
 
+  const classes = useStyles();
+  const formattedResults = []
+  if( results && (results.length !== 0) ){
+    results.forEach(result => {
+      if(result.bestTime !== 3600){
+        formattedResults.push(result);
+      }
+    })
+  }
+  formattedResults.sort((a, b) => {
+    if (a.createdAt < b.createdAt) return -1;
+    if (a.createdAt > b.createdAt) return 1;
+    return 0;
+});
   return (
     <React.Fragment>
       { props.userData.totalAttempts-props.userData.totalDnfs === 0 ? (
@@ -45,7 +58,7 @@ const  UserChart = (props) => {
         <Paper className={classes.paper}>
         <ResponsiveContainer>
           <LineChart
-            data={results}
+            data={formattedResults}
             margin={{
               top: 16,
               right: 16,
