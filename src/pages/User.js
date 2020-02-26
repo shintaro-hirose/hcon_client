@@ -64,7 +64,7 @@ const  User = (props) => {
                   variant="fullWidth"
                   aria-label="disabled tabs example"
                 >
-                  <Tab label="単発トップ5" />
+                  <Tab label="記録" />
                   <Tab label="成功率とDNFの原因"/>
                   <Tab label="タイムの推移" />
                 </Tabs>
