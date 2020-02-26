@@ -12,6 +12,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import CircularProgress from '@material-ui/core/CircularProgress'
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -20,7 +21,13 @@ const useStyles = makeStyles(theme => ({
     margin: '10px auto 10px auto'
   },
   button: {
-    float: 'right'
+    float: 'right',
+  },
+  submit:{
+    position: 'relative'
+  },
+  progress: {
+    position: 'absolute'
   },
 }));
 
@@ -32,6 +39,8 @@ function EditDetails(props) {
     belong: props.authorizedUserSummary.belong
   })
 
+  const uiLoading = props.UI.loading;
+  const errors = props.UI.errors;
 
   const handleOpen = () => {
     setOpen(true);
@@ -90,6 +99,8 @@ function EditDetails(props) {
                 value={form.twitter}
                 onChange={handleChange}
                 fullWidth
+                helperText={errors.twitter}
+                error={errors.twitter ? true : false}
               />
             </form>
           </DialogContent>
@@ -97,9 +108,15 @@ function EditDetails(props) {
             <Button onClick={handleClose} color="primary">
               キャンセル
             </Button>
-            <Button onClick={handleSubmit} color="primary" variant="contained">
+            <Button onClick={handleSubmit} color="primary" variant="contained"
+            className={classes.submit}
+            disabled={uiLoading}
+            >
               保存
             </Button>
+            {uiLoading && (
+                <CircularProgress size={30} className={classes.progress}/>
+              )}
           </DialogActions>
         </Dialog>
       </Fragment>
@@ -107,11 +124,15 @@ function EditDetails(props) {
 }
 
 EditDetails.propTypes = {
-  editUserDetails: PropTypes.func.isRequired
+  editUserDetails: PropTypes.func.isRequired,
+  authorizedUserSummary: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    authorizedUserSummary: state.user.authorizedUserSummary
+    authorizedUserSummary: state.user.authorizedUserSummary,
+    UI: state.UI
+
 });
 
 export default connect(

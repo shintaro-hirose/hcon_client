@@ -29,6 +29,10 @@ function Updates() {
             <List component="nav">
                 <Divider />
                     <ListItem > 
+                        <ListItemText primary="参加済みの場合、参加ボタンを非表示に。レイアウト調整。" secondary="2020-2-26 01:30"/>
+                    </ListItem>
+                <Divider />
+                    <ListItem > 
                         <ListItemText primary="結果画面の日付選択範囲を制限しました" secondary="2020-2-25 20:30"/>
                     </ListItem>
                 <Divider />
