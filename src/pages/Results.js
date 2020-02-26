@@ -29,6 +29,9 @@ const Results = (props) => {
 
 
     const contestId = props.match.params.contestId;
+    const refYear = contestId.substr(0,4);
+    const refMonth = contestId.substr(4,2);
+    const refDate = contestId.substr(6,2);
 
     if ((Number(t) - Number(contestId)) <= 0){
       window.location.href = '/';
@@ -40,9 +43,7 @@ const Results = (props) => {
     useEffect(() => {
         getResult(contestId);
     }, []);
-    let day = new Date();
-    day.setDate(day.getDate() - 1);
-    const [selectedDate, setSelectedDate] = useState(day);
+    const [selectedDate, setSelectedDate] = useState(new Date(Number(refYear), Number(refMonth)-1, Number(refDate)));
     const handleDateChange = (date) => {
         setSelectedDate(date);
         let year = String(date.getFullYear());
