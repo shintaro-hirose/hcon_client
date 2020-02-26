@@ -11,6 +11,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
+import prizeAvatar from '../images/icons8-prize-64.png';
 
 import moment from 'moment';
 import 'moment/locale/ja';
@@ -54,6 +55,9 @@ function Notifications(props) {
                             <Divider />
                         <Tooltip title="コンテストのページに行く" placement="left">
                         <ListItem button component={Link} to={`/result/${item.contestId}`}> 
+                        <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src={prizeAvatar}/>
+                            </ListItemAvatar>
                             <ListItemText 
                             primary={`${item.contestId.substr(0,4)}/${item.contestId.substr(4,2)}/${item.contestId.substr(6,2)}のコンテストが終了しました。今回の参加者はいませんでした。`} 
                             secondary={moment(item.createdAt).fromNow()}/>
@@ -66,6 +70,9 @@ function Notifications(props) {
                         <Divider />
                         <Tooltip title="コンテストのページに行く" placement="left">
                         <ListItem button component={Link} to={`/result/${item.contestId}`}> 
+                        <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src={prizeAvatar}/>
+                            </ListItemAvatar>
                             <ListItemText 
                             primary={`${item.contestId.substr(0,4)}/${item.contestId.substr(4,2)}/${item.contestId.substr(6,2)}のコンテストが終了しました。今回の優勝者はいませんでした。`} 
                             secondary={moment(item.createdAt).fromNow()}/>
@@ -77,8 +84,12 @@ function Notifications(props) {
                         <Divider />
                         <Tooltip title="コンテストのページに行く" placement="left">
                         <ListItem button component={Link} to={`/result/${item.contestId}`}> 
+                        <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src={prizeAvatar}/>
+                            </ListItemAvatar>
                             <ListItemText 
-                            primary={`${item.contestId.substr(0,4)}/${item.contestId.substr(4,2)}/${item.contestId.substr(6,2)}のコンテストが終了しました。単発 ${timeFormatter(item.bestTime)} で ${item.displayName} さんが優勝者しました。`} 
+                            primary={`${item.contestId.substr(0,4)}/${item.contestId.substr(4,2)}/${item.contestId.substr(6,2)}のコンテストが終了しました。単発 ${timeFormatter(item.bestTime)} で ${item.displayName} さんが優勝しました。
+                            `} 
                             secondary={moment(item.createdAt).fromNow()}/>
                         </ListItem>
                         </Tooltip>
