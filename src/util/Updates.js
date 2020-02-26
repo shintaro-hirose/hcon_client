@@ -29,6 +29,10 @@ function Updates() {
             <List component="nav">
                 <Divider />
                     <ListItem > 
+                        <ListItemText primary="今日の暫定結果を見れるようにしました" secondary="2020-2-26 22:25"/>
+                    </ListItem>
+                <Divider />
+                    <ListItem > 
                         <ListItemText primary="ユーザページに参加履歴を追加しました" secondary="2020-2-26 17:00"/>
                     </ListItem>
                 <Divider />
