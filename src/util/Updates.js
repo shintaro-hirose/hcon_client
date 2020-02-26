@@ -29,6 +29,10 @@ function Updates() {
             <List component="nav">
                 <Divider />
                     <ListItem > 
+                        <ListItemText primary="ユーザページに参加履歴を追加しました" secondary="2020-2-26 17:00"/>
+                    </ListItem>
+                <Divider />
+                    <ListItem > 
                         <ListItemText primary="参加済みの場合、参加ボタンを非表示に。レイアウト調整。" secondary="2020-2-26 01:30"/>
                     </ListItem>
                 <Divider />
