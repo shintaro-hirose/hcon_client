@@ -25,15 +25,13 @@ const Results = (props) => {
     date = ('0'+ date).slice(-2);
     const t = year+month+date;
     const todayDate = new Date();
-    todayDate.setDate(todayDate.getDate() -1);
-
 
     const contestId = props.match.params.contestId;
     const refYear = contestId.substr(0,4);
     const refMonth = contestId.substr(4,2);
     const refDate = contestId.substr(6,2);
 
-    if ((Number(t) - Number(contestId)) <= 0){
+    if ((Number(t) - Number(contestId)) < 0){
       window.location.href = '/';
     }
 
@@ -44,6 +42,7 @@ const Results = (props) => {
         getResult(contestId);
     }, []);
     const [selectedDate, setSelectedDate] = useState(new Date(Number(refYear), Number(refMonth)-1, Number(refDate)));
+    const [selectedDateFormatted, setSelectedDateFormatted] = useState(contestId)
     const handleDateChange = (date) => {
         setSelectedDate(date);
         let year = String(date.getFullYear());
@@ -51,11 +50,12 @@ const Results = (props) => {
         let day = String(date.getDate());
         month = ('0'+ month).slice(-2);
         day = ('0'+ day).slice(-2);
-        const contestId = year+month+day;
-        if ((Number(t) - Number(contestId)) <= 0){
+        const con = year+month+day;
+        setSelectedDateFormatted(con);
+        if ((Number(t) - Number(con)) < 0){
           window.location.href = '/';
         }
-        props.getResult(contestId);
+        props.getResult(con);
 
 
     };
@@ -71,7 +71,13 @@ const Results = (props) => {
       ) : (
         <div>
         <Box textAlign="center">
-        <Typography variant="h4" align="center" >過去の大会結果</Typography>
+          {((Number(t) - Number(selectedDateFormatted)) === 0) ? (
+            <Typography variant="h4" align="center" >今日の暫定結果</Typography>
+
+          ) : (
+            <Typography variant="h4" align="center" >過去の大会結果</Typography>
+
+          )}
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
             disableToolbar
