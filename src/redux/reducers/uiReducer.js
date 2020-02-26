@@ -4,14 +4,18 @@ import {
     LOADING_UI,
     STOP_LOADING_UI,
     OPEN_SUCCESSBAR,
-    CLOSE_SUCCESSBAR
+    CLOSE_SUCCESSBAR,
+    OPEN_ERRORBAR,
+    CLOSE_ERRORBAR
   } from '../types';
   
   const initialState = {
     loading: false,
     openSuccessbar: false,
     successbarMessage:"",
-    errors: {}
+    errors: {},
+    openErrorbar: false,
+    errorbarMessage:"",
   };
   
   export default function(state = initialState, action) {
@@ -50,6 +54,19 @@ import {
             ...state,
             successbarMessage: "",
             openSuccessbar: false,
+        };
+        case OPEN_ERRORBAR:
+        return {
+          ...state,
+          errorbarMessage: action.payload,
+          openErrorbar: true,
+          loading: false
+        };
+      case CLOSE_ERRORBAR:
+          return {
+            ...state,
+            errorbarMessage: "",
+            openErrorbar: false,
         };
       default:
         return state;
