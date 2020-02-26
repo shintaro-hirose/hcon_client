@@ -12,6 +12,8 @@ import {
     SET_RESULT,
     SET_USER_CREDENTIAL,
     UNLOADING_USER,
+    CLOSE_ERRORBAR,
+    OPEN_ERRORBAR,
   } from '../types';
 import axios from 'axios';
   
@@ -138,6 +140,10 @@ import axios from 'axios';
         dispatch({
           type: SET_ERRORS,
           payload: err.response.data
+        });
+        dispatch({
+          type: OPEN_ERRORBAR,
+          payload: "twitterのIDが正しくありません"
         });
       }); 
  };
