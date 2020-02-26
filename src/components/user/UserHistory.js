@@ -33,7 +33,6 @@ const useStyles = makeStyles(theme => ({
 function UserHistory(props) {
     const classes = useStyles();
     const results = props.userData.results;
-    console.log(results)
     if (results && (results !== 0)){
         results.sort((a, b) => {
             if (a.createdAt > b.createdAt) return -1;
@@ -42,13 +41,20 @@ function UserHistory(props) {
         });
     }
 
+    const dnfCorrespond = {
+        observationMiss: "分析ミス",
+        memoSlip: "記憶飛び",
+        edgeExeMiss: "エッジの実行ミス",
+        cornerExeMiss: "コーナーの実行ミス",
+        recallMiss: "違うレターペアの想起"
+      }
 
     const timeFormatter = (time, dnfReason) => {
         if (time === 3600){
             if (dnfReason===""){
                 return "DNF"
             } else {
-                return `DNF(${dnfReason})`;
+                return `DNF(${dnfCorrespond[dnfReason]})`;
             }
         } else if(time >= 60) {
             return `${Math.floor(time/60)}:${('0'+String((time - 60*(Math.floor(time/60))).toFixed(2))).substr(-5)}`
@@ -56,7 +62,7 @@ function UserHistory(props) {
             return time.toFixed(2)
         }
     }
-
+    
     return (
         <Paper className={classes.paper}>
             <Box paddingLeft="20px">
