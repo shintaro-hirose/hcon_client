@@ -28,6 +28,13 @@ const useStyles = makeStyles(theme => ({
 function Notifications(props) {
     const classes = useStyles();
     const notifications = props.notifications;
+    const timeFormatter = (time) => {
+        if(time >= 60) {
+            return `${Math.floor(time/60)}:${('0'+String((time - 60*(Math.floor(time/60))).toFixed(2))).substr(-5)}`
+        } else {
+            return time.toFixed(2)
+        }
+    }
 
     return (
         <Paper className={classes.paper}>
@@ -36,8 +43,51 @@ function Notifications(props) {
             </Box>
             <List component="nav">
                 { notifications && notifications.map((item,index) => {
+                    
                     return (
                         <div key={index}>
+                                            {
+                                                
+                    item.participantSituation ? (
+                        item.participantSituation === "noUser" ? (
+                            <div>
+                            <Divider />
+                        <Tooltip title="コンテストのページに行く" placement="left">
+                        <ListItem button component={Link} to={`/result/${item.contestId}`}> 
+                            <ListItemText 
+                            primary={`${item.contestId.substr(0,4)}/${item.contestId.substr(4,2)}/${item.contestId.substr(6,2)}のコンテストが終了しました。今回の参加者はいませんでした。`} 
+                            secondary={moment(item.createdAt).fromNow()}/>
+                        </ListItem>
+                        </Tooltip>
+                        </div>
+                        ) : (
+                            item.bestTime === 3600 ? (
+                                <div>
+                        <Divider />
+                        <Tooltip title="コンテストのページに行く" placement="left">
+                        <ListItem button component={Link} to={`/result/${item.contestId}`}> 
+                            <ListItemText 
+                            primary={`${item.contestId.substr(0,4)}/${item.contestId.substr(4,2)}/${item.contestId.substr(6,2)}のコンテストが終了しました。今回の優勝者はいませんでした。`} 
+                            secondary={moment(item.createdAt).fromNow()}/>
+                        </ListItem>
+                        </Tooltip>
+                        </div>
+                            ) : (
+                                <div>
+                        <Divider />
+                        <Tooltip title="コンテストのページに行く" placement="left">
+                        <ListItem button component={Link} to={`/result/${item.contestId}`}> 
+                            <ListItemText 
+                            primary={`${item.contestId.substr(0,4)}/${item.contestId.substr(4,2)}/${item.contestId.substr(6,2)}のコンテストが終了しました。単発 ${timeFormatter(item.bestTime)} で ${item.displayName} さんが優勝者しました。`} 
+                            secondary={moment(item.createdAt).fromNow()}/>
+                        </ListItem>
+                        </Tooltip>
+                        </div>
+                            )
+                        
+                        )
+                    ): (
+                        <div>
                         <Divider />
                         <Tooltip title="ユーザーのページに行く" placement="left">
                         <ListItem button component={Link} to={`/user/${item.userHandle}`}> 
@@ -47,6 +97,11 @@ function Notifications(props) {
                             <ListItemText primary={`${item.displayName}さんがコンテストに参加しました`} secondary={moment(item.createdAt).fromNow()}/>
                         </ListItem>
                         </Tooltip>
+                        </div>
+                    )
+                }
+
+                        
                         </div>
                     )
                 }) 
