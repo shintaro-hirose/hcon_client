@@ -117,12 +117,21 @@ import axios from 'axios';
     axios
       .post('/settings/image', formData)
       .then(() => {
-        dispatch(getAuthenticatedUserSummary());
-        dispatch({
-          type: OPEN_SUCCESSBAR,
-          payload: "プロフィール画像を更新しました"
-        });
-        dispatch({ type: CLEAR_ERRORS });
+        setTimeout(
+          function () {
+            
+            dispatch(getAuthenticatedUserSummary());
+            dispatch({ type: CLEAR_ERRORS });
+
+            dispatch({
+              type: OPEN_SUCCESSBAR,
+              payload: "プロフィール画像を更新しました"
+            });
+
+          },
+          "1000"
+        );
+        
       })
       .catch((err) => {
         dispatch({
@@ -235,10 +244,7 @@ export const getUserCredential = () => (dispatch) => {
     });
   })
   .catch(err => {
-    dispatch({
-      type:SET_ERRORS,
-      payload: err.response.data
-    })
+    console.log(err)
   })
 }
 
