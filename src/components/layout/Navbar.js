@@ -5,23 +5,7 @@ import PropTypes from 'prop-types';
 import logo from '../../images/hcon-icon.svg'
 // MUI stuff
 import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
-import DescriptionIcon from '@material-ui/icons/Description';
-import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SettingsIcon from '@material-ui/icons/Settings';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -41,27 +25,28 @@ const contestId = year+month+date;
 const drawerWidth = 180;
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: 0,
+    },
   },
   nav:{
     [theme.breakpoints.up('sm')]: {
       width: "550px",
+      margin: "auto",
     },
     [theme.breakpoints.down('xs')]: {
       width: "100%",
+      padding: 0,
+
     },
-    margin: "auto",
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(3),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
     },
   },
   toolbar: theme.mixins.toolbar,
@@ -70,6 +55,15 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#eeeeee",
     color: "383B55",
   },
+  hconLogo:{
+    [theme.breakpoints.up('sm')]: {
+      flexGrow: 1,
+    edge: "start",
+    },
+    [theme.breakpoints.down('xs')]: {
+     margin: "0 auto"
+    },
+  }
 }));
 
 function Navbar(props) {
@@ -87,70 +81,6 @@ function Navbar(props) {
     const handleDrawerToggle = () => {
       setMobileOpen(!mobileOpen);
     };
-  
-
-    const drawer = (
-      <div>
-        <Divider />
-        {authenticated ? (
-          <List>
-            <ListItem button component={Link} to="/"　onClick={handleDrawerToggle} color="primary">
-              <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText primary="ホーム" />
-            </ListItem>
-            <Divider />
-            <ListItem button component={Link} to={`/result/${contestId}`} onClick={handleDrawerToggle}>
-              <ListItemIcon><DescriptionIcon /></ListItemIcon>
-              <ListItemText primary="昨日の結果" />
-            </ListItem>
-            <ListItem button component={Link} to="/ranking" onClick={handleDrawerToggle}>
-            <ListItemIcon><FormatListNumberedIcon /></ListItemIcon>
-              <ListItemText primary="ランキング" />
-            </ListItem>
-            <ListItem button component={Link} to={`/user/${user}`} onClick={handleDrawerToggle}>
-            <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-              <ListItemText primary="マイページ" />
-            </ListItem>
-            <ListItem button component={Link} to="/settings" onClick={handleDrawerToggle}>
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
-              <ListItemText primary="設定" />
-            </ListItem>
-            <Divider />
-            <ListItem button component={Link} to="/"　onClick={handleLogout}>
-            <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary="ログアウト" />
-            </ListItem>
-        </List>
-        ) : (
-        <List>
-          <ListItem button component={Link} to="/" onClick={handleDrawerToggle}>
-          <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText primary="ホーム" />
-            </ListItem>
-            <Divider />
-            <ListItem button component={Link} to={`/result/${contestId}`} onClick={handleDrawerToggle}>
-            <ListItemIcon><DescriptionIcon /></ListItemIcon>
-              <ListItemText primary="昨日の結果" />
-            </ListItem>
-            <ListItem button component={Link} to="/ranking" onClick={handleDrawerToggle}>
-            <ListItemIcon><FormatListNumberedIcon /></ListItemIcon>
-              <ListItemText primary="ランキング" />
-            </ListItem>
-            <Divider />
-            <ListItem button component={Link} to="/login" onClick={handleDrawerToggle}>
-            <ListItemIcon><LockOpenIcon /></ListItemIcon>
-              <ListItemText primary="ログイン" />
-            </ListItem>
-            <ListItem button component={Link} to="/signup" onClick={handleDrawerToggle}>
-            <ListItemIcon><PersonAddIcon /></ListItemIcon>
-              <ListItemText primary="登録" />
-            </ListItem>
-        </List>
-        )}
-        
-      </div>
-    );
-
     const handleSelected0 = () => {
       setSelected("");
     }
@@ -179,7 +109,7 @@ function Navbar(props) {
         <Toolbar className={classes.nav}>
           {authenticated ? (
             <Fragment>
-              <Box component={Link} to="/" edge="start" flexGrow={1} onClick={handleSelected0}>
+              <Box component={Link} to="/" onClick={handleSelected0} className={classes.hconLogo}>
               <img src={logo} alt="logo"
               width={50}
               height={50}
@@ -219,19 +149,10 @@ function Navbar(props) {
                 ログアウト
               </Button>
               </Hidden>
-              <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="end"
-                  onClick={handleDrawerToggle}
-                  className={classes.menuButton}
-                >
-                  <MenuIcon />
-              </IconButton>
             </Fragment>
           ) : (
             <Fragment>
-              <Box component={Link} to="/" flexGrow={1} onClick={handleSelected0}>
+              <Box component={Link} to="/" className={classes.hconLogo} onClick={handleSelected0}>
               <img src={logo} alt="logo"
               width={50}
               height={50}
@@ -268,37 +189,10 @@ function Navbar(props) {
               </Button>
               </Box>
               </Hidden>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="end"
-                  onClick={handleDrawerToggle}
-                  className={classes.menuButton}
-                >
-                  <MenuIcon />
-              </IconButton>
             </Fragment>
           )}
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-      <Hidden smUp >
-        <Drawer
-          variant="temporary"
-          anchor={theme.direction === 'rtl' ? 'left' : 'right'}
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
-          {drawer}
-        </Drawer>
-        </Hidden>
-      </nav>
       </div>
     );
 }
