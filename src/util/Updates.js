@@ -27,26 +27,42 @@ function Updates() {
             <Typography variant="h6" >β版 修正</Typography>
             </Box>
             <List component="nav">
+                    <div>
+                <Divider />
+                    <ListItem > 
+                        <ListItemText primary="プロフィール画像や表示名の変更が過去の結果画面に及ぶようにしました" secondary="2020-2-26 13:00"/>
+                    </ListItem>
+                    </div>
+                    <div>
                 <Divider />
                     <ListItem > 
                         <ListItemText primary="今日の暫定結果を見れるようにしました" secondary="2020-2-26 22:25"/>
                     </ListItem>
+                    </div>
+                    <div>
                 <Divider />
                     <ListItem > 
                         <ListItemText primary="ユーザページに参加履歴を追加しました" secondary="2020-2-26 17:00"/>
                     </ListItem>
+                    </div>
+                    <div>
                 <Divider />
                     <ListItem > 
                         <ListItemText primary="参加済みの場合、参加ボタンを非表示に。レイアウト調整。" secondary="2020-2-26 01:30"/>
                     </ListItem>
+                    </div>
+                    <div>
                 <Divider />
                     <ListItem > 
                         <ListItemText primary="結果画面の日付選択範囲を制限しました" secondary="2020-2-25 20:30"/>
                     </ListItem>
+                    </div>
+                    <div>
                 <Divider />
                 <ListItem > 
                     <ListItemText primary="タイマー機能を追加しました（スマホ未対応）" secondary="2020-2-25 8:54"/>
                 </ListItem>
+                </div>
                 
             </List>
         </Paper>
