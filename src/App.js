@@ -32,6 +32,7 @@ import 'firebase/firestore' // <- needed if using firestore
 import store from './redux/store'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
+import BottomNavBar from './components/layout/BottomNavBar';
 
 
 
@@ -110,6 +111,7 @@ class App extends Component {
                     <UnauthRoute exact path="/settings" component={Settings} />
                   </Switch>
                 </div>
+              <BottomNavBar />
             </Router>
             </ReactReduxFirebaseProvider>
           </Provider>

@@ -1,48 +1,57 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SettingsIcon from '@material-ui/icons/Settings';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
-import LocalConvenienceStoreIcon from '@material-ui/icons/LocalConvenienceStore';
+import DescriptionIcon from '@material-ui/icons/Description';
 import HomeIcon from '@material-ui/icons/Home';
 import { Link,withRouter } from 'react-router-dom';
 
+
 const useStyles = makeStyles({
-    root: {
-      width: '95%',
-      position:'fixed',
-      bottom:0,
+    wrapper:{
+        display: 'block',
+        width: '100%',
+        position: 'fixed',
+        left: 0,
+        bottom: 0,
+        zIndex: 1000,
+        textAlign: 'center',
+      },
+      button: {
+        maxWidth: '100%',
+        minWidth: "0",
+        color: "#bdbdbd",
+
     },
   });
 
-const StyledBottomNavigationAction = withStyles({
-    root:{
-        width:'25%',
-        minWidth:'10px',
-    },
-    label:{
-        transitionDelay:'0.1s',
-    }
-
-})(BottomNavigationAction);
+const now = new Date();
+now.setDate(now.getDate() -1);
+let year = String(now.getFullYear());
+let month = String(now.getMonth() + 1) ;
+let date = String(now.getDate());
+month = ('0'+ month).slice(-2);
+date = ('0'+ date).slice(-2);
+const contestId = year+month+date;
 
 
 const SignedInBottomNavBar = (props) => {
     const classes = useStyles();
+    const user = props.user;
     return(
-        <div>
+        <div className={classes.wrapper}>
             <BottomNavigation
                 value={props.location.pathname}
-                className={classes.root}
             >
         
-                <StyledBottomNavigationAction component={Link} value="/" to="/" label="" icon={<HomeIcon />} />
-                <StyledBottomNavigationAction component={Link} value="/results" to="/results" label="" icon={<LocalConvenienceStoreIcon />} />
-                <StyledBottomNavigationAction component={Link} value="/ranking" to="/ranking" label="" icon={<FormatListNumberedIcon />} />
-                <StyledBottomNavigationAction component={Link} value="/user" to="/user" label="" icon={<AccountCircleIcon />} />
-                <StyledBottomNavigationAction component={Link} value="/settings" to="/settings" label="" icon={<SettingsIcon />} />
+                <BottomNavigationAction className={classes.button} component={Link} value="/" to="/" label="" icon={<HomeIcon />} />
+                <BottomNavigationAction className={classes.button} component={Link} value={`/result/${contestId}`} to={`/result/${contestId}`} label="" icon={<DescriptionIcon />} />
+                <BottomNavigationAction className={classes.button} component={Link} value="/ranking" to="/ranking" label="" icon={<FormatListNumberedIcon />} />
+                <BottomNavigationAction className={classes.button} component={Link} value={`/user/${user}`} to={`/user/${user}`} label="" icon={<AccountCircleIcon />} />
+                <BottomNavigationAction className={classes.button} component={Link} value="/settings" to="/settings" label="" icon={<SettingsIcon />} />
                 
             </BottomNavigation>
         </div>

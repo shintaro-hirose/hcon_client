@@ -1,50 +1,54 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import SettingsIcon from '@material-ui/icons/Settings';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
-import LocalConvenienceStoreIcon from '@material-ui/icons/LocalConvenienceStore';
+import DescriptionIcon from '@material-ui/icons/Description';
 import HomeIcon from '@material-ui/icons/Home';
-//not setted Link yet
+import { Link,withRouter } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
-    root: {
-      width: '95%',
-      position:'fixed',
-      bottom:0,
+    wrapper:{
+        display: 'block',
+        width: '100%',
+        position: 'fixed',
+        left: 0,
+        bottom: 0,
+        zIndex: 1000,
+        textAlign: 'center',
+      },
+      button: {
+        maxWidth: '100%',
+        minWidth: "0",
+        color: "#bdbdbd",
+
     },
   });
 
-const StyledBottomNavigationAction = withStyles({
-    root:{
-        width:'25%',
-        minWidth:'10px',
-    },
-    label:{
-        transitionDelay:'0.1s',
-    }
-
-})(BottomNavigationAction);
+  const now = new Date();
+now.setDate(now.getDate() -1);
+let year = String(now.getFullYear());
+let month = String(now.getMonth() + 1) ;
+let date = String(now.getDate());
+month = ('0'+ month).slice(-2);
+date = ('0'+ date).slice(-2);
+const contestId = year+month+date;
 
 
-const SignedOutBottomNavBar = () => {
+const SignedOutBottomNavBar = (props) => {
     
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     return(
-        <div>
+        <div className={classes.wrapper}>
             <BottomNavigation
-                value={value}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                }}
-                className={classes.root}
+                value={props.location.pathname}
+                
             >
-                <StyledBottomNavigationAction href="/" label="" icon={<HomeIcon />} />
-                <StyledBottomNavigationAction href="/results" label="" icon={<LocalConvenienceStoreIcon />} />
-                <StyledBottomNavigationAction href="/ranking" label="" icon={<FormatListNumberedIcon />} />
+                <BottomNavigationAction component={Link} value="/" to="/" label="" icon={<HomeIcon />} className={classes.button}/>
+                <BottomNavigationAction component={Link} value={`/result/${contestId}`} to={`/result/${contestId}`} label="" icon={<DescriptionIcon />} className={classes.button}/>
+                <BottomNavigationAction component={Link} value="/ranking" to="/ranking" label="" icon={<FormatListNumberedIcon />} className={classes.button}/>
                 
             </BottomNavigation>
         </div>
@@ -52,4 +56,4 @@ const SignedOutBottomNavBar = () => {
     )
 }
 
-export default SignedOutBottomNavBar;
+export default withRouter(SignedOutBottomNavBar);
