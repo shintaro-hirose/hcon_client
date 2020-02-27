@@ -35,7 +35,8 @@ import {
       case LOADING_UI:
         return {
           ...state,
-          loading: true
+          loading: true,
+          errors:{}
         };
       case STOP_LOADING_UI:
         return {
@@ -47,7 +48,8 @@ import {
           ...state,
           successbarMessage: action.payload,
           openSuccessbar: true,
-          loading: false
+          loading: false,
+          errors:{}
         };
       case CLOSE_SUCCESSBAR:
           return {

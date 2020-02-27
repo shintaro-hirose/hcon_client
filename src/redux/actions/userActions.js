@@ -89,6 +89,7 @@ import axios from 'axios';
 
     axios.get(`/user/${userHandle}`)
     .then(res => {
+      dispatch({ type: CLEAR_ERRORS });
       dispatch({
         type: SET_USER_RESULTS,
         payload: res.data
@@ -102,6 +103,7 @@ import axios from 'axios';
     axios
       .get('/mypage')
       .then((res) => {
+        dispatch({ type: CLEAR_ERRORS });
         dispatch({
           type: SET_AUTH_USER_SUMMARY,
           payload: res.data
@@ -120,8 +122,18 @@ import axios from 'axios';
           type: OPEN_SUCCESSBAR,
           payload: "プロフィール画像を更新しました"
         });
+        dispatch({ type: CLEAR_ERRORS });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err.response.data
+        });
+        dispatch({
+          type: OPEN_ERRORBAR,
+          payload: err.response.data.error
+        });
+      });
   };
   
   export const editUserDetails = (userDetails) => (dispatch) => {
@@ -176,10 +188,11 @@ import axios from 'axios';
   };
 
   export const getContest = () => (dispatch) => {
-    dispatch({ type: LOADING_USER});
+    dispatch({ type: LOADING_UI});
     axios
     .get('/contest')
     .then(res => {
+      dispatch({ type: CLEAR_ERRORS });
       dispatch({
         type: SET_CONTEST,
         payload: res.data
@@ -198,6 +211,8 @@ export const getResult = (contestId) => (dispatch) => {
   axios
   .get(`/result/${contestId}`)
   .then(res => {
+    dispatch({ type: CLEAR_ERRORS });
+
     dispatch({
       type: SET_RESULT,
       payload: res.data
@@ -216,6 +231,8 @@ export const getUserCredential = () => (dispatch) => {
   axios
   .get('/getUserCredential')
   .then(res => {
+    dispatch({ type: CLEAR_ERRORS });
+
     dispatch({
       type: SET_USER_CREDENTIAL,
       payload: res.data
