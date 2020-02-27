@@ -153,10 +153,6 @@ import axios from 'axios';
           type: SET_ERRORS,
           payload: err.response.data
         });
-        dispatch({
-          type: OPEN_ERRORBAR,
-          payload: "twitterのIDが正しくありません"
-        });
       }); 
  };
   

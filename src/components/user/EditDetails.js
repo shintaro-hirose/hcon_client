@@ -60,7 +60,6 @@ function EditDetails(props) {
   const handleSubmit = () => {
 
     props.editUserDetails(form);
-    handleClose();
   };
   return (
       <Fragment>
