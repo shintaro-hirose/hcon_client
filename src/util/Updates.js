@@ -30,7 +30,7 @@ function Updates() {
                     <div>
                 <Divider />
                     <ListItem > 
-                        <ListItemText primary="プロフィール画像や表示名の変更が過去の結果画面に及ぶようにしました" secondary="2020-2-26 13:00"/>
+                        <ListItemText primary="プロフィール画像や表示名の変更が過去の結果画面に及ぶようにしました" secondary="2020-2-27 13:00"/>
                     </ListItem>
                     </div>
                     <div>

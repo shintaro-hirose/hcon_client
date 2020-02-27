@@ -60,62 +60,68 @@ const Results = (props) => {
 
     };
 
-    const loading = props.user.loading;
+    const loading = props.UI.loading;
     const contestData = props.user.contestData;
+    const errors = props.UI.errors;
 
     
     return(
       <React.Fragment>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div>
-        <Box textAlign="center">
-          {((Number(t) - Number(selectedDateFormatted)) === 0) ? (
-            <Typography variant="h4" align="center" >今日の暫定結果</Typography>
-
+        { errors.resultError ? (
+          <p>{errors.resultError}</p>
+         ) : (
+          loading ? (
+            <Loading />
           ) : (
-            <Typography variant="h4" align="center" >過去の大会結果</Typography>
-
-          )}
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-            disableToolbar
-            variant="inline"
-            format="yyyy/MM/dd"
-            margin="normal"
-            id="date-picker-inline"
-            label="日付を選択してください"
-            value={selectedDate}
-            minDate={new Date(2020,1,22,12,12)}
-            maxDate={todayDate}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-                'aria-label': 'change date',
-            }}
-            />
-        </MuiPickersUtilsProvider>
-        </Box>
-        <Box textAlign="left" margin="30px 0"> 
-          <Box >
-            <Typography variant="h6" >1試技目: {contestData.scrambles.first}</Typography>
-          </Box>
-          <Box margin="20px 0">
-            <Typography variant="h6">2試技目: {contestData.scrambles.second}</Typography>
-          </Box>
-          <Box margin="20px 0">
-            <Typography variant="h6">3試技目: {contestData.scrambles.third}</Typography>
-          </Box>
-        </Box>
-        <Box textAlign="center">
-        { contestData.results.length === 0 ? (
-            <Typography variant="h5" margin="20px 0">この日の参加者はいませんでした。</Typography>
-        ) : (
-            <ResultTable contestData={contestData}/>
-        )  }
-        </Box>
-    </div>
-      )}
+            <div>
+            <Box textAlign="center">
+              {((Number(t) - Number(selectedDateFormatted)) === 0) ? (
+                <Typography variant="h4" align="center" >今日の暫定結果</Typography>
+    
+              ) : (
+                <Typography variant="h4" align="center" >過去の大会結果</Typography>
+    
+              )}
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="yyyy/MM/dd"
+                margin="normal"
+                id="date-picker-inline"
+                label="日付を選択してください"
+                value={selectedDate}
+                minDate={new Date(2020,1,22,12,12)}
+                maxDate={todayDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                }}
+                />
+            </MuiPickersUtilsProvider>
+            </Box>
+            <Box textAlign="left" margin="30px 0"> 
+              <Box >
+                <Typography variant="h6" >1試技目: {contestData.scrambles.first}</Typography>
+              </Box>
+              <Box margin="20px 0">
+                <Typography variant="h6">2試技目: {contestData.scrambles.second}</Typography>
+              </Box>
+              <Box margin="20px 0">
+                <Typography variant="h6">3試技目: {contestData.scrambles.third}</Typography>
+              </Box>
+            </Box>
+            <Box textAlign="center">
+            { contestData.results.length === 0 ? (
+                <Typography variant="h5" margin="20px 0">この日の参加者はいませんでした。</Typography>
+            ) : (
+                <ResultTable contestData={contestData}/>
+            )  }
+            </Box>
+        </div>
+          )
+        )}
+      
       </React.Fragment>
         
     )
@@ -124,10 +130,12 @@ const Results = (props) => {
 Results.propTypes = {
     getResult: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
+    UI: PropTypes.object.isRequired,
   };
   
   const mapStateToProps = (state) => ({
     user: state.user,
+    UI: state.UI
   });
   
   const mapActionsToProps = {
