@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Radio from '@material-ui/core/Radio';
 import Button from '@material-ui/core/Button';
@@ -39,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'rgb(245, 245, 245)',
   },
   scramble: {
-    margin: "50px 0",
+    margin: "20px 0",
   },
   modal: {
     display: 'flex',
@@ -50,6 +49,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     minHeight: "146px",
+    marginBottom: "10px"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -70,7 +70,7 @@ const YellowRadio = withStyles({
   checked: {color: yellow[600]},
 })(props => <Radio color="default" {...props} />);
 
-function ContestUseTimer(props) {
+function ContestUseTimerPhone(props) {
   const now = new Date();
   let year = String(now.getFullYear());
   let month = String(now.getMonth() + 1) ;
@@ -124,6 +124,9 @@ function ContestUseTimer(props) {
     });
   };
 
+  const handleConfirm = event => {
+    setSituationPar(4);
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     props.postContestResult({
@@ -175,7 +178,7 @@ function ContestUseTimer(props) {
       {loading ? (
         <Loading />
       ) : (
-        <Typography  variant="h4" align="center">{contestId.substr(0,4)}/{contestId.substr(4,2)}/{contestId.substr(6,2)} のコンテスト</Typography> 
+        <Typography  variant="h4" align="center">実装中でやんす{contestId.substr(0,4)}/{contestId.substr(4,2)}/{contestId.substr(6,2)} のコンテスト</Typography> 
       )}
       { situation === 0 ? (
         <Typography variant="h5" align="center" className={classes.scramble}>
@@ -193,7 +196,6 @@ function ContestUseTimer(props) {
             </Typography>
           ) : (
             <Typography variant="h5" align="center" className={classes.scramble}>
-              おつかれさまでした！
             </Typography>
           )
         )
@@ -216,10 +218,13 @@ function ContestUseTimer(props) {
       )}
         
         <form className={classes.root} noValidate onSubmit={handleSubmit}>
-        <Grid container spacing={1}>
-          <Grid item sm={4} xs={12}>
-            <Paper className={classes.resultPaper}>
+          <div>
+            { (situation === 1 || situation === 4) ? (
+              <Paper className={classes.resultPaper}>
               <Box paddingTop="20px" textAlign="center">
+                <Box marginBottom="10px">
+                <Typography variant="h5">1試技目</Typography>
+                </Box>
               {firstInput === "" ? (
                 <Typography variant="h4">-:--.--</Typography>
               ) : (
@@ -287,10 +292,17 @@ function ContestUseTimer(props) {
     </Fade>
   </Modal>
   </Paper>
-          </Grid>
-          <Grid item sm={4} xs={12}>
-            <Paper className={classes.resultPaper}>
+
+            ) : (
+              <p></p>
+            )}
+            {
+              (situation===2 || situation===4) ? (
+<Paper className={classes.resultPaper}>
               <Box paddingTop="20px" textAlign="center">
+              <Box marginBottom="10px">
+                <Typography variant="h5">2試技目</Typography>
+                </Box>
                 { secondInput === "" ? (
                   <Typography variant="h4">-:--.--</Typography>
                 ) : (
@@ -355,78 +367,108 @@ function ContestUseTimer(props) {
         </Fade>
       </Modal>
       </Paper>
-          </Grid>
-          <Grid item sm={4} xs={12}>
-            <Paper className={classes.resultPaper}>
+              ) : (
+                <p></p>
+              )
+            }
+            {
+              (situation===3 || situation===4) ? (
+<Paper className={classes.resultPaper}>
 
-                <Box paddingTop="20px" textAlign="center">
-                  {thirdInput === "" ? (
-                        <Typography variant="h4">-:--.--</Typography>
-                        ) : (
-                          form.thirdStatus === "DNF" ? (<div>
-                            <Typography variant="h6">DNF</Typography>
-                            <Typography variant="h6">{dnfCorrespond[form.thirdDnfReason]}</Typography>
-                            </div>
-                          ) : (
-                            form.thirdStatus === "plusTwo" ? (
-                              <Typography variant="h4">{String(thirdInput)} + 2</Typography>
-                              
-                            ) : (
-                              <Typography variant="h4">{thirdInput}</Typography>
-                              
-                            )
-                          )
-                  )}
-                  </Box>
-          <Box display="block" textAlign="center" margin="20px 0 0 0">
-              <FormControl component="fieldset">
-                  <RadioGroup aria-label="condition" name="thirdStatus" value={form.thirdStatus} onChange={handleChange} row>
-                      <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
-                      <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
-                      <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen3}/>} label="DNF" />
-                  </RadioGroup>
-              </FormControl>
-            </Box>
-          <Modal
-        aria-labelledby="modal-title-3"
-        aria-describedby="modal-description-3"
-        className={classes.modal}
-        open={open3}
-        onClose={handleClose3}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open3}>
-          <div className={classes.paper}>
-            <Box marginBottom="10px">
-            <Typography variant="h4" id="modal-title-3">DNFの理由</Typography>
-            <Typography variant="body1" id="modal-description-3">※一番近いものを選んでください</Typography>
+<Box paddingTop="20px" textAlign="center">
+<Box marginBottom="10px">
+                <Typography variant="h5">3試技目</Typography>
+                </Box>
+  {thirdInput === "" ? (
+        <Typography variant="h4">-:--.--</Typography>
+        ) : (
+          form.thirdStatus === "DNF" ? (<div>
+            <Typography variant="h6">DNF</Typography>
+            <Typography variant="h6">{dnfCorrespond[form.thirdDnfReason]}</Typography>
+            </div>
+          ) : (
+            form.thirdStatus === "plusTwo" ? (
+              <Typography variant="h4">{String(thirdInput)} + 2</Typography>
+              
+            ) : (
+              <Typography variant="h4">{thirdInput}</Typography>
+              
+            )
+          )
+  )}
+  </Box>
+<Box display="block" textAlign="center" margin="20px 0 0 0">
+<FormControl component="fieldset">
+  <RadioGroup aria-label="condition" name="thirdStatus" value={form.thirdStatus} onChange={handleChange} row>
+      <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
+      <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
+      <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen3}/>} label="DNF" />
+  </RadioGroup>
+</FormControl>
+</Box>
+<Modal
+aria-labelledby="modal-title-3"
+aria-describedby="modal-description-3"
+className={classes.modal}
+open={open3}
+onClose={handleClose3}
+closeAfterTransition
+BackdropComponent={Backdrop}
+BackdropProps={{
+timeout: 500,
+}}
+>
+<Fade in={open3}>
+<div className={classes.paper}>
+<Box marginBottom="10px">
+<Typography variant="h4" id="modal-title-3">DNFの理由</Typography>
+<Typography variant="body1" id="modal-description-3">※一番近いものを選んでください</Typography>
 
-            </Box>
-            <FormControl component="fieldset">
-            <RadioGroup aria-label="dnfReason3" name="thirdDnfReason" value={form.thirdDnfReason} onChange={handleChange} >
-              <FormControlLabel value="observationMiss" control={<Radio color="primary" />} label="分析ミス" />
-              <FormControlLabel value="memoSlip" control={<Radio color="primary" />} label="記憶が飛んだ" />
-              <FormControlLabel value="edgeExeMiss" control={<Radio color="primary" />} label="エッジの実行ミス" />
-              <FormControlLabel value="cornerExeMiss" control={<Radio color="primary" />} label="コーナーの実行ミス" />
-              <FormControlLabel value="recallMiss" control={<Radio color="primary" />} label="違うレターペアの想起" />
-            </RadioGroup>
-            </FormControl>
-            <Box textAlign="right" marginTop="10px">
-            <Button variant="contained" color="primary" onClick={handleClose3}>
-              確定
-            </Button>
-            </Box>
+</Box>
+<FormControl component="fieldset">
+<RadioGroup aria-label="dnfReason3" name="thirdDnfReason" value={form.thirdDnfReason} onChange={handleChange} >
+<FormControlLabel value="observationMiss" control={<Radio color="primary" />} label="分析ミス" />
+<FormControlLabel value="memoSlip" control={<Radio color="primary" />} label="記憶が飛んだ" />
+<FormControlLabel value="edgeExeMiss" control={<Radio color="primary" />} label="エッジの実行ミス" />
+<FormControlLabel value="cornerExeMiss" control={<Radio color="primary" />} label="コーナーの実行ミス" />
+<FormControlLabel value="recallMiss" control={<Radio color="primary" />} label="違うレターペアの想起" />
+</RadioGroup>
+</FormControl>
+<Box textAlign="right" marginTop="10px">
+<Button variant="contained" color="primary" onClick={handleClose3}>
+確定
+</Button>
+</Box>
+</div>
+</Fade>
+</Modal>
+</Paper>
+              ) : (
+                <p></p>
+              )
+            }
+            
+      </div>
+      {
+        situation === 3 ? (
+<div>
+<Box textAlign="center" marginTop="20px">
+              <Button
+                variant="contained"
+                size="large"
+                onClick={handleConfirm}
+                color="primary"
+              >
+                結果を確認する
+              </Button>
+              </Box>
+
           </div>
-        </Fade>
-      </Modal>
-      </Paper>
-          </Grid>
-        </Grid>
-        {situation === 3 ? (
+        ) : (
+          <p></p>
+        )
+      }
+        {situation === 4 ? (
           <div>
 <Box textAlign="center" marginTop="20px">
               <Button
@@ -460,7 +502,7 @@ function ContestUseTimer(props) {
 }
 
 
-ContestUseTimer.propTypes = {
+ContestUseTimerPhone.propTypes = {
   postContestResult: PropTypes.func.isRequired,
   getContest: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
@@ -480,4 +522,4 @@ const mapActionsToProps = {
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(ContestUseTimer);
+)(ContestUseTimerPhone);
