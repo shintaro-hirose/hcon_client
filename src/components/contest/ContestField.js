@@ -48,18 +48,32 @@ function ContestField(props) {
       if(contestId === lastPostedDate)  setIsPostable(false);
     }
   }
-    
+  function isMobile(){
+    var regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    return (window.navigator.userAgent.search(regexp) !== -1);
+  }
+
   let contentMarkup = authenticated ? (
     isPostable ? (
 <Grid container>
       <Grid item sm={6} xs={12} align="center">
         <Box marginBottom="10px">
-        <Button component={Link} to={`/contestUseTimer`} color="primary" variant="outlined" >
+          { isMobile() ? (
+            <Button component={Link} to={`/contestUseTimerPhone`} color="primary" variant="outlined" >
           <TimerIcon />
           <Typography variant="h6">
             タイマーを使用する
             </Typography>
         </Button>
+          ) : (
+<Button component={Link} to={`/contestUseTimer`} color="primary" variant="outlined" >
+          <TimerIcon />
+          <Typography variant="h6">
+            タイマーを使用する
+            </Typography>
+        </Button>
+          ) }
+        
         </Box>
       </Grid>
       <Grid item sm={6} xs={12} align="center">

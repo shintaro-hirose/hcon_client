@@ -5,14 +5,12 @@ import Typography from '@material-ui/core/Typography';
 
 
 const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) => {
-    const [started, setStarted] = useState(false);
-    const [pressStartTime, setPressStartTime] = useState(false);
-    const [timeLapse, setTimeLapse] = useState(0);
     const [attemptStartTime, setAttemptStartTime] = useState(0);
-    const [attemptStarted, setAttemptStarted] = useState(false);
     const [solveTime, setSolveTime] = useState(0);
-    const [situation, setSituation] = useState(0) // 0: before attempt 1, 1: between 1-2, 2: between2-3, 3: all attempt done
-
+    const [situation, setSituation] = useState(0);
+    const [timeSituation, setTimeSituation] = useState("neutral");
+    const [canStartTrigger, setCanStartTrigger] = useState(false);
+    const [hsStart, setHsStart] = useState(0)
     const timeFormatter = (time) => {
         if (isNaN(time))　return time;
         const ms = time % 1000;
@@ -26,56 +24,62 @@ const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituati
         }
         
     }
+    let timer;
+    let hs
 
-    document.ontouchstart = function(e) {
+    const handleOnTouchStart = (e) => {
         if(situation >= 3) return;
-        if (!attemptStarted){
-            let event;
-            if (e) {event = e};
-            if (!started){
-                setStarted(true);
-                setPressStartTime(Date.now());
-            } else {
-                setSolveTime(0);
-                setTimeLapse(Date.now() - pressStartTime);
-            }
-
-        } else {
+        if (timeSituation==="neutral"){
+            hs = hsStart;
+            setCanStartTrigger(false)
+            setTimeSituation("touching");
+            timer = setInterval(() => {
+                    hs = hs + 10;
+                    console.log(hs)
+                    if(hs>=200){
+                        setCanStartTrigger(true);
+                        clearInterval(timer);
+                    };
+        
+                
+            }, 10);
+            
+        } else if(timeSituation === "timing") {
             const result = Date.now() - attemptStartTime;
             const d = situation;
+            setTimeSituation("neutral");
+            setCanStartTrigger(false);
             setSituation(d + 1)
             setSituationPar(d+1)
             setAttemptStartTime(0);
-            setAttemptStarted(false);
             setSolveTime(result);
             if (d === 0) return setFirstInput(timeFormatter(result));
             if (d === 1) return setSecondInput(timeFormatter(result));
             if (d === 2) return setThirdInput(timeFormatter(result));
         }
-        
+
+
     };
 
-    document.ontouchend = function(e) {
+    const handleOnTouchEnd = (e) => {
+        clearInterval(timer);
         if(situation >= 3) return;
-        let event;
-        if (e){event = e};
-        if(timeLapse < 200){
-            setTimeLapse(0);
-            setStarted(false);
-            setPressStartTime(false);
-        } else if(timeLapse >= 200) {
-            setTimeLapse(0);
-            setStarted(false);
-            setAttemptStarted(true);
+        if((timeSituation === "touching") && (canStartTrigger)){
+            setHsStart(0);
+            setTimeSituation("timing");
             setAttemptStartTime(Date.now());
             setSolveTime("Timing")
-        }
+        } else {
+            setHsStart(0);
+            setTimeSituation("neutral");
+            setCanStartTrigger(false);
+        } 
     }
 
     return (
-      <div>
+      <div onTouchStart={handleOnTouchStart} onTouchEnd={handleOnTouchEnd}>
           <Box textAlign="center" margin="20px 0" minHeight="180px">
-          { (!started && !attemptStarted) ? (
+          { (timeSituation === "neutral") ? (
               <Typography component="div">
                   <Box fontSize="h1.fontSize">
                    {timeFormatter(solveTime)}
@@ -89,30 +93,30 @@ const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituati
               </Typography>
               
           ):(
-            started ? (
-                timeLapse < 200 ? (
-                    <Typography component="div">
+            (timeSituation === "touching") ? (
+                !canStartTrigger ? (
+            <Typography component="div">
                   <Box fontSize="h1.fontSize" color="red">
                   {timeFormatter(solveTime)}
                   </Box>
               </Typography>
-                    
                 ) : (
-                    
-                <Typography component="div">
+            <Typography component="div">
                     <Box fontSize="h1.fontSize" color="#64dd17">
                     00.00
                     </Box>
                 </Typography>
                 )
+                
             ) : (
                 <Typography component="div">
-                  <Box fontSize="h1.fontSize" color="primary">
+                  <Box fontSize="h1.fontSize" color="black">
                    {timeFormatter(solveTime)}
                   </Box>
               </Typography>
             )
-          ) }
+               
+            ) }
           </Box>
       </div>
     );
