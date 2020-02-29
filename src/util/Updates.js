@@ -30,9 +30,13 @@ function Updates() {
                     <div>
                     <Divider />
                     <ListItem > 
+                        <ListItemText primary="スマホ・タブレットのタイマーを実装しました。Androidはどうじゃろ..." secondary="2020-2-29 13:00"/>
+                    </ListItem>
+                    <Divider />
+                    <ListItem > 
                         <ListItemText primary="画像のリサイズを導入。プロフィール画像を更新すると、初回ロードデータが約1/300に削減されます" secondary="2020-2-27 13:00"/>
                     </ListItem>
-                <Divider />
+                {/* <Divider />
                     <ListItem > 
                         <ListItemText primary="プロフィール画像や表示名の変更が過去の結果画面に及ぶようにしました" secondary="2020-2-27 13:00"/>
                     </ListItem>
@@ -65,7 +69,7 @@ function Updates() {
                 <Divider />
                 <ListItem > 
                     <ListItemText primary="タイマー機能を追加しました（スマホ未対応）" secondary="2020-2-25 8:54"/>
-                </ListItem>
+                </ListItem> */}
                 </div>
                 
             </List>
