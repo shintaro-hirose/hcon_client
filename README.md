@@ -12,27 +12,33 @@ Hconは3x3x3キューブ目隠し競技者のための大会プラットフォ�
 
  - ユーザ登録
     - メールアドレスとパスワードによるユーザ認証
+
 ***
 
  - ストップウォッチ機能
  <img width="500" alt="スクリーンショット 2020-03-01 2 43 05" src="https://user-images.githubusercontent.com/48212107/75612626-c4850600-5b68-11ea-9ff8-f236c78bf7aa.png">
+
  ***
 
  - ランキング表示
 <img width="500" alt="スクリーンショット 2020-03-01 2 47 30" src="https://user-images.githubusercontent.com/48212107/75612632-cea70480-5b68-11ea-9512-e91d2de6c81a.png">
+
 ***
 
 
  - 過去の大会参加記録のグラフ表示
  <img width="500" alt="スクリーンショット 2020-03-01 2 50 26" src="https://user-images.githubusercontent.com/48212107/75612638-d797d600-5b68-11ea-92e3-8869bc7eea25.png">
+
  ***
 
  - 過去の試技の失敗原因の表示
 <img width="500" alt="スクリーンショット 2020-03-01 2 50 43" src="https://user-images.githubusercontent.com/48212107/75612643-df577a80-5b68-11ea-80d4-7d81a30470c4.png">
+
 ***
 
  - ユーザアクティビティのリアルタイム表示
  <img width="500" alt="スクリーンショット 2020-03-01 2 52 38" src="https://user-images.githubusercontent.com/48212107/75612647-e54d5b80-5b68-11ea-9363-f41979345d0d.png">
+ 
  ***
 
  - レスポンシブデザイン
