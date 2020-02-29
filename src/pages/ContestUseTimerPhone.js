@@ -15,7 +15,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Timer from '../components/contest/Timer'
-import TimerForPhone from '../components/contest/TimerForPhone'
 
 import Loading from '../util/Loading';
 
@@ -49,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     minHeight: "146px",
-    marginBottom: "10px"
+    marginBottom: "10px",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -173,40 +172,151 @@ function ContestUseTimerPhone(props) {
     var regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     return (window.navigator.userAgent.search(regexp) !== -1);
   }
+
+  const [attemptStartTime, setAttemptStartTime] = useState(0);
+    const [solveTime, setSolveTime] = useState(0);
+    const [timeSituation, setTimeSituation] = useState("neutral");
+    const [canStartTrigger, setCanStartTrigger] = useState(false);
+    const [hsStart, setHsStart] = useState(0)
+    const timeFormatter = (time) => {
+        if (isNaN(time))　return time;
+        const ms = time % 1000;
+        const fs = (time - ms) /1000;
+        const s = fs % 60;
+        const m = (fs - s) / 60
+        if (m > 0) {
+            return (String(m)) +':'+ ('0'+String(s)).slice(-2) +'.' +('00'+String(ms)).slice(-3,-1)
+        } else {
+            return ('0'+String(s)).slice(-2) +'.' + ('00'+String(ms)).slice(-3,-1)
+        }
+        
+    }
+    let timer;
+    let hs
+
+  const handleOnTouchStart = (e) => {
+    if(situation >= 3) return;
+    if (timeSituation==="neutral"){
+        hs = hsStart;
+        setCanStartTrigger(false)
+        setTimeSituation("touching");
+        timer = setInterval(() => {
+                hs = hs + 10;
+                console.log(hs)
+                if(hs>=200){
+                    setCanStartTrigger(true);
+                    clearInterval(timer);
+                };
+    
+            
+        }, 10);
+        
+    } else if(timeSituation === "timing") {
+        const result = Date.now() - attemptStartTime;
+        const d = situation;
+        setTimeSituation("neutral");
+        setCanStartTrigger(false);
+        setSituationPar(d+1)
+        setAttemptStartTime(0);
+        setSolveTime(result);
+        if (d === 0) return setFirstInput(timeFormatter(result));
+        if (d === 1) return setSecondInput(timeFormatter(result));
+        if (d === 2) return setThirdInput(timeFormatter(result));
+    }
+
+
+};
+
+const handleOnTouchEnd = (e) => {
+    clearInterval(timer);
+    if(situation >= 3) return;
+    if((timeSituation === "touching") && (canStartTrigger)){
+        setHsStart(0);
+        setTimeSituation("timing");
+        setAttemptStartTime(Date.now());
+        setSolveTime("Timing")
+    } else {
+        setHsStart(0);
+        setTimeSituation("neutral");
+        setCanStartTrigger(false);
+    } 
+}
+
   return (
-    <React.Fragment>
-      {loading ? (
-        <Loading />
-      ) : (
-        <Typography  variant="h4" align="center">実装中でやんす{contestId.substr(0,4)}/{contestId.substr(4,2)}/{contestId.substr(6,2)} のコンテスト</Typography> 
-      )}
-      { situation === 0 ? (
-        <Typography variant="h5" align="center" className={classes.scramble}>
-        1st: {props.user.contest.scrambles.first}
+    <React.Fragment >
+      <div onTouchStart={handleOnTouchStart} onTouchEnd={handleOnTouchEnd}>
+        {(timeSituation === "neutral") ? (
+<div>
+  <Typography  variant="h4" align="center">{contestId.substr(0,4)}/{contestId.substr(4,2)}/{contestId.substr(6,2)} のコンテスト</Typography> 
+{ situation === 0 ? (
+  <Typography variant="h5" align="center" className={classes.scramble}>
+  1st: {props.user.contest.scrambles.first}
+</Typography>
+) : (
+  situation === 1 ? (
+    <Typography variant="h5" align="center" className={classes.scramble}>
+        2nd: {props.user.contest.scrambles.second}
       </Typography>
-      ) : (
-        situation === 1 ? (
-          <Typography variant="h5" align="center" className={classes.scramble}>
-              2nd: {props.user.contest.scrambles.second}
-            </Typography>
+  ) : (
+    situation === 2 ? (
+      <Typography variant="h5" align="center" className={classes.scramble}>
+        3rd: {props.user.contest.scrambles.third}
+      </Typography>
+    ) : (
+      <Typography variant="h5" align="center" className={classes.scramble}>
+      </Typography>
+    )
+  )
+)}
+</div>
         ) : (
-          situation === 2 ? (
-            <Typography variant="h5" align="center" className={classes.scramble}>
-              3rd: {props.user.contest.scrambles.third}
+          <p></p>
+        )}
+      
+      {isMobile() ? (
+        <div >
+        <Box textAlign="center" margin="20px 0" minHeight="180px">
+        { (timeSituation === "neutral") ? (
+            <Typography component="div">
+                <Box fontSize="h1.fontSize">
+                 {timeFormatter(solveTime)}
+                </Box>
+                { situation !== 3 ? (
+                    <Box　fontSize="h5.fontSize">
+                    画面長押しでスタート
+                </Box>
+                ) : (<p></p>)}
+                
             </Typography>
+            
+        ):(
+          (timeSituation === "touching") ? (
+              !canStartTrigger ? (
+          <Typography component="div">
+                <Box fontSize="h1.fontSize" color="red">
+                {timeFormatter(solveTime)}
+                </Box>
+            </Typography>
+              ) : (
+          <Typography component="div">
+                  <Box fontSize="h1.fontSize" color="#64dd17">
+                  00.00
+                  </Box>
+              </Typography>
+              )
+              
           ) : (
-            <Typography variant="h5" align="center" className={classes.scramble}>
+              <Typography component="div">
+                <Box fontSize="h1.fontSize" color="black">
+                 {timeFormatter(solveTime)}
+                </Box>
             </Typography>
           )
-        )
-      )}
-      {isMobile() ? (
-        <TimerForPhone 
-        setFirstInput={setFirstInput} 
-        setSecondInput={setSecondInput} 
-        setThirdInput={setThirdInput} 
-        setSituationPar={setSituationPar}
-        />
+             
+          ) }
+        </Box>
+        <Box height={timeSituation === "neutral" ? "0px" : "380px"}></Box>
+    </div>
         
       ) : (
         <Timer 
@@ -216,194 +326,194 @@ function ContestUseTimerPhone(props) {
         setSituationPar={setSituationPar}
         />
       )}
-        
+      {(timeSituation === "neutral") ? (
         <form className={classes.root} noValidate onSubmit={handleSubmit}>
-          <div>
-            { (situation === 1 || situation === 4) ? (
-              <Paper className={classes.resultPaper}>
-              <Box paddingTop="20px" textAlign="center">
-                <Box marginBottom="10px">
-                <Typography variant="h5">1試技目</Typography>
-                </Box>
-              {firstInput === "" ? (
+        <div>
+          { (situation === 1 || situation === 4) ? (
+            <Paper className={classes.resultPaper}>
+            <Box paddingTop="20px" textAlign="center">
+              <Box marginBottom="10px">
+              <Typography variant="h5">1試技目</Typography>
+              </Box>
+            {firstInput === "" ? (
+              <Typography variant="h4">-:--.--</Typography>
+            ) : (
+              
+                form.firstStatus === "DNF" ? (<div>
+                  <Typography variant="h6">DNF</Typography>
+                  <Typography variant="h6">{dnfCorrespond[form.firstDnfReason]}</Typography>
+                  </div>
+                ) : (
+                  form.firstStatus === "plusTwo" ? (
+                    <Typography variant="h4">{String(firstInput)} + 2</Typography>
+                    
+                  ) : (
+                    <Typography variant="h4">{firstInput}</Typography>
+                    
+                  )
+                )
+              
+            )}
+            
+            </Box>
+    <Box display="block" textAlign="center" margin="20px 0 0 0">
+        <FormControl component="fieldset">
+            <RadioGroup aria-label="condition" name="firstStatus" value={form.firstStatus} onChange={handleChange} row>
+                <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
+                <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
+                <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen1}/>} label="DNF" />
+            </RadioGroup>
+        </FormControl>
+      </Box>
+    <Modal
+  aria-labelledby="modal-title-1"
+  aria-describedby="modal-description-2"
+  className={classes.modal}
+  open={open1}
+  onClose={handleClose1}
+  closeAfterTransition
+  BackdropComponent={Backdrop}
+  BackdropProps={{
+    timeout: 500,
+  }}
+>
+  <Fade in={open1}>
+    <div className={classes.paper}>
+      <Box marginBottom="10px">
+      <Typography variant="h4" id="modal-title-1">DNFの理由</Typography>
+      <Typography variant="body1" id="modal-description-2">※一番近いものを選んでください</Typography>
+
+      </Box>
+      <FormControl component="fieldset">
+      <RadioGroup aria-label="dnfReason1" name="firstDnfReason" value={form.firstDnfReason} onChange={handleChange} >
+        <FormControlLabel value="observationMiss" control={<Radio color="primary" />} label="分析ミス" />
+        <FormControlLabel value="memoSlip" control={<Radio color="primary" />} label="記憶が飛んだ" />
+        <FormControlLabel value="edgeExeMiss" control={<Radio color="primary" />} label="エッジの実行ミス" />
+        <FormControlLabel value="cornerExeMiss" control={<Radio color="primary" />} label="コーナーの実行ミス" />
+        <FormControlLabel value="recallMiss" control={<Radio color="primary" />} label="違うレターペアの想起" />
+      </RadioGroup>
+      </FormControl>
+      <Box textAlign="right" marginTop="10px">
+      <Button variant="contained" color="primary" onClick={handleClose1}>
+        確定
+      </Button>
+      </Box>
+    </div>
+  </Fade>
+</Modal>
+</Paper>
+
+          ) : (
+            <p></p>
+          )}
+          {
+            (situation===2 || situation===4) ? (
+<Paper className={classes.resultPaper}>
+            <Box paddingTop="20px" textAlign="center">
+            <Box marginBottom="10px">
+              <Typography variant="h5">2試技目</Typography>
+              </Box>
+              { secondInput === "" ? (
                 <Typography variant="h4">-:--.--</Typography>
               ) : (
-                
-                  form.firstStatus === "DNF" ? (<div>
-                    <Typography variant="h6">DNF</Typography>
-                    <Typography variant="h6">{dnfCorrespond[form.firstDnfReason]}</Typography>
-                    </div>
+                form.secondStatus === "DNF" ? (<div>
+                  <Typography variant="h6">DNF</Typography>
+                  <Typography variant="h6">{dnfCorrespond[form.secondDnfReason]}</Typography>
+                  </div>
+                ) : (
+                  form.secondStatus === "plusTwo" ? (
+                    <Typography variant="h4">{String(secondInput)} + 2</Typography>
+                    
                   ) : (
-                    form.firstStatus === "plusTwo" ? (
-                      <Typography variant="h4">{String(firstInput)} + 2</Typography>
-                      
-                    ) : (
-                      <Typography variant="h4">{firstInput}</Typography>
-                      
-                    )
+                    <Typography variant="h4">{secondInput}</Typography>
+                    
                   )
-                
-              )}
-              
-              </Box>
-      <Box display="block" textAlign="center" margin="20px 0 0 0">
+                )
+              ) }
+                </Box>
+        <Box display="block" textAlign="center" margin="20px 0 0 0">
+            <FormControl component="fieldset">
+                <RadioGroup aria-label="condition" name="secondStatus" value={form.secondStatus} onChange={handleChange} row>
+                    <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
+                    <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
+                    <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen2}/>} label="DNF" />
+                </RadioGroup>
+            </FormControl>
+          </Box>
+        <Modal
+      aria-labelledby="modal-title-2"
+      aria-describedby="modal-description-2"
+      className={classes.modal}
+      open={open2}
+      onClose={handleClose2}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Fade in={open2}>
+        <div className={classes.paper}>
+          <Box marginBottom="10px">
+          <Typography variant="h4" id="modal-title-2">DNFの理由</Typography>
+          <Typography variant="body1" id="modal-description-2">※一番近いものを選んでください</Typography>
+
+          </Box>
           <FormControl component="fieldset">
-              <RadioGroup aria-label="condition" name="firstStatus" value={form.firstStatus} onChange={handleChange} row>
-                  <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
-                  <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
-                  <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen1}/>} label="DNF" />
-              </RadioGroup>
+          <RadioGroup aria-label="dnfReason2" name="secondDnfReason" value={form.secondDnfReason} onChange={handleChange} >
+            <FormControlLabel value="observationMiss" control={<Radio color="primary" />} label="分析ミス" />
+            <FormControlLabel value="memoSlip" control={<Radio color="primary" />} label="記憶が飛んだ" />
+            <FormControlLabel value="edgeExeMiss" control={<Radio color="primary" />} label="エッジの実行ミス" />
+            <FormControlLabel value="cornerExeMiss" control={<Radio color="primary" />} label="コーナーの実行ミス" />
+            <FormControlLabel value="recallMiss" control={<Radio color="primary" />} label="違うレターペアの想起" />
+          </RadioGroup>
           </FormControl>
-        </Box>
-      <Modal
-    aria-labelledby="modal-title-1"
-    aria-describedby="modal-description-2"
-    className={classes.modal}
-    open={open1}
-    onClose={handleClose1}
-    closeAfterTransition
-    BackdropComponent={Backdrop}
-    BackdropProps={{
-      timeout: 500,
-    }}
-  >
-    <Fade in={open1}>
-      <div className={classes.paper}>
-        <Box marginBottom="10px">
-        <Typography variant="h4" id="modal-title-1">DNFの理由</Typography>
-        <Typography variant="body1" id="modal-description-2">※一番近いものを選んでください</Typography>
-
-        </Box>
-        <FormControl component="fieldset">
-        <RadioGroup aria-label="dnfReason1" name="firstDnfReason" value={form.firstDnfReason} onChange={handleChange} >
-          <FormControlLabel value="observationMiss" control={<Radio color="primary" />} label="分析ミス" />
-          <FormControlLabel value="memoSlip" control={<Radio color="primary" />} label="記憶が飛んだ" />
-          <FormControlLabel value="edgeExeMiss" control={<Radio color="primary" />} label="エッジの実行ミス" />
-          <FormControlLabel value="cornerExeMiss" control={<Radio color="primary" />} label="コーナーの実行ミス" />
-          <FormControlLabel value="recallMiss" control={<Radio color="primary" />} label="違うレターペアの想起" />
-        </RadioGroup>
-        </FormControl>
-        <Box textAlign="right" marginTop="10px">
-        <Button variant="contained" color="primary" onClick={handleClose1}>
-          確定
-        </Button>
-        </Box>
-      </div>
-    </Fade>
-  </Modal>
-  </Paper>
-
+          <Box textAlign="right" marginTop="10px">
+          <Button variant="contained" color="primary" onClick={handleClose2}>
+            確定
+          </Button>
+          </Box>
+        </div>
+      </Fade>
+    </Modal>
+    </Paper>
             ) : (
               <p></p>
-            )}
-            {
-              (situation===2 || situation===4) ? (
-<Paper className={classes.resultPaper}>
-              <Box paddingTop="20px" textAlign="center">
-              <Box marginBottom="10px">
-                <Typography variant="h5">2試技目</Typography>
-                </Box>
-                { secondInput === "" ? (
-                  <Typography variant="h4">-:--.--</Typography>
-                ) : (
-                  form.secondStatus === "DNF" ? (<div>
-                    <Typography variant="h6">DNF</Typography>
-                    <Typography variant="h6">{dnfCorrespond[form.secondDnfReason]}</Typography>
-                    </div>
-                  ) : (
-                    form.secondStatus === "plusTwo" ? (
-                      <Typography variant="h4">{String(secondInput)} + 2</Typography>
-                      
-                    ) : (
-                      <Typography variant="h4">{secondInput}</Typography>
-                      
-                    )
-                  )
-                ) }
-                  </Box>
-          <Box display="block" textAlign="center" margin="20px 0 0 0">
-              <FormControl component="fieldset">
-                  <RadioGroup aria-label="condition" name="secondStatus" value={form.secondStatus} onChange={handleChange} row>
-                      <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
-                      <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
-                      <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen2}/>} label="DNF" />
-                  </RadioGroup>
-              </FormControl>
-            </Box>
-          <Modal
-        aria-labelledby="modal-title-2"
-        aria-describedby="modal-description-2"
-        className={classes.modal}
-        open={open2}
-        onClose={handleClose2}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open2}>
-          <div className={classes.paper}>
-            <Box marginBottom="10px">
-            <Typography variant="h4" id="modal-title-2">DNFの理由</Typography>
-            <Typography variant="body1" id="modal-description-2">※一番近いものを選んでください</Typography>
-
-            </Box>
-            <FormControl component="fieldset">
-            <RadioGroup aria-label="dnfReason2" name="secondDnfReason" value={form.secondDnfReason} onChange={handleChange} >
-              <FormControlLabel value="observationMiss" control={<Radio color="primary" />} label="分析ミス" />
-              <FormControlLabel value="memoSlip" control={<Radio color="primary" />} label="記憶が飛んだ" />
-              <FormControlLabel value="edgeExeMiss" control={<Radio color="primary" />} label="エッジの実行ミス" />
-              <FormControlLabel value="cornerExeMiss" control={<Radio color="primary" />} label="コーナーの実行ミス" />
-              <FormControlLabel value="recallMiss" control={<Radio color="primary" />} label="違うレターペアの想起" />
-            </RadioGroup>
-            </FormControl>
-            <Box textAlign="right" marginTop="10px">
-            <Button variant="contained" color="primary" onClick={handleClose2}>
-              確定
-            </Button>
-            </Box>
-          </div>
-        </Fade>
-      </Modal>
-      </Paper>
-              ) : (
-                <p></p>
-              )
-            }
-            {
-              (situation===3 || situation===4) ? (
+            )
+          }
+          {
+            (situation===3 || situation===4) ? (
 <Paper className={classes.resultPaper}>
 
 <Box paddingTop="20px" textAlign="center">
 <Box marginBottom="10px">
-                <Typography variant="h5">3試技目</Typography>
-                </Box>
-  {thirdInput === "" ? (
-        <Typography variant="h4">-:--.--</Typography>
+              <Typography variant="h5">3試技目</Typography>
+              </Box>
+{thirdInput === "" ? (
+      <Typography variant="h4">-:--.--</Typography>
+      ) : (
+        form.thirdStatus === "DNF" ? (<div>
+          <Typography variant="h6">DNF</Typography>
+          <Typography variant="h6">{dnfCorrespond[form.thirdDnfReason]}</Typography>
+          </div>
         ) : (
-          form.thirdStatus === "DNF" ? (<div>
-            <Typography variant="h6">DNF</Typography>
-            <Typography variant="h6">{dnfCorrespond[form.thirdDnfReason]}</Typography>
-            </div>
+          form.thirdStatus === "plusTwo" ? (
+            <Typography variant="h4">{String(thirdInput)} + 2</Typography>
+            
           ) : (
-            form.thirdStatus === "plusTwo" ? (
-              <Typography variant="h4">{String(thirdInput)} + 2</Typography>
-              
-            ) : (
-              <Typography variant="h4">{thirdInput}</Typography>
-              
-            )
+            <Typography variant="h4">{thirdInput}</Typography>
+            
           )
-  )}
-  </Box>
+        )
+)}
+</Box>
 <Box display="block" textAlign="center" margin="20px 0 0 0">
 <FormControl component="fieldset">
-  <RadioGroup aria-label="condition" name="thirdStatus" value={form.thirdStatus} onChange={handleChange} row>
-      <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
-      <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
-      <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen3}/>} label="DNF" />
-  </RadioGroup>
+<RadioGroup aria-label="condition" name="thirdStatus" value={form.thirdStatus} onChange={handleChange} row>
+    <FormControlLabel value="success" control={<Radio color="primary" />} label="OK" />
+    <FormControlLabel value="plusTwo" control={<YellowRadio />} label="+2" />
+    <FormControlLabel value="DNF" control={<RedRadio onClick={handleOpen3}/>} label="DNF" />
+</RadioGroup>
 </FormControl>
 </Box>
 <Modal
@@ -443,60 +553,67 @@ timeout: 500,
 </Fade>
 </Modal>
 </Paper>
-              ) : (
-                <p></p>
-              )
-            }
-            
-      </div>
-      {
-        situation === 3 ? (
+            ) : (
+              <p></p>
+            )
+          }
+          
+    </div>
+    {
+      situation === 3 ? (
 <div>
 <Box textAlign="center" marginTop="20px">
-              <Button
-                variant="contained"
-                size="large"
-                onClick={handleConfirm}
-                color="primary"
-              >
-                結果を確認する
-              </Button>
-              </Box>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={handleConfirm}
+              color="primary"
+            >
+              結果を確認する
+            </Button>
+            </Box>
 
-          </div>
-        ) : (
-          <p></p>
-        )
-      }
-        {situation === 4 ? (
-          <div>
+        </div>
+      ) : (
+        <p></p>
+      )
+    }
+      {situation === 4 ? (
+        <div>
 <Box textAlign="center" marginTop="20px">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                disabled={uiLoading}
-                size="large"
-              >
-                結果を送信する
-                {uiLoading && (
-                        <CircularProgress size={30} className={classes.progress}/>
-                      )}
-              </Button>
-              </Box>
-              {errors.error && (
-                  <Box textAlign="center" margin="20px 0"> 
-                    <Typography variant="h5" color="error">
-                      {errors.error}
-                    </Typography>
-                  </Box>
-                )}
-          </div>
-        ):(
-          <p></p>
-        )}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              disabled={uiLoading}
+              size="large"
+            >
+              結果を送信する
+              {uiLoading && (
+                      <CircularProgress size={30} className={classes.progress}/>
+                    )}
+            </Button>
+            </Box>
+            {errors.error && (
+                <Box textAlign="center" margin="20px 0"> 
+                  <Typography variant="h5" color="error">
+                    {errors.error}
+                  </Typography>
+                </Box>
+              )}
+        </div>
+      ):(
+        <p></p>
+      )}
+      
         </form>
+
+      ) : (
+        <p></p>
+      )}
+        
+        </div>
     </React.Fragment>
   );
 }
