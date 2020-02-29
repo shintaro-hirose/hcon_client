@@ -56,6 +56,9 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  cantSelect:{
+    userSelect: "none",
+  }
 }));
 
 
@@ -244,7 +247,7 @@ const handleOnTouchEnd = (e) => {
 
   return (
     <React.Fragment >
-      <div onTouchStart={handleOnTouchStart} onTouchEnd={handleOnTouchEnd}>
+      <div>
         {(timeSituation === "neutral") ? (
 <div>
   <Typography  variant="h4" align="center">{contestId.substr(0,4)}/{contestId.substr(4,2)}/{contestId.substr(6,2)} のコンテスト</Typography> 
@@ -274,15 +277,15 @@ const handleOnTouchEnd = (e) => {
         )}
       
       {isMobile() ? (
-        <div >
-        <Box textAlign="center" margin="20px 0" minHeight="180px">
+        <div onTouchStart={handleOnTouchStart} onTouchEnd={handleOnTouchEnd}>
+        <Box textAlign="center" margin="20px 0" minHeight="180px" className={classes.cantSelect} >
         { (timeSituation === "neutral") ? (
-            <Typography component="div">
-                <Box fontSize="h1.fontSize">
+            <Typography component="div" >
+                <Box fontSize="h1.fontSize"  >
                  {timeFormatter(solveTime)}
                 </Box>
                 { situation !== 3 ? (
-                    <Box　fontSize="h5.fontSize">
+                    <Box　fontSize="h5.fontSize" >
                     画面長押しでスタート
                 </Box>
                 ) : (<p></p>)}
@@ -292,22 +295,22 @@ const handleOnTouchEnd = (e) => {
         ):(
           (timeSituation === "touching") ? (
               !canStartTrigger ? (
-          <Typography component="div">
-                <Box fontSize="h1.fontSize" color="red">
+          <Typography component="div" >
+                <Box fontSize="h1.fontSize" color="red" >
                 {timeFormatter(solveTime)}
                 </Box>
             </Typography>
               ) : (
-          <Typography component="div">
-                  <Box fontSize="h1.fontSize" color="#64dd17">
+          <Typography component="div" >
+                  <Box fontSize="h1.fontSize" color="#64dd17" >
                   00.00
                   </Box>
               </Typography>
               )
               
           ) : (
-              <Typography component="div">
-                <Box fontSize="h1.fontSize" color="black">
+              <Typography component="div" >
+                <Box fontSize="h1.fontSize" color="black" >
                  {timeFormatter(solveTime)}
                 </Box>
             </Typography>
@@ -315,7 +318,7 @@ const handleOnTouchEnd = (e) => {
              
           ) }
         </Box>
-        <Box height={timeSituation === "neutral" ? "0px" : "380px"}></Box>
+        <Box height={timeSituation === "neutral" ? "0px" : "380px"} className={classes.cantSelect}></Box>
     </div>
         
       ) : (

@@ -193,7 +193,7 @@ import axios from 'axios';
   };
 
   export const getContest = () => (dispatch) => {
-    dispatch({ type: LOADING_UI});
+    dispatch({ type: LOADING_USER});
     axios
     .get('/contest')
     .then(res => {
