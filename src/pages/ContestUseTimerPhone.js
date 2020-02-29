@@ -14,7 +14,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Timer from '../components/contest/Timer'
 
 import Loading from '../util/Loading';
 
@@ -276,7 +275,7 @@ const handleOnTouchEnd = (e) => {
           <p></p>
         )}
       
-      {isMobile() ? (
+      {isMobile() && (situation!==4) ? (
         <div onTouchStart={handleOnTouchStart} onTouchEnd={handleOnTouchEnd}>
         <Box textAlign="center" margin="20px 0" minHeight="180px" className={classes.cantSelect} >
         { (timeSituation === "neutral") ? (
@@ -322,12 +321,7 @@ const handleOnTouchEnd = (e) => {
     </div>
         
       ) : (
-        <Timer 
-        setFirstInput={setFirstInput} 
-        setSecondInput={setSecondInput} 
-        setThirdInput={setThirdInput} 
-        setSituationPar={setSituationPar}
-        />
+        <p></p>
       )}
       {(timeSituation === "neutral") ? (
         <form className={classes.root} noValidate onSubmit={handleSubmit}>
