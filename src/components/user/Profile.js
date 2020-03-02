@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import EditDetails from './EditDetails';
@@ -25,7 +25,8 @@ import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 
 //Redux
 import { connect } from 'react-redux';
-import { logoutUser, uploadImage } from '../../redux/actions/userActions';
+import { uploadImage } from '../../redux/actions/userActions';
+import LogoutModal from '../../util/LogoutModal';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -107,6 +108,7 @@ const ratedToJapanese = (rated) => {
 }
 
 function Profile(props) {
+  const [open, setOpen] = useState(false);
   const handleImageChange = (event) => {
     const image = event.target.files[0];
     const formData = new FormData();
@@ -118,7 +120,7 @@ function Profile(props) {
     fileInput.click();
   };
   const handleLogout = () => {
-    props.logoutUser();
+    setOpen(true)
   };
   
   const classes = useStyles();
@@ -192,6 +194,7 @@ function Profile(props) {
             <MyButton tip="ログアウト" onClick={handleLogout}>
               <KeyboardReturn color="primary" />
             </MyButton>
+            <LogoutModal open={open} setOpen={setOpen}/>
             <EditDetails />
           </div>
         </Paper>
@@ -216,10 +219,9 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 
-const mapActionsToProps = { logoutUser, uploadImage };
+const mapActionsToProps = { uploadImage };
 
 Profile.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
 };

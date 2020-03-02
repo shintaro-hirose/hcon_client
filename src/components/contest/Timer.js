@@ -28,10 +28,9 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
     }
 
     document.onkeydown = function(e) {
+        if(e.keyCode !== 32) return;
         if(situation >= 3) return;
         if (!attemptStarted){
-            let event;
-            if (e) {event = e};
             if (!started){
                 setStarted(true);
                 setPressStartTime(Date.now());
@@ -57,8 +56,6 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
 
     document.onkeyup = function(e) {
         if(situation >= 3) return;
-        let event;
-        if (e){event = e};
         if(timeLapse < 200){
             setTimeLapse(0);
             setStarted(false);
@@ -81,9 +78,14 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
                    {timeFormatter(solveTime)}
                   </Box>
                   { situation !== 3 ? (
-                      <Box　fontSize="h5.fontSize">
+                      <div>
+                      <Box　fontSize="h4.fontSize">
                       スペースキー長押しでスタート
                   </Box>
+                  <Box　fontSize="body1.fontSize">
+                  ※計測中は"Timing"と表示されます
+              </Box>
+              </div>
                   ) : (<p></p>)}
                   
               </Typography>
