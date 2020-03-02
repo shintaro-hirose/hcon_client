@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../../images/hcon-icon.svg'
+import LogoutModal from '../../util/LogoutModal';
 // MUI stuff
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
@@ -11,7 +12,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import { logoutUser } from '../../redux/actions/userActions';
 
 const now = new Date();
 now.setDate(now.getDate() -1);
@@ -67,20 +67,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Navbar(props) {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
     const handleLogout = () => {
-      setMobileOpen(!mobileOpen);
-        props.logoutUser();
+        setOpen(true);
       };
     const { authenticated, authorizedUserSummary } = props;
     const user = authorizedUserSummary.userHandle;
     const [selected, setSelected] = useState("");
-    const [mobileOpen, setMobileOpen] = useState(false);
     
-    const handleDrawerToggle = () => {
-      setMobileOpen(!mobileOpen);
-    };
+
     const handleSelected0 = () => {
       setSelected("");
     }
@@ -145,9 +142,10 @@ function Navbar(props) {
                 設定
               </Button>
               </Box>
-              <Button color="inherit" component={Link} to="/" onClick={handleLogout} variant="outlined">
+              <Button color="inherit"  onClick={handleLogout} variant="outlined">
                 ログアウト
               </Button>
+              <LogoutModal open={open} setOpen={setOpen} />
               </Hidden>
             </Fragment>
           ) : (
@@ -197,12 +195,10 @@ function Navbar(props) {
     );
 }
 
-const mapActionsToProps = { logoutUser };
 
 Navbar.propTypes = {
   authorizedUserSummary: PropTypes.object.isRequired,
   authenticated: PropTypes.bool.isRequired,
-  logoutUser: PropTypes.func.isRequired,
 
 };
 
@@ -211,4 +207,4 @@ const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated
 });
 
-export default connect(mapStateToProps, mapActionsToProps)(Navbar);
+export default connect(mapStateToProps)(Navbar);
