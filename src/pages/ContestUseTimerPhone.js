@@ -336,7 +336,8 @@ const handleOnTouchEnd = (e) => {
              
           ) }
         </Box>
-        <Box height={timeSituation === "neutral" ? "0px" : "380px"} className={classes.cantSelect}></Box>
+        <Box height={(situation === 0) ? "250px" : "0px"} className={classes.cantSelect}></Box>
+        <Box height={(timeSituation === "neutral") ? "0px" : "380px"} className={classes.cantSelect}></Box>
     </div>
         
       ) : (
