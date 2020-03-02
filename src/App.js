@@ -90,8 +90,6 @@ const rrfProps = {
 
 class App extends Component {
   render() {
-    document.title ="Hcon | 3BLD Contest"; 
-    document.getElementsByTagName("META")[2].content="3x3x3キューブ目隠し競技者のための大会プラットフォーム";
     
     return(
         <MuiThemeProvider theme={theme}>
