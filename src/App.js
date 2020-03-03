@@ -24,6 +24,12 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import User from './pages/User';
 import Settings from './pages/Settings';
+import SendEmailForPassword from './pages/SendEmailForPassword';
+import BottomNavBar from './components/layout/BottomNavBar';
+import SuccessBar from './util/SuccessBar';
+import ErrorBar from './util/SuccessBar';
+
+
 //Firebase
 import firebase from 'firebase/app';
 import 'firebase/auth'
@@ -33,7 +39,6 @@ import 'firebase/firestore' // <- needed if using firestore
 import store from './redux/store'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
-import BottomNavBar from './components/layout/BottomNavBar';
 
 
 
@@ -97,18 +102,22 @@ class App extends Component {
             <ReactReduxFirebaseProvider {...rrfProps}>
             <Router>
               <Navbar />
+              <SuccessBar />
+              <ErrorBar />
                 <div className="container">
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/user/:userId" component={User} />
                     <AuthRoute exact path="/login" component={Login} />
                     <AuthRoute exact path="/signup" component={SignUp} />
+                    <AuthRoute exact path="/sendEmailForPassword" component={SendEmailForPassword} />
                     <Route exact path="/result/:contestId" component={Results} />
                     <Route exact path="/ranking" component={Rankings} />
                     <UnauthRoute exact path="/contest" component={Contest} />
                     <UnauthRoute exact path="/contestUseTimer" component={ContestUseTimer} />
                     <UnauthRoute exact path="/contestUseTimerPhone" component={ContestUseTimerPhone} />
                     <UnauthRoute exact path="/settings" component={Settings} />
+
                   </Switch>
                 </div>
               <BottomNavBar />
