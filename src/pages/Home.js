@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import Profile from '../components/user/Profile';
 import ContestField from '../components/contest/ContestField';
 import RankingTable from '../components/ranking/RankingTable';
-import SuccessBar from '../util/SuccessBar';
-import ErrorBar from '../util/ErrorBar';
 import Loading from '../util/Loading';
 import About from '../util/About';
 import Notifications from '../util/Notifications';
@@ -81,8 +79,6 @@ function Home(props){
   ) : (<Loading />);
   return (
         <React.Fragment>
-          <SuccessBar />
-          <ErrorBar />
           {profileMarkup}
         </React.Fragment>
         );
