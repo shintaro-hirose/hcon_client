@@ -38,6 +38,10 @@ const useStyles = makeStyles(theme => ({
   scramble: {
     margin: "20px 0",
   },
+  pastScramble: {
+    marginTop: "20px",
+    color: "#bdbdbd"
+  },
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -265,8 +269,23 @@ const handleOnTouchEnd = (e) => {
         3rd: {props.user.contest.scrambles.third}
       </Typography>
     ) : (
+      situation === 4 ? (
+        <div>
+        <Typography variant="h5" align="center" className={classes.pastScramble}>
+        1st: {props.user.contest.scrambles.first}
+      </Typography>
+        <Typography variant="h5" align="center" className={classes.pastScramble}>
+        2nd: {props.user.contest.scrambles.second}
+      </Typography>
+      <Typography variant="h5" align="center" className={classes.pastScramble}>
+        3rd: {props.user.contest.scrambles.third}
+      </Typography>
+      </div>
+      ) : (
       <Typography variant="h5" align="center" className={classes.scramble}>
       </Typography>
+      )
+      
     )
   )
 )}
@@ -317,7 +336,8 @@ const handleOnTouchEnd = (e) => {
              
           ) }
         </Box>
-        <Box height={timeSituation === "neutral" ? "0px" : "380px"} className={classes.cantSelect}></Box>
+        <Box height={(situation === 0) ? "250px" : "0px"} className={classes.cantSelect}></Box>
+        <Box height={(timeSituation === "neutral") ? "0px" : "380px"} className={classes.cantSelect}></Box>
     </div>
         
       ) : (

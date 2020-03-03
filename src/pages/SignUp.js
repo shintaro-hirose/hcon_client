@@ -8,6 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Box from '@material-ui/core/Box';
 
 import { connect } from 'react-redux';
 import { signupUser } from '../redux/actions/userActions';
@@ -33,11 +38,24 @@ const useStyles = makeStyles(theme => ({
   },
   progress:{
     position: 'absolute',
+  },
+  formControl: {
+    margin: theme.spacing(3),
+  },
+  box1 :{
+    marginRight: "20px",
+    color: "#1111cc",
+    display:"inline",
+
   }
 }));
 
 function SignUp(props) {
   const classes = useStyles();
+  const [contact, setContact] = useState({
+    terms: false,
+    privactPolicy: false
+  });
   const [form, setForm] = useState({
     handle:"",
     displayName: "",
@@ -45,7 +63,6 @@ function SignUp(props) {
     password: "",
     confirmPassword: "",
   });
-
 
   const { UI:{loading, errors} } = props;
 
@@ -61,7 +78,19 @@ function SignUp(props) {
     props.signupUser(form, props.history);
   };
   
+  const handleCheck1 = () => {
+    setContact({
+      ...contact,
+      terms: !contact.terms
+    })
+  }
 
+  const handleCheck2 = () => {
+    setContact({
+      ...contact,
+      privactPolicy: !contact.privactPolicy
+    })
+  }
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -146,13 +175,39 @@ function SignUp(props) {
                 {errors.general}
               </Typography>
             )}
+            <Box textAlign="center" marginTop="20px">
+            <Typography component="div" textAlign="center">
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className={classes.box1}>
+              利用規約
+              </a>
+              <a href="/privacyPolicy" target="_blank" rel="noopener noreferrer" className={classes.box1}>
+              プライバシーポリシー
+              </a>
+            </Typography>
+            </Box>
+          <FormControl component="fieldset" className={classes.formControl}>
+          <FormGroup aria-label="position" >
+            <FormControlLabel
+              value="top"
+              control={<Checkbox color="primary" onChange={handleCheck1}/>}
+              label="利用規約に同意"
+              labelPlacement="end"
+            />
+            <FormControlLabel
+              value="start"
+              control={<Checkbox color="primary" onChange={handleCheck2}/>}
+              label="プライバシーポリシーに同意"
+              labelPlacement="end"
+            />
+          </FormGroup>
+          </FormControl>
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={loading}
+            disabled={loading || (!(contact.terms && contact.privactPolicy))}
           >
             登録
             {loading && (

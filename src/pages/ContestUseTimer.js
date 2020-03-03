@@ -39,7 +39,11 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'rgb(245, 245, 245)',
   },
   scramble: {
-    margin: "50px 0",
+    margin: "25px 0",
+  },
+  pastScramble: {
+    marginTop: "25px",
+    color:"#bdbdbd",
   },
   modal: {
     display: 'flex',
@@ -183,23 +187,47 @@ function ContestUseTimer(props) {
       </Typography>
       ) : (
         situation === 1 ? (
+          <div>
+          <Typography variant="h5" align="center" className={classes.pastScramble}>
+        1st: {props.user.contest.scrambles.first}
+      </Typography>
           <Typography variant="h5" align="center" className={classes.scramble}>
               2nd: {props.user.contest.scrambles.second}
             </Typography>
+            </div>
         ) : (
           situation === 2 ? (
+            <div>
+               <Typography variant="h5" align="center" className={classes.pastScramble}>
+              1st: {props.user.contest.scrambles.first}
+            </Typography>
+              <Typography variant="h5" align="center" className={classes.pastScramble}>
+              2nd: {props.user.contest.scrambles.second}
+            </Typography>
             <Typography variant="h5" align="center" className={classes.scramble}>
               3rd: {props.user.contest.scrambles.third}
             </Typography>
+            </div>
           ) : (
+            <div>
+              <Typography variant="h5" align="center" className={classes.pastScramble}>
+              1st: {props.user.contest.scrambles.first}
+            </Typography>
+              <Typography variant="h5" align="center" className={classes.pastScramble}>
+              2nd: {props.user.contest.scrambles.second}
+            </Typography>
+            <Typography variant="h5" align="center" className={classes.pastScramble}>
+              3rd: {props.user.contest.scrambles.third}
+            </Typography>
             <Typography variant="h5" align="center" className={classes.scramble}>
               おつかれさまでした！
             </Typography>
+            </div>
           )
         )
       )}
-      {isMobile() ? (
-        <TimerForPhone 
+      { (situation !== 3) ? (
+        <Timer 
         setFirstInput={setFirstInput} 
         setSecondInput={setSecondInput} 
         setThirdInput={setThirdInput} 
@@ -207,12 +235,7 @@ function ContestUseTimer(props) {
         />
         
       ) : (
-        <Timer 
-        setFirstInput={setFirstInput} 
-        setSecondInput={setSecondInput} 
-        setThirdInput={setThirdInput} 
-        setSituationPar={setSituationPar}
-        />
+        <p></p>
       )}
         
         <form className={classes.root} noValidate onSubmit={handleSubmit}>

@@ -28,9 +28,9 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
     }
 
     document.onkeydown = function(e) {
-        if(e.keyCode !== 32) return;
         if(situation >= 3) return;
         if (!attemptStarted){
+            if(e.keyCode !== 32) return;
             if (!started){
                 setStarted(true);
                 setPressStartTime(Date.now());
