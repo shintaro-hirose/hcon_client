@@ -20,7 +20,7 @@ import SuccessBar from '../util/SuccessBar';
 
 
 import { connect } from 'react-redux';
-import { getUserCredential, updateDisplayName} from '../redux/actions/userActions';
+import { getUserCredential, updateDisplayName, updateEmail, updatePassword} from '../redux/actions/userActions';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -85,9 +85,16 @@ function Settings(props) {
   };
   const handleSubmit2 = (event) => {
     event.preventDefault();
+    props.updateEmail({email: form.email});
+
   };
   const handleSubmit3 = (event) => {
     event.preventDefault();
+    props.updatePassword({
+      password: form.password,
+      confirmPassword: form.confirmPassword
+    });
+
   };
  
   return (
@@ -140,7 +147,6 @@ function Settings(props) {
             id="displayName"
             label="表示名"
             name="displayName"
-            autoFocus
             helperText={errors.displayName}
             error={errors.displayName ? true : false}
             onChange={handleChange}
@@ -166,7 +172,7 @@ function Settings(props) {
               active === 2 ? (
                 <Paper className={classes.paper}>
 <Box padding="20px">
-              <Typography variant="h5">メールアドレスの変更(未実装)</Typography>
+              <Typography variant="h5">メールアドレスの変更</Typography>
             </Box>                <form className={classes.form} noValidate onSubmit={handleSubmit2}>
           <TextField
             variant="outlined"
@@ -177,7 +183,6 @@ function Settings(props) {
             label="メールアドレス"
             name="email"
             autoComplete="email"
-            autoFocus
             helperText={errors.email}
             error={errors.email ? true : false}
             onChange={handleChange}
@@ -202,7 +207,7 @@ function Settings(props) {
               ) : (
 <Paper className={classes.paper}>
             <Box padding="20px">
-              <Typography variant="h5">パスワードの変更（未実装）</Typography>
+              <Typography variant="h5">パスワードの変更</Typography>
             </Box>
                 <form className={classes.form} noValidate onSubmit={handleSubmit3}>
           <TextField
@@ -214,7 +219,6 @@ function Settings(props) {
             label="新しいパスワード"
             type="password"
             id="password"
-            autoComplete="current-password"
             helperText={errors.password}
             error={errors.password ? true : false}
             onChange={handleChange}
@@ -266,6 +270,8 @@ function Settings(props) {
 Settings.propTypes = {
   getUserCredential: PropTypes.func.isRequired,
   updateDisplayName: PropTypes.func.isRequired,
+  updateEmail: PropTypes.func.isRequired,
+  updatePassword: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired
   };
@@ -277,7 +283,9 @@ Settings.propTypes = {
   
   const mapActionsToProps = {
     getUserCredential,
-    updateDisplayName
+    updateDisplayName,
+    updateEmail,
+    updatePassword
   };
   
   export default connect(

@@ -30,6 +30,10 @@ function Updates() {
                     <div>
                     <Divider />
                     <ListItem > 
+                        <ListItemText primary="メールアドレス・パスワードが変更可能になりました" secondary="2020-03-03 12:00"/>
+                    </ListItem>
+                    <Divider />
+                    <ListItem > 
                         <ListItemText primary="スマホ・タブレットのタイマーを実装しました。Androidはどうじゃろ..." secondary="2020-2-29 13:00"/>
                     </ListItem>
                     <Divider />

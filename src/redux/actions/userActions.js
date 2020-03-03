@@ -306,6 +306,44 @@ export const sendEmailForPassword = (userData) => (dispatch) => {
     });
 };
 
+export const updateEmail = (userData) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post('/updateEmail', userData)
+    .then((res) => {
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({
+        type: OPEN_SUCCESSBAR,
+        payload: "メールアドレスを更新しました"
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const updatePassword = (userData) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post('/updatePassword', userData)
+    .then((res) => {
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({
+        type: OPEN_SUCCESSBAR,
+        payload: "パスワードを更新しました"
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
 export const finishSignup = () => (dispatch) => {
   dispatch({ type: LOADING_UI });
     axios
