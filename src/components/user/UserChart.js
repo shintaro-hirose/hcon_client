@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box'
 import { LineChart, Line, XAxis, YAxis, Legend, Tooltip , ResponsiveContainer, CartesianGrid } from 'recharts';
 
 import { connect } from 'react-redux';
+import { Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme => ({
@@ -26,6 +27,10 @@ const useStyles = makeStyles(theme => ({
       boxShadow: theme.shadows[5],
   
     },
+    alertText:{
+      textAlign:"center",
+      color:"grey"
+    }
 }));
 
 const  UserChart = (props) => {
@@ -55,7 +60,13 @@ const  UserChart = (props) => {
           </Box>
         </Paper>
       ) : (
+        <div>
         <Paper className={classes.paper}>
+        <Box className={classes.alertText}>
+        <Typography>
+          ※全てDNFした回はグラフに反映されません
+        </Typography>
+        </Box>
         <ResponsiveContainer>
           <LineChart
             data={formattedResults}
@@ -81,7 +92,11 @@ const  UserChart = (props) => {
             <Legend />
           </LineChart>
         </ResponsiveContainer>
+        
+        
         </Paper>
+        
+        </div>
   
       )}
     </React.Fragment>
