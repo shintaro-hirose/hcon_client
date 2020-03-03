@@ -28,6 +28,8 @@ import SendEmailForPassword from './pages/SendEmailForPassword';
 import BottomNavBar from './components/layout/BottomNavBar';
 import SuccessBar from './util/SuccessBar';
 import ErrorBar from './util/SuccessBar';
+import Terms from './pages/Terms';
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 
 //Firebase
@@ -117,6 +119,8 @@ class App extends Component {
                     <UnauthRoute exact path="/contestUseTimer" component={ContestUseTimer} />
                     <UnauthRoute exact path="/contestUseTimerPhone" component={ContestUseTimerPhone} />
                     <UnauthRoute exact path="/settings" component={Settings} />
+                    <Route exact path="/terms" component={Terms} />
+                    <Route exact path="/privacyPolicy" component={PrivacyPolicy} />
 
                   </Switch>
                 </div>
