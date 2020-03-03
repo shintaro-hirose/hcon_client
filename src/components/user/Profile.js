@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import EditDetails from './EditDetails';
 import MyButton from '../../util/MyButton';
+
 // MUI stuff
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
 // Icons
 import GroupIcon from '@material-ui/icons/Group';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -27,57 +27,6 @@ import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 import { connect } from 'react-redux';
 import { uploadImage } from '../../redux/actions/userActions';
 import LogoutModal from '../../util/LogoutModal';
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    width:"100%",
-    padding: "10px 0",
-    boxShadow: theme.shadows[5],
-
-  },
-  profile: {
-    '& .image-wrapper': {
-      textAlign: 'center',
-      position: 'relative',
-      '& button': {
-        position: 'absolute',
-        top: '60%',
-        left: '65%'
-      }
-    },
-    '& .profile-image': {
-      width: 100,
-      height: 100,
-      objectFit: 'cover',
-      maxWidth: '100%',
-      borderRadius: '50%'
-    },
-    '& .profile-details': {
-      textAlign: 'center',
-      '& span, svg': {
-        verticalAlign: 'middle'
-      },
-      '& a': {
-        color: '#00bcd4'
-      }
-    },
-    '& hr': {
-      border: 'none',
-      margin: '0 0 10px 0'
-    },
-    '& svg.button': {
-      '&:hover': {
-        cursor: 'pointer'
-      }
-    }
-  },
-  ratedIcon: {
-    width: 40,
-      height: 40,
-      borderRadius: '50%',
-      verticalAlign: 'middle'
-  }
-}));
 
 const ratedToJapanese = (rated) => {
   if(rated === "God Eater"){
@@ -106,8 +55,113 @@ const ratedToJapanese = (rated) => {
     return "不明な称号"
   }
 }
+const paperColor = (rated) => {
+  if(rated === "God Eater"){
+    return "#ffcdd2"
+  } else if(rated === "God"){
+    return "#f8bbd0"
+  } else if(rated === "Grand Master"){
+    return "#e1bee7"
+  }else if(rated === "Master"){
+    return "#d1c4e9"
+  } else if(rated === "Diamond"){
+    return "#a7ffeb"
+  } else if(rated === "Platinum"){
+    return "#b3e5fc"
+  } else if(rated === "Gold"){
+    return "#fff9c4"
+  } else if(rated === "Silver"){
+    return "#cfd8dc"
+  } else if(rated === "Bronze"){
+    return "#ffe0b2"
+  } else if(rated === "Iron"){
+    return "#f5f5f5"
+  } else if(rated === "beginner"){
+    return "#d7ccc8"
+  } else {
+    return "不明な称号"
+  }
+}
+
 
 function Profile(props) {
+  const {
+    user: {
+      authorizedUserSummary: { displayName, imageUrl, rating,  belong, twitter, rated },
+      loading,
+      authenticated
+    }
+  } = props;
+  const useStyles = makeStyles(theme => ({
+    paper: {
+      width:"100%",
+      padding: "10px 0",
+      boxShadow: theme.shadows[5],
+  
+    },
+    paper2: {
+      width:"100%",
+      padding: "10px 0",
+      boxShadow: theme.shadows[5],
+      marginTop:"10px",
+      textAlign: "center",
+      backgroundColor: paperColor(rated)
+
+    },
+    rankIcon:{
+      width:30,
+      height:30,
+      borderRadius:"50%",
+      verticalAlign: 'middle'
+    },
+    rankWrapper:{
+      display: "inline",
+      marginRight:"10px"
+    },
+    profile: {
+      '& .image-wrapper': {
+        textAlign: 'center',
+        position: 'relative',
+        '& button': {
+          position: 'absolute',
+          top: '60%',
+          left: '65%'
+        }
+      },
+      '& .profile-image': {
+        width: 100,
+        height: 100,
+        objectFit: 'cover',
+        maxWidth: '100%',
+        borderRadius: '50%'
+      },
+      '& .profile-details': {
+        textAlign: 'center',
+        '& span, svg': {
+          verticalAlign: 'middle'
+        },
+        '& a': {
+          color: '#00bcd4'
+        }
+      },
+      '& hr': {
+        border: 'none',
+        margin: '0 0 10px 0'
+      },
+      '& svg.button': {
+        '&:hover': {
+          cursor: 'pointer'
+        }
+      }
+    },
+    ratedIcon: {
+      width: 40,
+        height: 40,
+        borderRadius: '50%',
+        verticalAlign: 'middle'
+    }
+  }));
+
   const [open, setOpen] = useState(false);
   const handleImageChange = (event) => {
     const image = event.target.files[0];
@@ -124,13 +178,7 @@ function Profile(props) {
   };
   
   const classes = useStyles();
-    const {
-      user: {
-        authorizedUserSummary: { displayName, imageUrl, rating,  belong, twitter, rated },
-        loading,
-        authenticated
-      }
-    } = props;
+    
 
   return(
     <Fragment>
@@ -139,6 +187,7 @@ function Profile(props) {
           if(!loading){
             if(authenticated){
               return(
+                <div>
 <Paper className={classes.paper}>
           <div className={classes.profile}>
             <div className="image-wrapper">
@@ -168,11 +217,6 @@ function Profile(props) {
               </Box>
               <hr />
               <Typography variant="h6">レート: {rating}</Typography>
-              <Typography component="div">
-                <Box fontWeight="fontWeightLight">
-                  {ratedToJapanese(rated)}
-                </Box>
-              </Typography>
               <hr />
               {belong && (
                 <Fragment>
@@ -198,6 +242,23 @@ function Profile(props) {
             <EditDetails />
           </div>
         </Paper>
+        <Paper className={classes.paper2}>
+        {/* <Box className={classes.rankWrapper}>
+          <img src={god} alt="profile" className={classes.rankIcon}/>
+        </Box> */}
+        <Box display="inline">
+            <Typography variant="body2" display="inline">
+              {"ランク:　"}
+            </Typography>
+          </Box>
+        <Box display="inline">
+          <Typography display="inline">
+            {ratedToJapanese(rated)}
+          </Typography>
+        </Box>
+
+      </Paper>
+      </div>
               );
             } else {
               return(
