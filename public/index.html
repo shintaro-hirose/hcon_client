@@ -8,6 +8,10 @@
     <meta name="theme-color" content="#383B55" />
     <meta property="og:title" content="HCON | 3BLD Contest" />
     <meta property="og:description" content="3BLD競技者のための大会プラットフォームです。毎日24:00に更新します" />
+    <meta name="twitter:card" content="summary" /> <!--①-->
+    <meta name="twitter:site" content="@cubeforworld" /> <!--②-->
+    <meta property="og:url" content="https://hcon-3bld.web.app/" /> <!--③-->
+    <meta property="og:image" content="https://user-images.githubusercontent.com/48212107/75612236-13c93780-5b65-11ea-95c8-9d864f92612d.png" /> <!--⑥-->
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -41,4 +45,13 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.9.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.9.3/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
 </html>
