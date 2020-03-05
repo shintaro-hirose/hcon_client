@@ -9,8 +9,9 @@ import RankingTable from '../components/ranking/RankingTable';
 import Loading from '../util/Loading';
 import About from '../util/About';
 import Notifications from '../util/Notifications';
-import Updates from '../util/Updates';
+// import Updates from '../util/Updates';
 import Contact from '../util/Contact';
+import Policy from '../util/Policy';
 
 //redux
 import { connect } from 'react-redux';
@@ -42,9 +43,10 @@ function Home(props){
       <Grid container spacing={2}>
             <Grid item sm={4} xs={12}>
               <Profile />
-              <Updates />
+              {/* <Updates /> */}
               <Hidden xsDown>
                 <Contact />
+                <Policy />
               </Hidden>
             </Grid>
             <Grid item sm={8} xs={12} >
@@ -53,6 +55,7 @@ function Home(props){
               <Notifications notifications={notifications}/>
               <Hidden smUp>
                 <Contact />
+                <Policy />
               </Hidden>
             </Grid>
           </Grid>
@@ -60,9 +63,10 @@ function Home(props){
       <Grid container spacing={2}>
             <Grid item sm={4} xs={12}>
               <About />
-              <Updates />
+              {/* <Updates /> */}
               <Hidden xsDown>
                 <Contact />
+                <Policy />
               </Hidden>
             </Grid>
             <Grid item sm={8} xs={12} >
@@ -71,6 +75,7 @@ function Home(props){
               <Notifications notifications={notifications}/>
               <Hidden smUp>
                 <Contact />
+                <Policy />
               </Hidden>
             </Grid>
           </Grid>
