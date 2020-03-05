@@ -1,10 +1,24 @@
 import React, {useState} from 'react';
 
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles(theme => ({
+    check: {
+        height: "75px",
+        width: "600px",
+        textAlign:"center",
+        margin: "0 auto",
+        fontSize: 30,
+    },
+  }));
 
 const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) => {
+    const classes = useStyles();
+    const [showCheck, setShowCheck] = useState(false);
     const [started, setStarted] = useState(false);
     const [pressStartTime, setPressStartTime] = useState(false);
     const [timeLapse, setTimeLapse] = useState(0);
@@ -47,9 +61,11 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
             setAttemptStartTime(0);
             setAttemptStarted(false);
             setSolveTime(result);
+            setShowCheck(true);
             if (d === 0) return setFirstInput(timeFormatter(result));
             if (d === 1) return setSecondInput(timeFormatter(result));
             if (d === 2) return setThirdInput(timeFormatter(result));
+            
         }
         
     };
@@ -69,52 +85,69 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
         }
     }
 
+    const handleCheckClick = () => {
+        setShowCheck(false);
+    }
+
     return (
       <div>
           <Box textAlign="center" margin="20px 0" minHeight="180px">
-          { (!started && !attemptStarted) ? (
-              <Typography component="div">
-                  <Box fontSize="h1.fontSize">
-                   {timeFormatter(solveTime)}
-                  </Box>
-                  { situation !== 3 ? (
-                      <div>
-                      <Box　fontSize="h4.fontSize">
-                      スペースキー長押しでスタート
-                  </Box>
-                  <Box　fontSize="body1.fontSize">
-                  ※計測中は"Timing"と表示されます
-              </Box>
-              </div>
-                  ) : (<p></p>)}
-                  
-              </Typography>
-              
-          ):(
-            started ? (
-                timeLapse < 200 ? (
-                    <Typography component="div">
-                  <Box fontSize="h1.fontSize" color="red">
-                  {timeFormatter(solveTime)}
-                  </Box>
-              </Typography>
-                    
-                ) : (
-                    
-                <Typography component="div">
-                    <Box fontSize="h1.fontSize" color="#64dd17">
-                    00.00
-                    </Box>
-                </Typography>
-                )
-            ) : (
-                <Typography component="div">
-                  <Box fontSize="h1.fontSize" color="primary">
-                   {timeFormatter(solveTime)}
-                  </Box>
-              </Typography>
-            )
-          ) }
+              {
+                    (!started && !attemptStarted) ? (
+                        <Typography component="div">
+                            <Box fontSize="h1.fontSize">
+                             {timeFormatter(solveTime)}
+                            </Box>
+                            { situation !== 3 ? (
+                                showCheck ? (
+                                <Box className={classes.check} 
+                                component={Button} 
+                                variant="contained"
+                               
+                                onClick={handleCheckClick}>
+                                    次の試技に進む
+                                </Box>
+                                ) : (
+                        <div>
+                                <Box　fontSize="h4.fontSize">
+                                スペースキー長押しでスタート
+                            </Box>
+                            <Box　fontSize="body1.fontSize">
+                            ※計測中は"Timing"と表示されます
+                        </Box>
+                        </div>
+                                )
+                                
+                            ) : (<p></p>)}
+                            
+                        </Typography>
+                        
+                    ):(
+                      started ? (
+                          timeLapse < 200 ? (
+                              <Typography component="div">
+                            <Box fontSize="h1.fontSize" color="red">
+                            {timeFormatter(solveTime)}
+                            </Box>
+                        </Typography>
+                              
+                          ) : (
+                              
+                          <Typography component="div">
+                              <Box fontSize="h1.fontSize" color="#64dd17">
+                              00.00
+                              </Box>
+                          </Typography>
+                          )
+                      ) : (
+                          <Typography component="div">
+                            <Box fontSize="h1.fontSize" color="primary">
+                             {timeFormatter(solveTime)}
+                            </Box>
+                        </Typography>
+                      )
+                    )
+              }
           </Box>
       </div>
     );
