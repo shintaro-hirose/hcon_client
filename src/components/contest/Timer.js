@@ -42,6 +42,7 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
     }
 
     document.onkeydown = function(e) {
+        if(showCheck) return;
         if(situation >= 3) return;
         if (!attemptStarted){
             if(e.keyCode !== 32) return;
@@ -71,6 +72,7 @@ const Timer = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) 
     };
 
     document.onkeyup = function(e) {
+        if(showCheck) return;
         if(situation >= 3) return;
         if(timeLapse < 200){
             setTimeLapse(0);
