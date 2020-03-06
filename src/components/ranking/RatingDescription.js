@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
     createData('ゴッド',"10000", "20.00"),
     createData('グランドマスター',"9500", "25.00"),
     createData('マスター',"9000", "30.00"),
+    createData('ソロモン',"8500", "40.00"),
     createData('ダイアモンド',"8000", "50.00"),
     createData('プラチナ',"7000", "1:10.00"),
     createData('ゴールド',"6000", "1:30.00"),
