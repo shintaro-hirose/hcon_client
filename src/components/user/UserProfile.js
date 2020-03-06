@@ -13,35 +13,6 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import { connect } from 'react-redux';
 import { getUserResults } from '../../redux/actions/userActions';
 
-const paperColor = (rated) => {
-  if(rated === "God Eater"){
-    return "#ffcdd2"
-  } else if(rated === "God"){
-    return "#f8bbd0"
-  } else if(rated === "Grand Master"){
-    return "#e1bee7"
-  }else if(rated === "Master"){
-    return "#d1c4e9"
-  } else if(rated === "Diamond"){
-    return "#a7ffeb"
-  } else if(rated === "Platinum"){
-    return "#b3e5fc"
-  } else if(rated === "Gold"){
-    return "#fff9c4"
-  } else if(rated === "Silver"){
-    return "#cfd8dc"
-  } else if(rated === "Bronze"){
-    return "#ffe0b2"
-  } else if(rated === "Iron"){
-    return "#f5f5f5"
-  } else if(rated === "beginner"){
-    return "#d7ccc8"
-  } else {
-    return "不明な称号"
-  }
-}
-
-
 const ratedToJapanese = (rated) => {
   if(rated === "God Eater"){
     return "ゴッドイーター"
@@ -55,6 +26,8 @@ const ratedToJapanese = (rated) => {
     return "ダイアモンド"
   } else if(rated === "Platinum"){
     return "プラチナ"
+  } else if(rated === "Solomon"){
+    return "ソロモン"
   } else if(rated === "Gold"){
     return "ゴールド"
   } else if(rated === "Silver"){
@@ -65,6 +38,35 @@ const ratedToJapanese = (rated) => {
     return "アイアン"
   } else if(rated === "beginner"){
     return "ビギナー"
+  } else {
+    return "不明な称号"
+  }
+}
+const paperColor = (rated) => {
+  if(rated === "God Eater"){
+    return "#ffcdd2"
+  } else if(rated === "God"){
+    return "#f8bbd0"
+  } else if(rated === "Grand Master"){
+    return "#e1bee7"
+  }else if(rated === "Master"){
+    return "#d1c4e9"
+  } else if(rated === "Diamond"){
+    return "#a7ffeb"
+  } else if(rated === "Solomon"){
+    return "#dcedc8"
+  } else if(rated === "Platinum"){
+    return "#b3e5fc"
+  } else if(rated === "Gold"){
+    return "#fff9c4"
+  } else if(rated === "Silver"){
+    return "#cfd8dc"
+  } else if(rated === "Bronze"){
+    return "#ffe0b2"
+  } else if(rated === "Iron"){
+    return "#f5f5f5"
+  } else if(rated === "beginner"){
+    return "#d7ccc8"
   } else {
     return "不明な称号"
   }

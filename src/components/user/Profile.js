@@ -41,6 +41,8 @@ const ratedToJapanese = (rated) => {
     return "ダイアモンド"
   } else if(rated === "Platinum"){
     return "プラチナ"
+  } else if(rated === "Solomon"){
+    return "ソロモン"
   } else if(rated === "Gold"){
     return "ゴールド"
   } else if(rated === "Silver"){
@@ -66,6 +68,8 @@ const paperColor = (rated) => {
     return "#d1c4e9"
   } else if(rated === "Diamond"){
     return "#a7ffeb"
+  } else if(rated === "Solomon"){
+    return "#dcedc8"
   } else if(rated === "Platinum"){
     return "#b3e5fc"
   } else if(rated === "Gold"){
