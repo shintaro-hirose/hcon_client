@@ -83,7 +83,7 @@ const paperColor = (rated) => {
   } else if(rated === "beginner"){
     return "#d7ccc8"
   } else {
-    return "不明な称号"
+    return "#d7ccc8"
   }
 }
 

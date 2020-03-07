@@ -45,30 +45,35 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map(el => el[0]);
 }
-function getColorByRated(rated) {
-  if(rated === "GodEater"){
-    return "#4a148c";
-  } else if (rated === "God") {
-    return "#8e24aa";
-  } else if (rated === "Grand Master") {
-    return "#880e4f";
-  } else if (rated === "Master") {
-    return "#e91e63"
-  } else if (rated === "Diamond") {
-    return "#00bcd4"
-  } else if (rated === "Platinum") {
-    return "#448aff"
-  } else if (rated === "Gold") {
-    return "#fdd835"
-  } else if (rated === "Silver") {
-    return "#9e9e9e"
-  } else if (rated === "Bronze") {
-    return "#795548"
+const getColorByRated = (rated) => {
+  if(rated === "God Eater"){
+    return "#ffcdd2"
+  } else if(rated === "God"){
+    return "#f8bbd0"
+  } else if(rated === "Grand Master"){
+    return "#e1bee7"
+  }else if(rated === "Master"){
+    return "#d1c4e9"
+  } else if(rated === "Diamond"){
+    return "#a7ffeb"
+  } else if(rated === "Solomon"){
+    return "#dcedc8"
+  } else if(rated === "Platinum"){
+    return "#b3e5fc"
+  } else if(rated === "Gold"){
+    return "#fff9c4"
+  } else if(rated === "Silver"){
+    return "#cfd8dc"
+  } else if(rated === "Bronze"){
+    return "#ffe0b2"
+  } else if(rated === "Iron"){
+    return "#f5f5f5"
+  } else if(rated === "beginner"){
+    return "#d7ccc8"
   } else {
-    return "#212121"
+    return "#d7ccc8"
   }
-};
-
+}
 const headCells = [
   { id: 'rank', numeric: false, disablePadding: true, label: '順位' },
   { id: 'userHandle', numeric: false, disablePadding: true, label: 'ユーザ名' },
@@ -142,14 +147,18 @@ const useToolbarStyles = makeStyles(theme => ({
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   return (
+    <div>
     <Toolbar
     >
         <Typography className={classes.title} variant="h6" id="tableTitle">
           全体ランキング
         </Typography>
 
+
         
     </Toolbar>
+
+    </div>
   );
 };
 
@@ -248,6 +257,7 @@ function RankingTable(props) {
                   return (
                     <TableRow
                       key={row.userHandle}
+                      style={{ backgroundColor: getColorByRated(row.rated) }}
                     >
                       <TableCell align="center" padding="none" >{row.rank}</TableCell>
                       <TableCell component="th" scope="row" padding="none" align="left"  >

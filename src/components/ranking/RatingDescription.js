@@ -96,11 +96,7 @@ function SimpleTable() {
             {rows.map(row => (
                 <TableRow key={row.rank} style={{ backgroundColor: row.color }}>
                   <TableCell component="th" scope="row" align="center" >
-                    <Typography component="div">
-                      <Box  >
                         {row.rank}
-                      </Box>
-                    </Typography>
                   </TableCell>
                   <TableCell align="center">{row.rating}</TableCell>
                   <TableCell align="center">{row.time}</TableCell>
