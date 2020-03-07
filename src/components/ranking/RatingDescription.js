@@ -14,6 +14,36 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+const paperColor = (rated) => {
+  if(rated === "ゴッドイーター"){
+    return "#ffcdd2"
+  } else if(rated === "ゴッド"){
+    return "#f8bbd0"
+  } else if(rated === "グランドマスター"){
+    return "#e1bee7"
+  }else if(rated === "マスター"){
+    return "#d1c4e9"
+  } else if(rated === "ダイヤモンド"){
+    return "#a7ffeb"
+  } else if(rated === "ソロモン"){
+    return "#dcedc8"
+  } else if(rated === "プラチナ"){
+    return "#b3e5fc"
+  } else if(rated === "ゴールド"){
+    return "#fff9c4"
+  } else if(rated === "シルバー"){
+    return "#cfd8dc"
+  } else if(rated === "ブロンズ"){
+    return "#ffe0b2"
+  } else if(rated === "アイアン"){
+    return "#f5f5f5"
+  } else if(rated === "ビギナー"){
+    return "#d7ccc8"
+  } else {
+    return "#d7ccc8"
+  }
+}
+
 const useStyles = makeStyles(theme => ({
     modal: {
       display: 'flex',
@@ -30,22 +60,22 @@ const useStyles = makeStyles(theme => ({
       },
   }));
 
-  function createData(rank, rating, time) {
-    return { rank, rating, time };
+  function createData(rank, rating, time, color ) {
+    return { rank, rating, time, color };
   }
   
   const rows = [
-    createData('ゴッドイーター',"10150", "19.00"),
-    createData('ゴッド',"10000", "20.00"),
-    createData('グランドマスター',"9500", "25.00"),
-    createData('マスター',"9000", "30.00"),
-    createData('ソロモン',"8500", "40.00"),
-    createData('ダイアモンド',"8000", "50.00"),
-    createData('プラチナ',"7000", "1:10.00"),
-    createData('ゴールド',"6000", "1:30.00"),
-    createData('シルバー',"5500", "2:30.00"),
-    createData('ブロンズ',"4000", "5:00.00"),
-    createData('ビギナー',"0", "-"),
+    createData('ゴッドイーター',"10150", "19.00","#ffcdd2"),
+    createData('ゴッド',"10000", "20.00","#f8bbd0"),
+    createData('グランドマスター',"9500", "25.00","#e1bee7"),
+    createData('マスター',"9000", "30.00","#d1c4e9"),
+    createData('ソロモン',"8500", "40.00","#dcedc8"),
+    createData('ダイヤモンド',"8000", "50.00","#a7ffeb"),
+    createData('プラチナ',"7000", "1:10.00","#b3e5fc"),
+    createData('ゴールド',"6000", "1:30.00","#fff9c4"),
+    createData('シルバー',"5500", "2:30.00","#cfd8dc"),
+    createData('ブロンズ',"4000", "5:00.00","#ffe0b2"),
+    createData('ビギナー',"0", "-","#d7ccc8"),
     
   ];
 
@@ -64,13 +94,17 @@ function SimpleTable() {
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow key={row.rank}>
-                <TableCell component="th" scope="row" align="center">
-                  {row.rank}
-                </TableCell>
-                <TableCell align="center">{row.rating}</TableCell>
-                <TableCell align="center">{row.time}</TableCell>
-              </TableRow>
+                <TableRow key={row.rank} style={{ backgroundColor: row.color }}>
+                  <TableCell component="th" scope="row" align="center" >
+                    <Typography component="div">
+                      <Box  >
+                        {row.rank}
+                      </Box>
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center">{row.rating}</TableCell>
+                  <TableCell align="center">{row.time}</TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>
@@ -106,7 +140,7 @@ export default function RatingDescription() {
             }}>
             <Fade in={open}>
                 <div className={classes.paper}>
-                    <Typography component="div">
+                    <Typography component="div" >
                         <Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
                         レートとランクについて
                         </Box>

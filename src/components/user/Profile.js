@@ -38,7 +38,7 @@ const ratedToJapanese = (rated) => {
   }else if(rated === "Master"){
     return "マスター"
   } else if(rated === "Diamond"){
-    return "ダイアモンド"
+    return "ダイヤモンド"
   } else if(rated === "Platinum"){
     return "プラチナ"
   } else if(rated === "Solomon"){
