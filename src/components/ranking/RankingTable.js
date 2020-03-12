@@ -211,7 +211,7 @@ function RankingTable(props) {
       rank: index+1,
       displayName: userSummary.displayName,
       userHandle : userSummary.userHandle,
-      rating: userSummary.rating,
+      rating: Number(userSummary.rating),
       time: userSummary.bestTime1.time,
       imageUrl:userSummary.imageUrl,
       rated: userSummary.rated,
