@@ -30,7 +30,10 @@ const useStyles = makeStyles(theme => ({
     alertText:{
       textAlign:"center",
       color:"grey"
-    }
+    },
+    standard:{
+      textAlign:"center",
+    },
 }));
 
 const  UserChart = (props) => {
@@ -38,11 +41,17 @@ const  UserChart = (props) => {
   const results = props.userData.results;
 
   const classes = useStyles();
+
   const formattedResults = []
+  let timeTotal = 0;
   if( results && (results.length !== 0) ){
     results.forEach(result => {
       if(result.bestTime !== 3600){
-        formattedResults.push(result);
+        timeTotal += result.bestTime;
+        formattedResults.push({
+          bestTime: result.bestTime.toFixed(2),
+          createdAt: result.createdAt
+        });
       }
     })
   }
@@ -51,6 +60,14 @@ const  UserChart = (props) => {
     if (a.createdAt > b.createdAt) return 1;
     return 0;
 });
+
+const average = timeTotal / formattedResults.length;
+let spread = 0 ;
+formattedResults.forEach(result => {
+  spread += ((average - result.bestTime) ** 2)
+})
+const standardDeviation = Math.sqrt(spread/formattedResults.length);
+
   return (
     <React.Fragment>
       { props.userData.totalAttempts-props.userData.totalDnfs === 0 ? (
@@ -66,6 +83,14 @@ const  UserChart = (props) => {
         <Typography>
           ※全てDNFした回はグラフに反映されません
         </Typography>
+        </Box>
+        <Box className={classes.standard}>
+          <Typography>
+            平均：　{average.toFixed(2)}
+          </Typography>
+          <Typography>
+            標準偏差：　{standardDeviation.toFixed(3)}
+          </Typography>
         </Box>
         <ResponsiveContainer>
           <LineChart
