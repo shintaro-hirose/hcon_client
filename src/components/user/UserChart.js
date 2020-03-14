@@ -49,7 +49,7 @@ const  UserChart = (props) => {
       if(result.bestTime !== 3600){
         timeTotal += result.bestTime;
         formattedResults.push({
-          bestTime: result.bestTime.toFixed(2),
+          bestTime: (result.bestTime),
           createdAt: result.createdAt
         });
       }
@@ -84,14 +84,14 @@ const standardDeviation = Math.sqrt(spread/formattedResults.length);
           ※全てDNFした回はグラフに反映されません
         </Typography>
         </Box>
-        <Box className={classes.standard}>
-          <Typography>
-            平均：　{average.toFixed(2)}
-          </Typography>
-          <Typography>
-            標準偏差：　{standardDeviation.toFixed(3)}
-          </Typography>
-        </Box>
+          <Box className={classes.standard}>
+            <Typography>
+              平均：　{average.toFixed(2)}
+            </Typography>
+            <Typography>
+              標準偏差：　{standardDeviation.toFixed(3)}
+            </Typography>
+          </Box>
         <ResponsiveContainer>
           <LineChart
             data={formattedResults}
@@ -104,7 +104,8 @@ const standardDeviation = Math.sqrt(spread/formattedResults.length);
             <XAxis dataKey="createdAt" stroke={theme.palette.text.secondary}
             tickFormatter={(tickItem) => moment(tickItem).format('MM/DD')} 
             />
-            <YAxis stroke={theme.palette.text.secondary} />
+            <YAxis stroke={theme.palette.text.secondary} 
+            />
             <Line name="単発ベスト"
             type="monotone" dataKey="bestTime" stroke={theme.palette.primary.main} activeDot={{ r: 8 }} />
             <CartesianGrid // ガイド線の表示
@@ -112,6 +113,7 @@ const standardDeviation = Math.sqrt(spread/formattedResults.length);
               strokeDasharray="3 3"
             />
             <Tooltip 
+            formatter={value => value.toFixed(2)}
             labelFormatter={(props) => moment(props).format('YYYY/MM/DD')}
             />
             <Legend />
