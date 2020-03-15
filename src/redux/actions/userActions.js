@@ -14,6 +14,7 @@ import {
     UNLOADING_USER,
     CLOSE_ERRORBAR,
     OPEN_ERRORBAR,
+    SET_EXIBITIONS
   } from '../types';
 import axios from 'axios';
   
@@ -80,6 +81,15 @@ import axios from 'axios';
         type: SET_USER_SUMMARIES,
         payload: res.data
       });
+    })
+    .then(() => {
+      axios.get('/getExibitions')
+      .then(res => {
+        dispatch({
+          type: SET_EXIBITIONS,
+          payload: res.data  
+        })
+      })
     })
     .catch(err => console.log(err));
   }

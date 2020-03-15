@@ -10,6 +10,7 @@ import {
     SET_RESULT,
     SET_USER_CREDENTIAL,
     SET_NOTIFICATIONS,
+    SET_EXIBITIONS,
     } from '../types';
   
   const initialState = {
@@ -56,7 +57,8 @@ import {
         third: ""
       },
       results:[]
-    }
+    },
+    exibitions: []
   };
   
   export default function(state = initialState, action) {
@@ -120,12 +122,18 @@ import {
           loading:false,
           authorizedUserCredential: action.payload,
         };
-        case SET_NOTIFICATIONS:
-          return{
-            ...state,
-            loading:false,
-            notifications: action.payload,
-          };
+      case SET_NOTIFICATIONS:
+        return{
+          ...state,
+          loading:false,
+          notifications: action.payload,
+        };
+      case SET_EXIBITIONS:
+      return{
+        ...state,
+        loading:false,
+        exibitions: action.payload,
+      };
 
       default:
             return state;
