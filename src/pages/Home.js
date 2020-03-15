@@ -12,6 +12,7 @@ import Notifications from '../util/Notifications';
 // import Updates from '../util/Updates';
 import Contact from '../util/Contact';
 import Policy from '../util/Policy';
+import ExibitionHome from '../components/exibitions/ExibitionHome'
 
 //redux
 import { connect } from 'react-redux';
@@ -51,6 +52,7 @@ function Home(props){
             </Grid>
             <Grid item sm={8} xs={12} >
               <ContestField />
+              <ExibitionHome />
               <RankingTable />
               <Notifications notifications={notifications}/>
               <Hidden smUp>
@@ -71,6 +73,8 @@ function Home(props){
             </Grid>
             <Grid item sm={8} xs={12} >
               <ContestField />
+              <ExibitionHome />
+
               <RankingTable />
               <Notifications notifications={notifications}/>
               <Hidden smUp>
