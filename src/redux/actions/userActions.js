@@ -14,7 +14,8 @@ import {
     UNLOADING_USER,
     CLOSE_ERRORBAR,
     OPEN_ERRORBAR,
-    SET_EXIBITIONS
+    SET_EXIBITIONS,
+    SET_EXIBITION_SCRAMBLES
   } from '../types';
 import axios from 'axios';
   
@@ -372,4 +373,21 @@ export const finishSignup = () => (dispatch) => {
           payload: err.response.data
         });
       });
+}
+
+export const getExibitionScramble = () => (dispatch) => {
+  dispatch({type: LOADING_UI});
+  axios
+  .get('/getExibitionScramble')
+  .then(res => {
+    dispatch({
+      type: SET_EXIBITION_SCRAMBLES,
+      payload: res.data  
+    })
+  })
+
+}
+
+export const postExibitionResult = () => (dispatch) => {
+  
 }
