@@ -11,6 +11,7 @@ import {
     SET_USER_CREDENTIAL,
     SET_NOTIFICATIONS,
     SET_EXIBITIONS,
+    SET_EXIBITION_SCRAMBLES,
     } from '../types';
   
   const initialState = {
@@ -58,7 +59,8 @@ import {
       },
       results:[]
     },
-    exibitions: []
+    exibitions: {},
+    exibitionScrambles: {}
   };
   
   export default function(state = initialState, action) {
@@ -134,6 +136,12 @@ import {
         loading:false,
         exibitions: action.payload,
       };
+      case SET_EXIBITION_SCRAMBLES:
+        return{
+          ...state,
+          loading: false,
+          exibitionScrambles: action.payload
+        }
 
       default:
             return state;

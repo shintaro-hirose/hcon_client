@@ -259,7 +259,7 @@ function RankingTable(props) {
                       key={row.userHandle}
                       style={{ backgroundColor: getColorByRated(row.rated) }}
                     >
-                      <TableCell align="center" padding="none" >{row.rank}</TableCell>
+                      <TableCell align="center" padding="none" >{index+1}</TableCell>
                       <TableCell component="th" scope="row" padding="none" align="left"  >
                         <Box className={classes.imgBox}>
                           <img src={row.imageUrl} alt="profile" className={classes.profileImage} />

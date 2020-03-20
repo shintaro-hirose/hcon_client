@@ -18,6 +18,9 @@ import Home from './pages/Home';
 import Contest from './pages/Contest';
 import ContestUseTimer from './pages/ContestUseTimer';
 import ContestUseTimerPhone from './pages/ContestUseTimerPhone';
+import ExibitionSubmit from './pages/ExibitionSubmit';
+import ExibitionSubmitUseTimer from './pages/ExibitionSubmitUseTimer';
+import ExibitionSubmitUseTimerPhone from './pages/ExibitionSubmitUseTimerPhone';
 import Results from './pages/Results';
 import Rankings from './pages/Rankings';
 import Login from './pages/Login';
@@ -116,6 +119,9 @@ class App extends Component {
                     <Route exact path="/result/:contestId" component={Results} />
                     <Route exact path="/ranking" component={Rankings} />
                     <UnauthRoute exact path="/contest" component={Contest} />
+                    <UnauthRoute exact path="/exibition/:contestId/:roundId" component={ExibitionSubmit} />
+                    <UnauthRoute exact path="/exibitionUseTimer/:contestId/:roundId" component={ExibitionSubmitUseTimer} />
+                    <UnauthRoute exact path="/exibitionUseTimerPhone/:contestId/:roundId" component={ExibitionSubmitUseTimerPhone} />
                     <UnauthRoute exact path="/contestUseTimer" component={ContestUseTimer} />
                     <UnauthRoute exact path="/contestUseTimerPhone" component={ContestUseTimerPhone} />
                     <UnauthRoute exact path="/settings" component={Settings} />
