@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign:"center",
     padding:0,
     marginBottom:20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
 
   },
   content:{
@@ -80,8 +80,14 @@ function ExibitionHome(props) {
         <Typography className={classes.title}>
           春風杯2020
         </Typography>
+        <Typography className={classes.subTitle} style={{color:'gray', fontSize:'15px'}}>
+          <del>3/21(土) 9:00 ~ 18:00 開催予定</del>
+          
+        </Typography>
         <Typography className={classes.subTitle}>
-          3/21(土) 9:00 ~ 18:00 開催予定
+          <u>3/29(日) 9:00 ~ 18:00 に予定変更しました</u>
+          
+          
         </Typography>
         <Box className={classes.content}>
             <Typography className={classes.text}>
