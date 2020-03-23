@@ -3,12 +3,12 @@
   "name": "Hcon | 3BLD Contest",
   "icons": [
     {
-      "src": "hcon-icon-512.png",
+      "src": "hcon-icon-og-512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "hcon-icon-192.png",
+      "src": "hcon-icon-og-new.png",
       "sizes": "192x192",
       "type": "image/png"
     }
