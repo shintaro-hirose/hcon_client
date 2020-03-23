@@ -60,7 +60,7 @@ const Results = (props) => {
 
     };
 
-    const loading = props.UI.loading;
+    const loading = props.user.loading;
     const contestData = props.user.contestData;
     const errors = props.UI.errors;
 
