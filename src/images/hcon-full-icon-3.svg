@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="528" viewBox="0 0 512 528">
+  <g id="グループ_279" data-name="グループ 279" transform="translate(-4561 -4215)">
+    <rect id="長方形_3" data-name="長方形 3" width="512" height="512" transform="translate(4561 4215)" fill="#fff"/>
+    <g id="グループ_278" data-name="グループ 278" transform="translate(3226 2793.616)">
+      <path id="Path" d="M70.324,80.336h99.395l31.846,123.041H299.8L331.986,80.336h98.477L370.015,414H316.469L299.8,301.8h-98.23L183.064,414h-52.4Z" transform="translate(1342.526 1374)" fill="#383b55" fill-rule="evenodd"/>
+      <path id="パス_2" data-name="パス 2" d="M1583.534,1840.395c-1.385,3.385,15.569,22.668,20.539,27.618s12.268,7.389,24.4-2.738,24.588-28.33,23.709-31.715-22.272,10.159-37.112,15.336S1584.919,1837.01,1583.534,1840.395Z" transform="translate(-24.942 -120.968)" fill="#ee1616"/>
+      <text id="Hcon" transform="translate(1591 1910.384)" fill="#383b55" font-size="159" font-family="Copperplate-Bold, Copperplate" font-weight="700"><tspan x="-212.027" y="0">Hcon</tspan></text>
+    </g>
+  </g>
+</svg>

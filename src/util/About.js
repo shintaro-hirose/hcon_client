@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
-import logo from '../images/hcon-icon.svg';
+import logo from '../images/hcon-full-icon-3.svg';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -17,7 +17,6 @@ const useStyles = makeStyles(theme => ({
       logo: {
           width: "180px",
           height: "180px",
-          marginBottom: "10px",
       }
 }));
 
@@ -31,12 +30,7 @@ export default function About() {
                 src={logo}
                 className={classes.logo}
                 />
-                <Box padding="0 10px">
-                    <Typography variant="h5" color="secondary">
-                        Hcon
-                    </Typography>
-                </Box>
-                <Box marginTop="10px">
+                <Box padding="10px">
                     <Typography variant="body1">
                         3BLD競技者のための大会プラットフォームです。<br />
                         毎日24：00に更新します。
