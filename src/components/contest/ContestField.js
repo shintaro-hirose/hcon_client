@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import TimerIcon from '@material-ui/icons/Timer';
 import CreateIcon from '@material-ui/icons/Create';
@@ -34,7 +35,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign:"center",
     padding:0,
     marginBottom:20,
+    padding: '10px'
   },
+  todaysResultButton:{
+    textAlign: 'center',
+    border: 'solid 2px green',
+    color: 'green',
+    borderRadius: '10px',
+    padding: '10px 30px'
+
+
+  }
 
 }));
 
@@ -84,11 +95,16 @@ function ContestField(props) {
       </Grid>
     </Grid>   
     ) : (
-      <Box textAlign="center" color="#4caf50" >
-          <Typography variant="h5" display="inline" fontWeight="bold">
-            参加済み
-            </Typography>
+      <Box textAlign="center" marginBottom="20px">
+
+      <Tooltip title="今日の暫定結果を確認する" >
+
+      <Box className={classes.todaysResultButton} component={Link} to={`/result/${contestId}`} >
+        参加済み
         </Box>
+        </Tooltip>
+        </Box>
+
     )
      
   ) : (
