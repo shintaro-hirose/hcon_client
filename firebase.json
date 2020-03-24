@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "hcon-3bld",
+    "target": "product",
     "public": "build",
     "ignore": [
       "firebase.json",

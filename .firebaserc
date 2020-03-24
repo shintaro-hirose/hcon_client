@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "hcon-98e1e"
+  },
+  "targets": {
+    "hcon-98e1e": {
+      "hosting": {
+        "product": [
+          "hcon-3bld"
+        ]
+      }
+    }
   }
 }

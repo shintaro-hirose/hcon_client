@@ -2,7 +2,7 @@ import React, {  Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import logo from '../../images/hcon-nav-icon.svg'
+import logo from '../../images/hcon-nav-icon-4.svg'
 import LogoutModal from '../../util/LogoutModal';
 // MUI stuff
 import Box from '@material-ui/core/Box';
