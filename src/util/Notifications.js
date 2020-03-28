@@ -98,7 +98,18 @@ function Notifications(props) {
                         
                         )
                     ): (
+                        item.exibitionId ? (
                         <div>
+                        <Divider />
+                        <ListItem > 
+                            <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src={item.imageUrl}/>
+                            </ListItemAvatar>
+                            <ListItemText primary={`${item.displayName}さんが春風杯2020の${item.roundId}に参加しました`} secondary={moment(item.createdAt).fromNow()}/>
+                        </ListItem>
+                        </div>
+                        ) : (
+                            <div>
                         <Divider />
                         <Tooltip title="ユーザーのページに行く" placement="left">
                         <ListItem button component={Link} to={`/user/${item.userHandle}`}> 
@@ -109,6 +120,8 @@ function Notifications(props) {
                         </ListItem>
                         </Tooltip>
                         </div>
+                        )
+                        
                     )
                 }
 
