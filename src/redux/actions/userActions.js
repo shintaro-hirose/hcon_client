@@ -373,3 +373,23 @@ export const finishSignup = () => (dispatch) => {
         });
       });
 }
+
+export const postExibitionResult = (form, history) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post('/postExibitionResult', form)
+    .then((res) => {
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({
+        type: OPEN_SUCCESSBAR,
+        payload: "コンテスト結果の送信に成功しました"
+      });
+      history.push('/');
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
