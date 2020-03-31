@@ -327,6 +327,10 @@ const handleClose = () => {
                 <Typography className={classes.subTitle}>
           参加済みです。ラウンド終了までお待ちください。
         </Typography>
+        <div align="center">
+        <Button component={Link} to="/exibitionResult/breathOfSpring2020/round1" variant="contained"
+        >第1ラウンドの結果を見る</Button>
+        </div>
                 <Box className={classes.content}>
                     <Typography className={classes.text}>
                         ・3BLD Best of 3、　2ラウンド制
@@ -414,7 +418,10 @@ const handleClose = () => {
                 </div>
             </Fade>
             </Modal>
-
+            <div align="center">
+        <Button component={Link} to="/exibitionResult/breathOfSpring2020/round1" variant="contained"
+        >第1ラウンドの結果を見る</Button>
+        </div>
 
                 <Box className={classes.content}>
                     <Typography className={classes.text}>
@@ -438,6 +445,10 @@ const handleClose = () => {
         <Typography className={classes.subTitle}>
           14:00 ~ 18:00 決勝ラウンド進行中
         </Typography>
+        <div align="center">
+        <Button component={Link} to="/exibitionResult/breathOfSpring2020/round1" variant="contained"
+        >第1ラウンドの結果を見る</Button>
+        </div>
         <Box className={classes.content}>
             <Typography className={classes.text}>
                 ・3BLD Best of 3、　2ラウンド制
@@ -460,6 +471,10 @@ const handleClose = () => {
         <Typography className={classes.subTitle}>
           14:00 ~ 18:00 決勝ラウンド進行中
         </Typography>
+        <div align="center">
+        <Button component={Link} to="/exibitionResult/breathOfSpring2020/round1" variant="contained"
+        >第1ラウンドの結果を見る</Button>
+        </div>
         <Box className={classes.content}>
             <Typography className={classes.text}>
                 ・3BLD Best of 3、　2ラウンド制
@@ -481,7 +496,7 @@ const handleClose = () => {
             <div>
 
         <Typography className={classes.subTitle}>
-          2020/03/21 9:00 ~ 18:00 終了しました
+          2020/03/29 9:00 ~ 18:00 終了しました
         </Typography>
         <Box align="center" marginBottom="20px">
         <Button component={Link} to="/exibitionAllResults/breathOfSpring2020" variant="contained" color="primary"

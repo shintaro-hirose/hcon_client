@@ -12,6 +12,7 @@ import UserChart from '../components/user/UserChart';
 import UserProfile from '../components/user/UserProfile';
 import UserStats from '../components/user/UserStats';
 import UserHistory from '../components/user/UserHistory';
+import UserExibitionBadge from '../components/user/UserExibitionBadge';
 import Loading from '../util/Loading';
 
 import { connect } from 'react-redux';
@@ -47,10 +48,13 @@ const  User = (props) => {
       ) : (
         <Grid container spacing={1}>
             <Grid item xs={12} sm={4}>
+              <div>
               {props.user.authenticated ? ( 
                 userHandle === props.user.authorizedUserSummary.userHandle ? ( <Profile /> ) : ( <UserProfile userData={userData}/>)
                ) : ( <UserProfile userData={userData}/>)
               }
+              <UserExibitionBadge userData={userData}/>
+              </div>
                 
             </Grid>
             <Grid item xs={12} sm={8}>
