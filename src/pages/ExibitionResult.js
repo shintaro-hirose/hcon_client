@@ -40,6 +40,15 @@ const ExibitionResult = (props) => {
     const roundId = props.match.params.roundId;
     const [loading, setLoading] = useState(true);
     const [contestData,setContestData] = useState({});
+    let situation = "";
+
+    if(props.user.exibitions.breathOfSpring2020){
+      situation = props.user.exibitions.breathOfSpring2020.situation;
+    }
+
+    if (situation === roundId){
+        window.location.href = '/';
+    }
 
     useEffect(() => {
         axios

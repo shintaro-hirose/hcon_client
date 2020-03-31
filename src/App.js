@@ -25,6 +25,7 @@ import ExibitionUseTimerPhone from './pages/ExibitionUseTimerPhone';
 import ExibitionAllResults from './pages/ExibitionAllResults'
 
 import Results from './pages/Results';
+import ResultMap from './pages/ResultMap';
 import Rankings from './pages/Rankings';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -119,6 +120,7 @@ class App extends Component {
                     <AuthRoute exact path="/login" component={Login} />
                     <AuthRoute exact path="/signup" component={SignUp} />
                     <AuthRoute exact path="/sendEmailForPassword" component={SendEmailForPassword} />
+                    <Route exact path="/resultMap" component={ResultMap} />
                     <Route exact path="/result/:contestId" component={Results} />
                     <Route exact path="/ranking" component={Rankings} />
                     <UnauthRoute exact path="/contest" component={Contest} />

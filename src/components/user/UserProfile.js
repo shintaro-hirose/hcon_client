@@ -90,6 +90,14 @@ function UserProfile(props) {
       backgroundColor: paperColor(userData.rated)
       
     },
+    logo:{
+      width: "100px",
+      height: "47px",
+    },
+    fontLogo:{
+      width: "50px",
+      height: "24px",
+    },
     rankIcon:{
       width:30,
       height:30,
@@ -192,6 +200,7 @@ function UserProfile(props) {
           </Box>
 
         </Paper>
+        
     </Fragment>
   )
 }

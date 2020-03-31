@@ -12,16 +12,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-
-const now = new Date();
-now.setDate(now.getDate() -1);
-let year = String(now.getFullYear());
-let month = String(now.getMonth() + 1) ;
-let date = String(now.getDate());
-month = ('0'+ month).slice(-2);
-date = ('0'+ date).slice(-2);
-const contestId = year+month+date;
-
 const drawerWidth = 180;
 const useStyles = makeStyles(theme => ({
   root: {
@@ -119,8 +109,8 @@ function Navbar(props) {
               color={selected === "results" ? "secondary" : "inherit"} 
               onClick={handleSelected1}
               component={Link} 
-              to={`/result/${contestId}`}>
-                昨日の結果
+              to={`/resultMap`}>
+                過去の大会
               </Button>
               <Button 
               color={selected === "ranking" ? "secondary" : "inherit"} 
@@ -162,8 +152,8 @@ function Navbar(props) {
               <Button
               color={selected === "results" ? "secondary" : "inherit"} 
               onClick={handleSelected1}
-              component={Link} to={`/result/${contestId}`} >
-                昨日の結果
+              component={Link} to={`/resultMap`} >
+                過去の大会
               </Button>
               <Button
               color={selected === "ranking" ? "secondary" : "inherit"} 

@@ -48,7 +48,7 @@ const SignedInBottomNavBar = (props) => {
             >
         
                 <BottomNavigationAction className={classes.button} component={Link} value="/" to="/" label="" icon={<HomeIcon />} />
-                <BottomNavigationAction className={classes.button} component={Link} value={`/result/${contestId}`} to={`/result/${contestId}`} label="" icon={<DescriptionIcon />} />
+                <BottomNavigationAction className={classes.button} component={Link} value={`/resultMap`} to={`/resultMap`} label="" icon={<DescriptionIcon />} />
                 <BottomNavigationAction className={classes.button} component={Link} value="/ranking" to="/ranking" label="" icon={<FormatListNumberedIcon />} />
                 <BottomNavigationAction className={classes.button} component={Link} value={`/user/${user}`} to={`/user/${user}`} label="" icon={<AccountCircleIcon />} />
                 <BottomNavigationAction className={classes.button} component={Link} value="/settings" to="/settings" label="" icon={<SettingsIcon />} />
