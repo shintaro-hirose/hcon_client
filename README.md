@@ -1,12 +1,19 @@
 ## Hcon | 3BLD Contest
 
-![hcon-icon192](https://user-images.githubusercontent.com/48212107/75612236-13c93780-5b65-11ea-95c8-9d864f92612d.png)
+目隠しルービックキューブの競技者のための大会サイト
 
-Hconは3x3x3キューブ目隠し競技者のための大会プラットフォームです。毎日0時に更新し、3試技の単発ベストタイムで順位がつきます。
+ <img width="192" alt="hcon logo" src="https://user-images.githubusercontent.com/48212107/80457756-c7368880-896a-11ea-950c-1e7758b8ccbf.png">
+
+提供するもの
+
+- 毎日1回、3試技の模擬大会を体験できる
+- 試技のタイムの蓄積
+- 試技の失敗原因の蓄積
+- タイムの推移グラフ
 
 ## App Demo URL
 
-### **https://hcon-98e1e.web.app/**  
+### **https://hcon-3bld.web.app/**  
 
 ## 機能
 
@@ -39,10 +46,7 @@ Hconは3x3x3キューブ目隠し競技者のための大会プラットフォ�
  - ユーザアクティビティのリアルタイム表示
  <img width="500" alt="スクリーンショット 2020-03-01 2 52 38" src="https://user-images.githubusercontent.com/48212107/75612647-e54d5b80-5b68-11ea-9363-f41979345d0d.png">
  
- ***
 
- - レスポンシブデザイン
- <img width="400" alt="スクリーンショット 2020-03-01 2 54 03" src="https://user-images.githubusercontent.com/48212107/75612652-ee3e2d00-5b68-11ea-872a-9c93b1c30f7b.png">
 
 ## 使用した技術
 
