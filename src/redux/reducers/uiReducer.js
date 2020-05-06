@@ -6,7 +6,9 @@ import {
     OPEN_SUCCESSBAR,
     CLOSE_SUCCESSBAR,
     OPEN_ERRORBAR,
-    CLOSE_ERRORBAR
+    CLOSE_ERRORBAR,
+    OPEN_TWEET_MODAL,
+    CLOSE_TWEET_MODAL,
   } from '../types';
   
   const initialState = {
@@ -16,6 +18,7 @@ import {
     errors: {},
     openErrorbar: false,
     errorbarMessage:"",
+    openTweetModal: false,
   };
   
   export default function(state = initialState, action) {
@@ -70,6 +73,16 @@ import {
             errorbarMessage: "",
             openErrorbar: false,
         };
+      case OPEN_TWEET_MODAL:
+        return {
+          ...state,
+          openTweetModal: true,
+        }
+      case CLOSE_TWEET_MODAL:
+        return {
+          ...state,
+          openTweetModal: false,
+        }
       default:
         return state;
     }
