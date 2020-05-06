@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import PropTypes from 'prop-types';
-
+//components
 import Profile from '../components/user/Profile';
 import ContestField from '../components/contest/ContestField';
 import RankingTable from '../components/ranking/RankingTable';
 import Loading from '../util/Loading';
 import About from '../util/About';
 import Notifications from '../util/Notifications';
+import TweetModal from '../util/TweetModal';
 // import Updates from '../util/Updates';
 import Contact from '../util/Contact';
 import Policy from '../util/Policy';
@@ -17,6 +18,8 @@ import Policy from '../util/Policy';
 //redux
 import { connect } from 'react-redux';
 import { getAllUserSummary, getAuthenticatedUserSummary } from '../redux/actions/userActions';
+import { closeTweetModal } from '../redux/actions/uiActions';
+
 //firestore
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
@@ -90,6 +93,11 @@ function Home(props){
   return (
         <React.Fragment>
           {profileMarkup}
+          <TweetModal
+          contestId={props.user.contest.contestId}
+          modalOpen={props.UI.openTweetModal}
+          modalClose={props.closeTweetModal}
+          />
         </React.Fragment>
         );
 }
@@ -97,14 +105,17 @@ function Home(props){
 Home.propTypes = {
   getAllUserSummary: PropTypes.func.isRequired,
   getAuthenticatedUserSummary: PropTypes.func.isRequired,
+  closeTweetModal: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  UI: state.UI,
 });
 
 export default connect(
     mapStateToProps,
-  { getAllUserSummary, getAuthenticatedUserSummary }
+  { getAllUserSummary, getAuthenticatedUserSummary, closeTweetModal }
   )(Home);

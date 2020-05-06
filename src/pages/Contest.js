@@ -544,7 +544,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
   postContestResult,
-  getContest
+  getContest,
 };
 
 export default connect(

@@ -14,7 +14,8 @@ import {
     UNLOADING_USER,
     CLOSE_ERRORBAR,
     OPEN_ERRORBAR,
-    SET_EXIBITIONS
+    SET_EXIBITIONS,
+    OPEN_TWEET_MODAL
   } from '../types';
 import axios from 'axios';
   
@@ -192,6 +193,7 @@ import axios from 'axios';
           type: OPEN_SUCCESSBAR,
           payload: "コンテスト結果の送信に成功しました"
         });
+        dispatch({type: OPEN_TWEET_MODAL});
         history.push('/');
       })
       .catch((err) => {
