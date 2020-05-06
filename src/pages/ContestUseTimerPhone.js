@@ -117,7 +117,7 @@ function ContestUseTimerPhone(props) {
 
   const loading = props.user.loading; 
   const errors = props.UI.errors;
-  const uiLoading = props.UI.uiLoading;
+  const uiLoading = props.UI.loading;
   const contestId = props.user.contest.contestId;
   const imageUrl = props.user.authorizedUserSummary.imageUrl;
   const displayName = props.user.authorizedUserSummary.displayName;
