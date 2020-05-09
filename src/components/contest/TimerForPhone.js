@@ -1,11 +1,24 @@
 import React, {useState} from 'react';
-
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    check: {
+        height: "75px",
+        width: "600px",
+        textAlign:"center",
+        margin: "0 auto",
+        fontSize: 30,
+    },
+  }));
 
 
 const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituationPar}) => {
+    const classes = useStyles();
     const [attemptStartTime, setAttemptStartTime] = useState(0);
+    const [showCheck, setShowCheck] = useState(false);
     const [solveTime, setSolveTime] = useState(0);
     const [situation, setSituation] = useState(0);
     const [timeSituation, setTimeSituation] = useState("neutral");
@@ -28,6 +41,7 @@ const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituati
     let hs
 
     const handleOnTouchStart = (e) => {
+        if(showCheck) return;
         if(situation >= 3) return;
         if (timeSituation==="neutral"){
             hs = hsStart;
@@ -53,6 +67,7 @@ const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituati
             setSituationPar(d+1)
             setAttemptStartTime(0);
             setSolveTime(result);
+            setShowCheck(true);
             if (d === 0) return setFirstInput(timeFormatter(result));
             if (d === 1) return setSecondInput(timeFormatter(result));
             if (d === 2) return setThirdInput(timeFormatter(result));
@@ -62,6 +77,7 @@ const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituati
     };
 
     const handleOnTouchEnd = (e) => {
+        if(showCheck) return;
         clearInterval(timer);
         if(situation >= 3) return;
         if((timeSituation === "touching") && (canStartTrigger)){
@@ -75,6 +91,9 @@ const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituati
             setCanStartTrigger(false);
         } 
     }
+    const handleCheckClick = () => {
+        setShowCheck(false);
+    }
 
     return (
       <div onTouchStart={handleOnTouchStart} onTouchEnd={handleOnTouchEnd}>
@@ -85,9 +104,19 @@ const TimerForPhone = ({setFirstInput, setSecondInput, setThirdInput, setSituati
                    {timeFormatter(solveTime)}
                   </Box>
                   { situation !== 3 ? (
-                      <Box　fontSize="h5.fontSize">
-                      画面長押しでスタート
-                  </Box>
+                      showCheck ? (
+                        <Box className={classes.check} 
+                        component={Button} 
+                        variant="contained"
+                        onClick={handleCheckClick}>
+                            次の試技に進む
+                        </Box>
+                      ) : (
+                        <Box　fontSize="h5.fontSize">
+                            画面長押しでスタートwet
+                        </Box>
+                      )
+                      
                   ) : (<p></p>)}
                   
               </Typography>
