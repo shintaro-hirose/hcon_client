@@ -15,8 +15,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
-import Loading from '../util/Loading';
-
 import { connect } from 'react-redux';
 import { postContestResult, getContest } from '../redux/actions/userActions';
 
@@ -61,7 +59,13 @@ const useStyles = makeStyles(theme => ({
   },
   cantSelect:{
     userSelect: "none",
-  }
+  },
+  check: {
+    width: "90%",
+    textAlign:"center",
+    margin: "0 auto",
+    fontSize: 30,
+  },
 }));
 
 
@@ -179,7 +183,8 @@ function ContestUseTimerPhone(props) {
     return (window.navigator.userAgent.search(regexp) !== -1);
   }
 
-  const [attemptStartTime, setAttemptStartTime] = useState(0);
+    const [attemptStartTime, setAttemptStartTime] = useState(0);
+    const [showCheck, setShowCheck] = useState(false);
     const [solveTime, setSolveTime] = useState(0);
     const [timeSituation, setTimeSituation] = useState("neutral");
     const [canStartTrigger, setCanStartTrigger] = useState(false);
@@ -201,6 +206,7 @@ function ContestUseTimerPhone(props) {
     let hs
 
   const handleOnTouchStart = (e) => {
+    if(showCheck) return;
     if(situation >= 3) return;
     if (timeSituation==="neutral"){
         hs = hsStart;
@@ -225,6 +231,7 @@ function ContestUseTimerPhone(props) {
         setSituationPar(d+1)
         setAttemptStartTime(0);
         setSolveTime(result);
+        setShowCheck(true);
         if (d === 0) return setFirstInput(timeFormatter(result));
         if (d === 1) return setSecondInput(timeFormatter(result));
         if (d === 2) return setThirdInput(timeFormatter(result));
@@ -234,6 +241,7 @@ function ContestUseTimerPhone(props) {
 };
 
 const handleOnTouchEnd = (e) => {
+    if(showCheck) return;
     clearInterval(timer);
     if(situation >= 3) return;
     if((timeSituation === "touching") && (canStartTrigger)){
@@ -246,6 +254,9 @@ const handleOnTouchEnd = (e) => {
         setTimeSituation("neutral");
         setCanStartTrigger(false);
     } 
+}
+const handleCheckClick = () => {
+  setShowCheck(false);
 }
 
   return (
@@ -303,10 +314,20 @@ const handleOnTouchEnd = (e) => {
                  {timeFormatter(solveTime)}
                 </Box>
                 { situation !== 3 ? (
-                    <Box　fontSize="h5.fontSize" >
-                    画面長押しでスタート
-                </Box>
-                ) : (<p></p>)}
+                      showCheck ? (
+                        <Box className={classes.check} 
+                        component={Button} 
+                        variant="contained"
+                        onClick={handleCheckClick}>
+                            次の試技に進む
+                        </Box>
+                      ) : (
+                        <Box　fontSize="h5.fontSize">
+                            画面長押しでスタート
+                        </Box>
+                      )
+                      
+                  ) : (<p></p>)}
                 
             </Typography>
             
