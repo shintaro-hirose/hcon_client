@@ -35,9 +35,10 @@ function Home(props){
   ])
   const notifications = useSelector(state => state.firestore.ordered.notifications)
   function f() {
+    if(authenticated) props.getAuthenticatedUserSummary();
     if(props.user.userSummaries.length != 0) return;
     props.getAllUserSummary();
-    if(authenticated) props.getAuthenticatedUserSummary();
+    
   }
   useEffect(() => {
     f();
