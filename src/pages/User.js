@@ -59,9 +59,15 @@ const  User = (props) => {
                ) : ( <UserProfile userData={userData}/>)
               }
               <UserExibitionBadge userData={userData}/>
-              <Box textAlign="center" className={classes.csv_export_box}>
-                <CSVExportButton userData={userData}/>
-              </Box>
+              {props.user.authenticated ? ( 
+                userHandle === props.user.authorizedUserSummary.userHandle ? ( 
+                  <Box textAlign="center" className={classes.csv_export_box}>
+                    <CSVExportButton userData={userData}/>
+                  </Box>
+                 ) : ( <p></p>)
+               ) : ( <p></p>)
+              }
+              
               </div>
                 
             </Grid>
