@@ -10,7 +10,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
 
-
 import moment from 'moment';
 import 'moment/locale/ja';
 

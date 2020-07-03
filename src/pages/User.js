@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
 
 import Profile from '../components/user/Profile';
 import UserBestTable from '../components/user/UserBestTable';
@@ -17,6 +18,7 @@ import Loading from '../util/Loading';
 
 import { connect } from 'react-redux';
 import { getUserResults } from '../redux/actions/userActions';
+import CSVExportButton from '../components/user/CSVExportButton';
 
 const useStyles = makeStyles(theme => ({
   tab: {
@@ -24,6 +26,9 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "10px"
 
   },
+  csv_export_box:{
+    marginBottom: '10px',
+  }
 }));
 
 const  User = (props) => {
@@ -54,6 +59,9 @@ const  User = (props) => {
                ) : ( <UserProfile userData={userData}/>)
               }
               <UserExibitionBadge userData={userData}/>
+              <Box textAlign="center" className={classes.csv_export_box}>
+                <CSVExportButton userData={userData}/>
+              </Box>
               </div>
                 
             </Grid>
