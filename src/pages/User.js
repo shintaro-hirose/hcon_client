@@ -26,7 +26,10 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "10px"
 
   },
-  csv_export_box:{
+  marginBox:{
+    marginBottom: '15px',
+  },
+  csvExportBox:{
     marginBottom: '10px',
   }
 }));
@@ -58,16 +61,17 @@ const  User = (props) => {
                 userHandle === props.user.authorizedUserSummary.userHandle ? ( <Profile /> ) : ( <UserProfile userData={userData}/>)
                ) : ( <UserProfile userData={userData}/>)
               }
-              <UserExibitionBadge userData={userData}/>
+              <Box className={classes.marginBox}>
+                <UserExibitionBadge userData={userData}/>
+              </Box>
               {props.user.authenticated ? ( 
                 userHandle === props.user.authorizedUserSummary.userHandle ? ( 
-                  <Box textAlign="center" className={classes.csv_export_box}>
+                  <Box textAlign="center" className={classes.csvExportBox}>
                     <CSVExportButton userData={userData}/>
                   </Box>
                  ) : ( <p></p>)
                ) : ( <p></p>)
-              }
-              
+              }            
               </div>
                 
             </Grid>

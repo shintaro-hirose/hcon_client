@@ -33,12 +33,12 @@
 ***
 
 
- - 過去の大会参加記録のグラフ表示
+ - 過去の試技の失敗原因の表示
  <img width="500" alt="スクリーンショット 2020-03-01 2 50 26" src="https://user-images.githubusercontent.com/48212107/75612638-d797d600-5b68-11ea-92e3-8869bc7eea25.png">
 
  ***
 
- - 過去の試技の失敗原因の表示
+ - 過去の大会参加記録のグラフ表示
 <img width="500" alt="スクリーンショット 2020-03-01 2 50 43" src="https://user-images.githubusercontent.com/48212107/75612643-df577a80-5b68-11ea-80d4-7d81a30470c4.png">
 
 ***
@@ -60,6 +60,10 @@
   <a href="https://firebase.google.com/docs/firestore?"><img src="https://user-images.githubusercontent.com/48212107/75612846-c4860580-5b6a-11ea-90ef-4ba769ef9715.png" height="90px;" /></a>
   <a href="https://nodejs.org/ja/"><img src="https://user-images.githubusercontent.com/48212107/75612911-437b3e00-5b6b-11ea-8c56-719c0d1cb5af.png" height="90px;" /></a>
 </p>
+
+## フロー
+
+ <img width="900" alt="hcon logo" src="https://user-images.githubusercontent.com/48212107/86787496-1ce08d00-c0a0-11ea-804e-e1bae2199ba9.png">
 
 ## ライセンス
 
