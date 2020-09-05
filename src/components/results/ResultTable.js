@@ -34,7 +34,10 @@ const useStyles = makeStyles(theme =>({
         marginLeft: "25%"
       },
       display: "inline"
-    }
+    },
+  tableButton:{
+    textTransform: 'none',
+  }
 }));
 
 export default function ResultTable(props) {
@@ -63,7 +66,7 @@ export default function ResultTable(props) {
                 <Box className={classes.imgBox}>
                 <img src={row.imageUrl} alt="profile" className={classes.profileImage} />
                 </Box>
-                <Button  color="inherit" component={Link} to={`/user/${row.userHandle}`}>
+                <Button  color="inherit" component={Link} to={`/user/${row.userHandle}`} className={classes.tableButton}>
                   {row.displayName}
                 </Button>
               </TableCell>

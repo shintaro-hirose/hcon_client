@@ -199,6 +199,9 @@ const useStyles = makeStyles(theme => ({
       marginLeft: "30%"
     },
     display: "inline"
+  },
+  tableButton:{
+    textTransform: 'none',
   }
 }));
 
@@ -264,7 +267,7 @@ function RankingTable(props) {
                         <Box className={classes.imgBox}>
                           <img src={row.imageUrl} alt="profile" className={classes.profileImage} />
                           </Box>
-                        <Button  color="primary" component={Link} to={`/user/${row.userHandle}`}>
+                        <Button  color="primary" component={Link} to={`/user/${row.userHandle}`} className={classes.tableButton}>
                          {row.displayName}
                         </Button>
                       </TableCell>
