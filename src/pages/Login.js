@@ -1,54 +1,56 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { connect } from 'react-redux';
-import { loginUser } from '../redux/actions/userActions';
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-    textAlign: 'center',
+    textAlign: "center",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    position: 'relative',
+    position: "relative",
   },
   progress: {
-    position: 'absolute'
+    position: "absolute",
   },
 }));
 
 function Login(props) {
   const classes = useStyles();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const { UI:{loading, errors} } = props;
+  const {
+    UI: { loading, errors },
+  } = props;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.loginUser({email, password}, props.history);
+    props.loginUser({ email, password }, props.history);
   };
   const handleChange1 = (event) => {
     setEmail(event.target.value);
@@ -94,13 +96,13 @@ function Login(props) {
             helperText={errors.password}
             error={errors.password ? true : false}
             onChange={handleChange2}
-            value={password}            
+            value={password}
           />
           {errors.general && (
-              <Typography variant="body2" color="error">
-                {errors.general}
-              </Typography>
-            )}
+            <Typography variant="body2" color="error">
+              {errors.general}
+            </Typography>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -111,14 +113,19 @@ function Login(props) {
           >
             ログイン
             {loading && (
-                <CircularProgress size={30} className={classes.progress}/>
-              )}
+              <CircularProgress size={30} className={classes.progress} />
+            )}
           </Button>
         </form>
         <Box marginTop="10px">
-        <Typography variant="body2" component={Link} to="/sendEmailForPassword" color="primary">
-          パスワードを忘れましたか？
-        </Typography>
+          <Typography
+            variant="body2"
+            component={Link}
+            to="/sendEmailForPassword"
+            color="primary"
+          >
+            パスワードを忘れましたか？
+          </Typography>
         </Box>
       </div>
     </Container>
@@ -126,21 +133,18 @@ function Login(props) {
 }
 
 Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired
-  };
-  
-  const mapStateToProps = (state) => ({
-    user: state.user,
-    UI: state.UI
-  });
-  
-  const mapActionsToProps = {
-    loginUser,
-  };
-  
-  export default connect(
-    mapStateToProps,
-    mapActionsToProps
-  )(Login);
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionsToProps = {
+  loginUser,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Login);

@@ -1,96 +1,97 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Box from '@material-ui/core/Box';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Box from "@material-ui/core/Box";
 
-import { connect } from 'react-redux';
-import { signupUser } from '../redux/actions/userActions';
+import { connect } from "react-redux";
+import { signupUser } from "../redux/actions/userActions";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-    alignItems: 'center',
+    alignItems: "center",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    position: 'relateve',
+    position: "relateve",
   },
-  progress:{
-    position: 'absolute',
+  progress: {
+    position: "absolute",
   },
   formControl: {
     margin: theme.spacing(3),
   },
-  box1 :{
+  box1: {
     marginRight: "20px",
     color: "#1111cc",
-    display:"inline",
-
-  }
+    display: "inline",
+  },
 }));
 
 function SignUp(props) {
   const classes = useStyles();
   const [contact, setContact] = useState({
     terms: false,
-    privactPolicy: false
+    privactPolicy: false,
   });
   const [form, setForm] = useState({
-    handle:"",
+    handle: "",
     displayName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const { UI:{loading, errors} } = props;
+  const {
+    UI: { loading, errors },
+  } = props;
 
   const handleChange = (event) => {
     setForm({
       ...form,
-      [event.target.name] : event.target.value
-    })
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     props.signupUser(form, props.history);
   };
-  
+
   const handleCheck1 = () => {
     setContact({
       ...contact,
-      terms: !contact.terms
-    })
-  }
+      terms: !contact.terms,
+    });
+  };
 
   const handleCheck2 = () => {
     setContact({
       ...contact,
-      privactPolicy: !contact.privactPolicy
-    })
-  }
+      privactPolicy: !contact.privactPolicy,
+    });
+  };
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -101,7 +102,7 @@ function SignUp(props) {
           登録
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-        <TextField
+          <TextField
             variant="outlined"
             margin="normal"
             required
@@ -110,10 +111,14 @@ function SignUp(props) {
             label="ユーザID"
             id="handle"
             autoFocus
-            helperText={errors.handle ? errors.handle : "英数字6文字以上12文字以下(変更できません)"}
+            helperText={
+              errors.handle
+                ? errors.handle
+                : "英数字6文字以上12文字以下(変更できません)"
+            }
             error={errors.handle ? true : false}
             onChange={handleChange}
-            value={form.handle}            
+            value={form.handle}
           />
           <TextField
             variant="outlined"
@@ -123,10 +128,14 @@ function SignUp(props) {
             name="displayName"
             label="表示名"
             id="displayName"
-            helperText={errors.displayName ? errors.displayName : "16文字以下(全体に表示されます)"}
+            helperText={
+              errors.displayName
+                ? errors.displayName
+                : "16文字以下(全体に表示されます)"
+            }
             error={errors.displayName ? true : false}
             onChange={handleChange}
-            value={form.displayName}            
+            value={form.displayName}
           />
           <TextField
             variant="outlined"
@@ -153,7 +162,7 @@ function SignUp(props) {
             helperText={errors.password}
             error={errors.password ? true : false}
             onChange={handleChange}
-            value={form.password}            
+            value={form.password}
           />
           <TextField
             variant="outlined"
@@ -167,39 +176,47 @@ function SignUp(props) {
             helperText={errors.confirmPassword}
             error={errors.confirmPassword ? true : false}
             onChange={handleChange}
-            value={form.confirmPassword}            
+            value={form.confirmPassword}
           />
-          
+
           {errors.general && (
-              <Typography variant="body2">
-                {errors.general}
-              </Typography>
-            )}
-            <Box textAlign="center" marginTop="20px">
+            <Typography variant="body2">{errors.general}</Typography>
+          )}
+          <Box textAlign="center" marginTop="20px">
             <Typography component="div" textAlign="center">
-              <a href="/terms" target="_blank" rel="noopener noreferrer" className={classes.box1}>
-              利用規約
+              <a
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.box1}
+              >
+                利用規約
               </a>
-              <a href="/privacyPolicy" target="_blank" rel="noopener noreferrer" className={classes.box1}>
-              プライバシーポリシー
+              <a
+                href="/privacyPolicy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.box1}
+              >
+                プライバシーポリシー
               </a>
             </Typography>
-            </Box>
+          </Box>
           <FormControl component="fieldset" className={classes.formControl}>
-          <FormGroup aria-label="position" >
-            <FormControlLabel
-              value="top"
-              control={<Checkbox color="primary" onChange={handleCheck1}/>}
-              label="利用規約に同意"
-              labelPlacement="end"
-            />
-            <FormControlLabel
-              value="start"
-              control={<Checkbox color="primary" onChange={handleCheck2}/>}
-              label="プライバシーポリシーに同意"
-              labelPlacement="end"
-            />
-          </FormGroup>
+            <FormGroup aria-label="position">
+              <FormControlLabel
+                value="top"
+                control={<Checkbox color="primary" onChange={handleCheck1} />}
+                label="利用規約に同意"
+                labelPlacement="end"
+              />
+              <FormControlLabel
+                value="start"
+                control={<Checkbox color="primary" onChange={handleCheck2} />}
+                label="プライバシーポリシーに同意"
+                labelPlacement="end"
+              />
+            </FormGroup>
           </FormControl>
           <Button
             type="submit"
@@ -207,12 +224,12 @@ function SignUp(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={loading || (!(contact.terms && contact.privactPolicy))}
+            disabled={loading || !(contact.terms && contact.privactPolicy)}
           >
             登録
             {loading && (
-                <CircularProgress size={30} className={classes.progress}/>
-              )}
+              <CircularProgress size={30} className={classes.progress} />
+            )}
           </Button>
         </form>
       </div>
@@ -221,21 +238,18 @@ function SignUp(props) {
 }
 
 SignUp.propTypes = {
-    signupUser: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired
-  };
-  
-  const mapStateToProps = (state) => ({
-    user: state.user,
-    UI: state.UI
-  });
-  
-  const mapActionsToProps = {
-    signupUser
-  };
-  
-  export default connect(
-    mapStateToProps,
-    mapActionsToProps
-  )(SignUp);
+  signupUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionsToProps = {
+  signupUser,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(SignUp);
