@@ -12,7 +12,7 @@ export default {
       dark: "#a02725",
       contrastText: "#fff",
     },
-    type: "dark",
+    type: "light",
   },
   typography: {
     useNextVariants: true,

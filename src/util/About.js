@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   logo: {
+    color: theme.palette.primary,
     width: "180px",
     height: "180px",
   },

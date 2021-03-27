@@ -129,6 +129,7 @@ const UserChart = (props) => {
                 <Tooltip
                   formatter={(value) => value.toFixed(2)}
                   labelFormatter={(props) => moment(props).format("YYYY/MM/DD")}
+                  contentStyle={{ color: "black" }}
                 />
                 <Legend />
               </LineChart>

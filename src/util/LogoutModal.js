@@ -7,28 +7,13 @@ import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/userActions";
 // MUI Stuff
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 // Icons
 
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    margin: "10px auto 10px auto",
-  },
-  button: {
-    float: "right",
-  },
-  progress: {
-    position: "absolute",
-  },
-}));
-
 function LogoutModal(props) {
-  const classes = useStyles();
-
   const handleClose = () => {
     props.setOpen(false);
   };

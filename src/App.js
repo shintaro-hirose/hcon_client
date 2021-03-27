@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import themeObject from "./util/theme";
 //Redux
-import { Provider } from "react-redux";
-import { SET_AUTHENTICATED } from "./redux/types";
+import { Provider, useSelector } from "react-redux";
+import { SET_AUTHENTICATED, TOGGLE_DARK_MODE } from "./redux/types";
 import {
   getAuthenticatedUserSummary,
   logoutUser,
@@ -50,8 +50,7 @@ import "firebase/firestore"; // <- needed if using firestore
 import store from "./redux/store";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
-
-const theme = createMuiTheme(themeObject);
+import { toggleDarkMode } from "./redux/actions/uiActions";
 
 axios.defaults.baseURL =
   "https://asia-northeast1-hcon-98e1e.cloudfunctions.net/api";
@@ -69,6 +68,10 @@ if (token) {
   }
 }
 
+// darkmodeの処理
+if (localStorage.getItem("hcon_darkmode")) {
+  store.dispatch({ type: TOGGLE_DARK_MODE });
+}
 const fbConfig = {
   apiKey: "AIzaSyCOsBhiS-gUvJ--rtKeY6eljedeixSS5FI",
   authDomain: "hcon-98e1e.firebaseapp.com",
@@ -101,84 +104,100 @@ const rrfProps = {
   createFirestoreInstance, // <- needed if using firestore
 };
 
-class App extends Component {
-  render() {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Provider store={store}>
-          <ReactReduxFirebaseProvider {...rrfProps}>
-            <Router>
-              <Navbar />
-              <SuccessBar />
-              <ErrorBar />
-              <div className="container">
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/user/:userId" component={User} />
-                  <AuthRoute exact path="/login" component={Login} />
-                  <AuthRoute exact path="/signup" component={SignUp} />
-                  <AuthRoute
-                    exact
-                    path="/sendEmailForPassword"
-                    component={SendEmailForPassword}
-                  />
-                  <Route exact path="/resultMap" component={ResultMap} />
-                  <Route exact path="/result/:contestId" component={Results} />
-                  <Route exact path="/ranking" component={Rankings} />
-                  <UnauthRoute exact path="/contest" component={Contest} />
-                  <UnauthRoute
-                    exact
-                    path="/contestUseTimer"
-                    component={ContestUseTimer}
-                  />
-                  <UnauthRoute
-                    exact
-                    path="/contestUseTimerPhone"
-                    component={ContestUseTimerPhone}
-                  />
+function App() {
+  const darkmode = useSelector((state) => state.UI.darkmode);
 
-                  <UnauthRoute
-                    exact
-                    path="/exibition/:contestId/:roundId"
-                    component={Exibition}
-                  />
-                  <UnauthRoute
-                    exact
-                    path="/exibitionUseTimer/:contestId/:roundId"
-                    component={ExibitionUseTimer}
-                  />
-                  <UnauthRoute
-                    exact
-                    path="/exibitionUseTimerPhone/:contestId/:roundId"
-                    component={ExibitionUseTimerPhone}
-                  />
-                  <Route
-                    exact
-                    path="/exibitionResult/:contestId/:roundId"
-                    component={ExibitionResult}
-                  />
-                  <Route
-                    exact
-                    path="/exibitionAllResults/:contestId"
-                    component={ExibitionAllResults}
-                  />
+  const themeObject = {
+    palette: {
+      primary: {
+        light: "#5f6277",
+        main: darkmode ? "#e53935" : "#383B55",
+        dark: "#27293b",
+        contrastText: "#fff",
+      },
+      secondary: {
+        light: "#ea605d",
+        main: darkmode ? "#383B55" : "#e53935",
+        dark: "#a02725",
+        contrastText: "#fff",
+      },
+      type: darkmode ? "dark" : "light",
+    },
+    typography: {
+      useNextVariants: true,
+    },
+  };
+  const theme = createMuiTheme(themeObject);
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <Router>
+          <Navbar />
+          <SuccessBar />
+          <ErrorBar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/user/:userId" component={User} />
+              <AuthRoute exact path="/login" component={Login} />
+              <AuthRoute exact path="/signup" component={SignUp} />
+              <AuthRoute
+                exact
+                path="/sendEmailForPassword"
+                component={SendEmailForPassword}
+              />
+              <Route exact path="/resultMap" component={ResultMap} />
+              <Route exact path="/result/:contestId" component={Results} />
+              <Route exact path="/ranking" component={Rankings} />
+              <UnauthRoute exact path="/contest" component={Contest} />
+              <UnauthRoute
+                exact
+                path="/contestUseTimer"
+                component={ContestUseTimer}
+              />
+              <UnauthRoute
+                exact
+                path="/contestUseTimerPhone"
+                component={ContestUseTimerPhone}
+              />
 
-                  <UnauthRoute exact path="/settings" component={Settings} />
-                  <Route exact path="/terms" component={Terms} />
-                  <Route
-                    exact
-                    path="/privacyPolicy"
-                    component={PrivacyPolicy}
-                  />
-                </Switch>
-              </div>
-              <BottomNavBar />
-            </Router>
-          </ReactReduxFirebaseProvider>
-        </Provider>
-      </MuiThemeProvider>
-    );
-  }
+              <UnauthRoute
+                exact
+                path="/exibition/:contestId/:roundId"
+                component={Exibition}
+              />
+              <UnauthRoute
+                exact
+                path="/exibitionUseTimer/:contestId/:roundId"
+                component={ExibitionUseTimer}
+              />
+              <UnauthRoute
+                exact
+                path="/exibitionUseTimerPhone/:contestId/:roundId"
+                component={ExibitionUseTimerPhone}
+              />
+              <Route
+                exact
+                path="/exibitionResult/:contestId/:roundId"
+                component={ExibitionResult}
+              />
+              <Route
+                exact
+                path="/exibitionAllResults/:contestId"
+                component={ExibitionAllResults}
+              />
+
+              <UnauthRoute exact path="/settings" component={Settings} />
+              <Route exact path="/terms" component={Terms} />
+              <Route exact path="/privacyPolicy" component={PrivacyPolicy} />
+            </Switch>
+          </div>
+          <BottomNavBar />
+        </Router>
+      </ReactReduxFirebaseProvider>
+    </MuiThemeProvider>
+  );
 }
 
 export default App;

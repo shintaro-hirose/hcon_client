@@ -12,6 +12,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+import Brightness7Icon from "@material-ui/icons/Brightness7";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import { toggleDarkMode } from "../../redux/actions/uiActions";
+
 const drawerWidth = 180;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +66,7 @@ function Navbar(props) {
   const handleLogout = () => {
     setOpen(true);
   };
-  const { authenticated, authorizedUserSummary } = props;
+  const { authenticated, authorizedUserSummary, darkmode } = props;
   const user = authorizedUserSummary.userHandle;
   const [selected, setSelected] = useState("");
 
@@ -153,6 +157,9 @@ function Navbar(props) {
                 </Button>
                 <LogoutModal open={open} setOpen={setOpen} />
               </Hidden>
+              <Button onClick={props.toggleDarkMode}>
+                {darkmode ? <Brightness7Icon /> : <Brightness4Icon />}
+              </Button>
             </Fragment>
           ) : (
             <Fragment>
@@ -209,6 +216,9 @@ function Navbar(props) {
                   </Button>
                 </Box>
               </Hidden>
+              <Button onClick={props.toggleDarkMode}>
+                {darkmode ? <Brightness7Icon /> : <Brightness4Icon />}
+              </Button>
             </Fragment>
           )}
         </Toolbar>
@@ -220,11 +230,17 @@ function Navbar(props) {
 Navbar.propTypes = {
   authorizedUserSummary: PropTypes.object.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  darkmode: PropTypes.bool.isRequired,
+  toggleDarkMode: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizedUserSummary: state.user.authorizedUserSummary,
   authenticated: state.user.authenticated,
+  darkmode: state.UI.darkmode,
 });
 
-export default connect(mapStateToProps)(Navbar);
+const mapActionsToProps = {
+  toggleDarkMode,
+};
+export default connect(mapStateToProps, mapActionsToProps)(Navbar);

@@ -9,6 +9,7 @@ import {
   CLOSE_ERRORBAR,
   OPEN_TWEET_MODAL,
   CLOSE_TWEET_MODAL,
+  TOGGLE_DARK_MODE,
 } from "../types";
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   openErrorbar: false,
   errorbarMessage: "",
   openTweetModal: false,
+  darkmode: false,
 };
 
 export default function (state = initialState, action) {
@@ -82,6 +84,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         openTweetModal: false,
+      };
+    case TOGGLE_DARK_MODE:
+      return {
+        ...state,
+        darkmode: !state.darkmode,
       };
     default:
       return state;
