@@ -44,8 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
   box1: {
     marginRight: "20px",
-    color: "#1111cc",
     display: "inline",
+    color: theme.palette.text.primary,
+    textDecoration: "underline"
   },
 }));
 
@@ -183,7 +184,7 @@ function SignUp(props) {
             <Typography variant="body2">{errors.general}</Typography>
           )}
           <Box textAlign="center" marginTop="20px">
-            <Typography component="div" textAlign="center">
+            <Typography component="div" textAlign="center" >
               <a
                 href="/terms"
                 target="_blank"
