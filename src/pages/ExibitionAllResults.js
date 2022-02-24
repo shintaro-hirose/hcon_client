@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${sakura})`,
   },
   logo: {
+    backgroundColor: "rgba(252,238,235,0.7)",
+    borderRadius: "5px",
     width: "300px",
     height: "140px",
   },
