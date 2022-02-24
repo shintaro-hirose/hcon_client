@@ -190,9 +190,10 @@ const useStyles = makeStyles((theme) => ({
     },
     display: "inline",
   },
-  tableButton: {
+  tablecell:{
     textTransform: "none",
-  },
+    color:"#000"
+  }
 }));
 
 function RankingTable(props) {
@@ -248,9 +249,9 @@ function RankingTable(props) {
                   return (
                     <TableRow
                       key={row.userHandle}
-                      style={{ backgroundColor: getColorByRated(row.rated) }}
-                    >
-                      <TableCell align="center" padding="none">
+                      style={{ backgroundColor: getColorByRated(row.rated)}}
+                      >
+                      <TableCell align="center" padding="none" className={classes.tablecell}>
                         {row.rank}
                       </TableCell>
                       <TableCell
@@ -267,19 +268,18 @@ function RankingTable(props) {
                           />
                         </Box>
                         <Button
-                          color="primary"
                           component={Link}
                           to={`/user/${row.userHandle}`}
-                          className={classes.tableButton}
+                          className={classes.tablecell}
                         >
                           {row.displayName}
                         </Button>
                       </TableCell>
 
-                      <TableCell align="center" padding="none">
+                      <TableCell align="center" padding="none" className={classes.tablecell}>
                         {row.rating}
                       </TableCell>
-                      <TableCell align="center" padding="none">
+                      <TableCell align="center" padding="none" className={classes.tablecell}>
                         {row.time === 3600
                           ? "-"
                           : row.time >= 60

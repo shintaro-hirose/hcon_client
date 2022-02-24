@@ -122,7 +122,7 @@ function Login(props) {
             variant="body2"
             component={Link}
             to="/sendEmailForPassword"
-            color="primary"
+            color="inherit"
           >
             パスワードを忘れましたか？
           </Typography>

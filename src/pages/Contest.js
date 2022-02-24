@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   stepper: {
-    backgroundColor: "rgb(245, 245, 245)",
+    // backgroundColor: "rgb(245, 245, 245)",
+    backgroundColor: theme.palette.background.default,
   },
   scramble: {
     margin: "50px 0",

@@ -115,6 +115,7 @@ function Profile(props) {
       marginTop: "10px",
       textAlign: "center",
       backgroundColor: paperColor(rated),
+      color: "#000"
     },
     rankIcon: {
       width: 30,

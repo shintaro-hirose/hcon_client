@@ -87,6 +87,7 @@ function UserProfile(props) {
       marginTop: "10px",
       textAlign: "center",
       backgroundColor: paperColor(userData.rated),
+      color: "#000"
     },
     logo: {
       width: "100px",

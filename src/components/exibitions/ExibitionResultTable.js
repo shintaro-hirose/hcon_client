@@ -44,7 +44,7 @@ const getColorByIndex = (rank) => {
   } else if (rank === 3) {
     return "peru";
   } else {
-    return "white";
+    return "";
   }
 };
 

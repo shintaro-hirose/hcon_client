@@ -112,7 +112,7 @@ function CSVExportButton({ userData }) {
             filename={`hcon_${userHandle}_results.csv`}
           >
             <Button onClick={handleClose} color="primary" variant="contained">
-              はい
+              実行
             </Button>
           </CSVLink>
         </DialogActions>

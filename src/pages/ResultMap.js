@@ -61,7 +61,6 @@ function ResultMap(props) {
         <Button
           component={Link}
           to={`/result/${contestId}`}
-          color="primary"
           variant="outlined"
         >
           <Typography variant="h6">昨日の結果を確認する</Typography>

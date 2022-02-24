@@ -68,7 +68,7 @@ function ExibitionResultSummaryButton(props) {
                 className={classes.logo}
               />
             </Grid>
-            <Grid item sm={6} xs={12}>
+            <Grid item sm={6} xs={12} style={{color: "#000"}}>
               <Typography>開催日： 2020/03/29</Typography>
               <Typography>参加者： 24名</Typography>
               <p> 優勝： plus さん　（優勝タイム： 39.42）</p>

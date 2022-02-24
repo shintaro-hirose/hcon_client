@@ -24,11 +24,11 @@ function Policy() {
   return (
     <Paper className={classes.paper}>
       <Box className={classes.box}>
-        <Button component={Link} to="/terms" color="primary">
+        <Button component={Link} to="/terms" color="inherit">
           利用規約
         </Button>
         <Divider />
-        <Button component={Link} to="/privacyPolicy" color="primary">
+        <Button component={Link} to="/privacyPolicy" color="inherit">
           プライバシーポリシー
         </Button>
       </Box>

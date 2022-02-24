@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import Hidden from "@material-ui/core/Hidden";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import Tooltip from "@material-ui/core/Tooltip";
 import Button from "@material-ui/core/Button";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
@@ -16,53 +17,54 @@ import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import { toggleDarkMode } from "../../redux/actions/uiActions";
 
-const drawerWidth = 180;
 const useStyles = makeStyles((theme) => ({
   root: {
-    [theme.breakpoints.up("sm")]: {
-      display: "flex",
-    },
-    [theme.breakpoints.down("xs")]: {
-      padding: 0,
-    },
+  },
+  appbar:{
+    backgroundColor: "#383B55",
+    color: "#fff"
   },
   nav: {
     [theme.breakpoints.up("sm")]: {
-      width: "550px",
-      margin: "auto",
-    },
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
+      margin: "0 auto",
       padding: 0,
+      display:"flex",
+      width: "100%",
+      maxWidth:"700px"
     },
-  },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor: "#eeeeee",
-    color: "383B55",
   },
   hconLogo: {
     [theme.breakpoints.up("sm")]: {
-      flexGrow: 1,
-      edge: "start",
+      // flexGrow: 1,
+      // edge: "start",
+      marginRight: "auto",
+      marginLeft: "15px",
     },
     [theme.breakpoints.down("xs")]: {
       margin: "0 auto",
     },
   },
+  login:{
+    marginRight: 0,
+    marginLeft: "auto",
+  },
+  settings:{
+    marginRight: 0,
+    marginLeft: "auto",
+  },
+  togglebutton:{
+    [theme.breakpoints.down("xs")]: {
+      position: "absolute",
+      right: 5
+    },
+    marginLeft:"5px"
+  }
+
 }));
 
 function Navbar(props) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const theme = useTheme();
   const handleLogout = () => {
     setOpen(true);
   };
@@ -94,133 +96,106 @@ function Navbar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" className={classes.appbar}>
         <Toolbar className={classes.nav}>
+          <Box
+            component={Link}
+            to="/"
+            onClick={handleSelected0}
+            className={classes.hconLogo}
+          >
+            <img
+              src={logo}
+              alt="logo"
+              width={50}
+              height={50}
+              display="inline"
+            />
+          </Box>
+          <Hidden xsDown>
+          <Button
+            color={selected === "results" ? "secondary" : "inherit"}
+            onClick={handleSelected1}
+            component={Link}
+            to={`/resultMap`}
+          >
+            過去の大会
+          </Button>
+          <Button
+            color={selected === "ranking" ? "secondary" : "inherit"}
+            onClick={handleSelected2}
+            component={Link}
+            to="/ranking"
+          >
+            ランキング
+          </Button>
           {authenticated ? (
             <Fragment>
-              <Box
+              <Button
+                color={selected === "mypage" ? "secondary" : "inherit"}
+                onClick={handleSelected3}
                 component={Link}
-                to="/"
-                onClick={handleSelected0}
-                className={classes.hconLogo}
+                to={`/user/${user}`}
               >
-                <img
-                  src={logo}
-                  alt="logo"
-                  width={50}
-                  height={50}
-                  display="inline"
-                />
-              </Box>
-              <Hidden xsDown>
-                <Box flexGrow={1}>
-                  <Button
-                    color={selected === "results" ? "secondary" : "inherit"}
-                    onClick={handleSelected1}
-                    component={Link}
-                    to={`/resultMap`}
-                  >
-                    過去の大会
-                  </Button>
-                  <Button
-                    color={selected === "ranking" ? "secondary" : "inherit"}
-                    onClick={handleSelected2}
-                    component={Link}
-                    to="/ranking"
-                  >
-                    ランキング
-                  </Button>
-                  <Button
-                    color={selected === "mypage" ? "secondary" : "inherit"}
-                    onClick={handleSelected3}
-                    component={Link}
-                    to={`/user/${user}`}
-                  >
-                    マイページ
-                  </Button>
-
-                  <Button
-                    color={selected === "settings" ? "secondary" : "inherit"}
-                    onClick={handleSelected4}
-                    component={Link}
-                    to="/settings"
-                  >
-                    設定
-                  </Button>
-                </Box>
-                <Button
-                  color="inherit"
-                  onClick={handleLogout}
-                  variant="outlined"
-                >
-                  ログアウト
-                </Button>
-                <LogoutModal open={open} setOpen={setOpen} />
-              </Hidden>
-              <Button onClick={props.toggleDarkMode}>
-                {darkmode ? <Brightness7Icon /> : <Brightness4Icon />}
+                マイページ
               </Button>
+
+              <Button
+                color={selected === "settings" ? "secondary" : "inherit"}
+                onClick={handleSelected4}
+                component={Link}
+                to="/settings"
+                className={classes.settings}
+              >
+                設定
+              </Button>
+              <Button
+                color="inherit"
+                onClick={handleLogout}
+                variant="outlined"
+                className={classes.logout}
+              >
+                ログアウト
+              </Button>
+              <LogoutModal open={open} setOpen={setOpen} />
             </Fragment>
           ) : (
             <Fragment>
-              <Box
+              <Button
+                color={selected === "login" ? "secondary" : "inherit"}
+                onClick={handleSelected5}
                 component={Link}
-                to="/"
-                className={classes.hconLogo}
-                onClick={handleSelected0}
+                to="/login"
+                className={classes.login}
               >
-                <img
-                  src={logo}
-                  alt="logo"
-                  width={50}
-                  height={50}
-                  display="inline"
-                />
-              </Box>
-              <Hidden xsDown>
-                <Box flexGrow={1}>
-                  <Button
-                    color={selected === "results" ? "secondary" : "inherit"}
-                    onClick={handleSelected1}
-                    component={Link}
-                    to={`/resultMap`}
-                  >
-                    過去の大会
-                  </Button>
-                  <Button
-                    color={selected === "ranking" ? "secondary" : "inherit"}
-                    onClick={handleSelected2}
-                    component={Link}
-                    to="/ranking"
-                  >
-                    ランキング
-                  </Button>
-                </Box>
-                <Box>
-                  <Button
-                    color={selected === "login" ? "secondary" : "inherit"}
-                    onClick={handleSelected5}
-                    component={Link}
-                    to="/login"
-                  >
-                    ログイン
-                  </Button>
-                  <Button
-                    color={selected === "signup" ? "secondary" : "inherit"}
-                    onClick={handleSelected6}
-                    component={Link}
-                    to="/signup"
-                    variant="outlined"
-                  >
-                    登録
-                  </Button>
-                </Box>
-              </Hidden>
-              <Button onClick={props.toggleDarkMode}>
-                {darkmode ? <Brightness7Icon /> : <Brightness4Icon />}
+                ログイン
+              </Button>
+              <Button
+                color={selected === "signup" ? "secondary" : "inherit"}
+                onClick={handleSelected6}
+                component={Link}
+                to="/signup"
+                variant="outlined"
+              >
+                登録
               </Button>
             </Fragment>
           )}
+          </Hidden>
+          <Tooltip
+            title="ライト/ダークテーマに変更する"
+            placement="bottom"
+          >
+            <Button 
+            color="inherit"
+            onClick={props.toggleDarkMode}
+            className={classes.togglebutton}
+            >
+              
+              {darkmode ? <Brightness7Icon /> : <Brightness4Icon />}
+            </Button>
+          </Tooltip>
+          
         </Toolbar>
       </AppBar>
     </div>
