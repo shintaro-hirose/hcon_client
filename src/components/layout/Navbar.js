@@ -11,12 +11,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Button from "@material-ui/core/Button";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Brightness7Icon from "@material-ui/icons/Brightness7";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
+import BrightnessMediumIcon from '@material-ui/icons/BrightnessMedium';
 import { toggleDarkMode } from "../../redux/actions/uiActions";
-import { applyMiddleware } from "redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -193,8 +191,7 @@ function Navbar(props) {
             onClick={props.toggleDarkMode}
             className={classes.togglebutton}
             >
-              
-              {darkmode ? <Brightness7Icon /> : <Brightness4Icon />}
+              <BrightnessMediumIcon />
             </Button>
           </Tooltip>
           
