@@ -16,6 +16,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import { toggleDarkMode } from "../../redux/actions/uiActions";
+import { applyMiddleware } from "redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,14 +36,15 @@ const useStyles = makeStyles((theme) => ({
   },
   hconLogo: {
     [theme.breakpoints.up("sm")]: {
-      // flexGrow: 1,
-      // edge: "start",
       marginRight: "auto",
       marginLeft: "15px",
     },
     [theme.breakpoints.down("xs")]: {
-      margin: "0 auto",
+      margin: "auto",
     },
+    "& img":{
+      verticalAlign: "middle",
+    }
   },
   login:{
     marginRight: 0,
