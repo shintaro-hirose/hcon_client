@@ -139,11 +139,6 @@ function ContestField(props) {
       <Typography className={classes.title}>
         {year}/{month}/{date} のコンテスト開催中
       </Typography>
-      <Typography className={classes.title}>
-        ※3x3x3目隠しの大会です。
-        <br />
-        間違えて参加した場合は管理者にお知らせください。
-      </Typography>
       {contentMarkup}
     </Paper>
   );
