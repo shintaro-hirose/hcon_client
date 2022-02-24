@@ -110,12 +110,16 @@ function App() {
   const themeObject = {
     palette: {
       primary: {
-        main: darkmode ?"#fff" : "#383B55",
+        main: darkmode ?"#f5f5f5" : "#383B55",
       },
       secondary: {
         main:  "#e53935"
       },
       type: darkmode ? "dark" : "light",
+      background: {
+        default: darkmode ? "#1e2130" : "#f5f5f5",
+        paper: darkmode ? "#292d42" : "#fff",
+      }
     },
     typography: {
       useNextVariants: true,

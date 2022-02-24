@@ -29,9 +29,6 @@ const useStyles = makeStyles((theme) => ({
   backButton: {
     marginRight: theme.spacing(1),
   },
-  stepper: {
-    backgroundColor: "rgb(245, 245, 245)",
-  },
   scramble: {
     margin: "20px 0",
   },
@@ -65,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     fontSize: 30,
   },
+  timing: {
+    color: theme.palette.text.primary
+  }
 }));
 
 const RedRadio = withStyles({
@@ -339,7 +339,7 @@ function ContestUseTimerPhone(props) {
             >
               {timeSituation === "neutral" ? (
                 <Typography component="div">
-                  <Box fontSize="h1.fontSize">{timeFormatter(solveTime)}</Box>
+                  <Box fontSize="h1.fontSize" color="inherit">{timeFormatter(solveTime)}</Box>
                   {situation !== 3 ? (
                     showCheck ? (
                       <Box
@@ -373,7 +373,7 @@ function ContestUseTimerPhone(props) {
                 )
               ) : (
                 <Typography component="div">
-                  <Box fontSize="h1.fontSize" color="black">
+                  <Box fontSize="h1.fontSize" color="inherit">
                     {timeFormatter(solveTime)}
                   </Box>
                 </Typography>
