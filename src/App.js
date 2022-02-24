@@ -117,7 +117,7 @@ function App() {
       },
       type: darkmode ? "dark" : "light",
       background: {
-        default: darkmode ? "#1e2130" : "#f5f5f5",
+        default: darkmode ? "#10111a" : "#f5f5f5",
         paper: darkmode ? "#292d42" : "#fff",
       }
     },
