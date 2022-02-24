@@ -119,6 +119,18 @@ function App() {
     },
     typography: {
       useNextVariants: true,
+      fontFamily: [
+        'Arial',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
     },
   };
   const theme = createMuiTheme(themeObject);
