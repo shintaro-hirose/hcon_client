@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["#FFBB67", "#6F8AF4", "#383B55", "#E6A3CA", "#238C89"];
+const COLORS = ["#FFBB67", "#6F8AF4", "#CD5D67", "#E6A3CA", "#238C89"];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
