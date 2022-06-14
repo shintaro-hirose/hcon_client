@@ -100,9 +100,6 @@ const Results = (props) => {
               />
             </MuiPickersUtilsProvider>
           </Box>
-          {Number(t) - Number(selectedDateFormatted) === 0 ? (
-            <p></p>
-          ) : (
             <Box textAlign="left" margin="30px 0">
               <Box>
                 <Typography variant="h6">
@@ -120,7 +117,6 @@ const Results = (props) => {
                 </Typography>
               </Box>
             </Box>
-          )}
 
           <Box textAlign="center">
             {contestData.results.length === 0 ? (
