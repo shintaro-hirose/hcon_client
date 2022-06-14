@@ -50,7 +50,6 @@ import "firebase/firestore"; // <- needed if using firestore
 import store from "./redux/store";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
-import { toggleDarkMode } from "./redux/actions/uiActions";
 
 axios.defaults.baseURL =
   "https://asia-northeast1-hcon-98e1e.cloudfunctions.net/api";
