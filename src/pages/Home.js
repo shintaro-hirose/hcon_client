@@ -20,23 +20,15 @@ import { connect } from "react-redux";
 import {
   getAllUserSummary,
   getAuthenticatedUserSummary,
+  getNotifications,
 } from "../redux/actions/userActions";
 import { closeTweetModal } from "../redux/actions/uiActions";
 
-//firestore
-import { useSelector } from "react-redux";
-import { useFirestoreConnect } from "react-redux-firebase";
-
 function Home(props) {
-  const { loading, authenticated } = props.user;
-  useFirestoreConnect([
-    { collection: "notifications", orderBy: ["createdAt", "desc"], limit: 10 },
-  ]);
-  const notifications = useSelector(
-    (state) => state.firestore.ordered.notifications
-  );
+  const { loading, authenticated, notifications} = props.user;
   function f() {
     if (authenticated) props.getAuthenticatedUserSummary();
+    props.getNotifications();
     if (props.user.userSummaries.length != 0) return;
     props.getAllUserSummary();
   }
@@ -107,6 +99,7 @@ function Home(props) {
 Home.propTypes = {
   getAllUserSummary: PropTypes.func.isRequired,
   getAuthenticatedUserSummary: PropTypes.func.isRequired,
+  getNotifications: PropTypes.func.isRequired,
   closeTweetModal: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
@@ -120,5 +113,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAllUserSummary,
   getAuthenticatedUserSummary,
+  getNotifications,
   closeTweetModal,
 })(Home);

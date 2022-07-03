@@ -41,14 +41,7 @@ import ErrorBar from "./util/SuccessBar";
 import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
-//Firebase
-import firebase from "firebase/app";
-import "firebase/database";
-import "firebase/firestore"; // <- needed if using firestore
-// import 'firebase/functions' // <- needed if using httpsCallable
 import store from "./redux/store";
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-import { createFirestoreInstance } from "redux-firestore";
 
 axios.defaults.baseURL =
   "https://asia-northeast1-hcon-98e1e.cloudfunctions.net/api";
@@ -70,37 +63,7 @@ if (token) {
 if (localStorage.getItem("hcon_darkmode")) {
   store.dispatch({ type: TOGGLE_DARK_MODE });
 }
-const fbConfig = {
-  apiKey: "AIzaSyCOsBhiS-gUvJ--rtKeY6eljedeixSS5FI",
-  authDomain: "hcon-98e1e.firebaseapp.com",
-  databaseURL: "https://hcon-98e1e.firebaseio.com",
-  projectId: "hcon-98e1e",
-  storageBucket: "hcon-98e1e.appspot.com",
-  messagingSenderId: "413063046385",
-};
 
-// react-redux-firebase config
-const rrfConfig = {
-  // userProfile: 'users',
-  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-  // enableClaims: true // Get custom claims along with the profile
-};
-
-// Initialize firebase instance
-firebase.initializeApp(fbConfig);
-
-// Initialize other services on firebase instance
-firebase.firestore(); // <- needed if using firestore
-// firebase.functions() // <- needed if using httpsCallable
-
-// Create store with reducers and initial state
-
-const rrfProps = {
-  firebase,
-  config: rrfConfig,
-  dispatch: store.dispatch,
-  createFirestoreInstance, // <- needed if using firestore
-};
 
 function App() {
   const darkmode = useSelector((state) => state.UI.darkmode);
@@ -139,7 +102,6 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <ReactReduxFirebaseProvider {...rrfProps}>
         <Router>
           <Navbar />
           <SuccessBar />
@@ -203,7 +165,6 @@ function App() {
           </div>
           <BottomNavBar />
         </Router>
-      </ReactReduxFirebaseProvider>
     </MuiThemeProvider>
   );
 }
