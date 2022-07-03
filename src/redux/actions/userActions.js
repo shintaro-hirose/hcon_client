@@ -16,6 +16,7 @@ import {
   OPEN_ERRORBAR,
   SET_EXIBITIONS,
   OPEN_TWEET_MODAL,
+  SET_NOTIFICATIONS,
 } from "../types";
 import axios from "axios";
 
@@ -388,4 +389,18 @@ export const postExibitionResult = (form, history) => (dispatch) => {
         payload: err.response.data,
       });
     });
+};
+
+export const getNotifications = () => (dispatch) => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .get("/getNotifications")
+    .then((res) => {
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({
+        type: SET_NOTIFICATIONS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log(err));
 };
