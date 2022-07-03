@@ -43,7 +43,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 //Firebase
 import firebase from "firebase/app";
-import "firebase/auth";
 import "firebase/database";
 import "firebase/firestore"; // <- needed if using firestore
 // import 'firebase/functions' // <- needed if using httpsCallable
