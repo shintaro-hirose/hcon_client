@@ -75,7 +75,7 @@ export const logoutUser = () => (dispatch) => {
 };
 
 export const getAllUserSummary = () => (dispatch) => {
-  dispatch({ type: LOADING_USER });
+  // dispatch({ type: LOADING_USER });
 
   axios
     .get("/ranking/rating")
@@ -112,7 +112,7 @@ export const getUserResults = (userHandle) => (dispatch) => {
 };
 
 export const getAuthenticatedUserSummary = () => (dispatch) => {
-  dispatch({ type: LOADING_USER });
+  // dispatch({ type: LOADING_USER });
   axios
     .get("/mypage")
     .then((res) => {
@@ -392,7 +392,7 @@ export const postExibitionResult = (form, history) => (dispatch) => {
 };
 
 export const getNotifications = () => (dispatch) => {
-  dispatch({ type: LOADING_USER });
+  // dispatch({ type: LOADING_USER });
   axios
     .get("/getNotifications")
     .then((res) => {
