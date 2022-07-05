@@ -12,6 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
 import prizeAvatar from "../images/icons8-prize-64.png";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import moment from "moment";
 import "moment/locale/ja";
@@ -28,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 function Notifications(props) {
   const classes = useStyles();
   const notifications = props.notifications;
+  const skeletonRows = Array(10);
+  skeletonRows.fill(0);
   const timeFormatter = (time) => {
     if (time >= 60) {
       return `${Math.floor(time / 60)}:${(
@@ -44,7 +47,7 @@ function Notifications(props) {
         <Typography variant="h6">最近のアクティビティ</Typography>
       </Box>
       <List component="nav">
-        {notifications &&
+        {notifications.length ? (
           notifications.map((item, index) => {
             return (
               <div key={index}>
@@ -181,7 +184,27 @@ function Notifications(props) {
                 )}
               </div>
             );
-          })}
+          }))
+         : (
+          skeletonRows.map((row, index) =>{
+            return(
+              <div>
+                <Divider />
+                <ListItem>
+                <ListItemText>
+                <Skeleton 
+                  variant="rectangular"
+                  height={48.02}
+                  />
+                </ListItemText>
+                
+                </ListItem>
+                  
+              </div>
+            )
+          })
+         )
+        }
       </List>
     </Paper>
   );

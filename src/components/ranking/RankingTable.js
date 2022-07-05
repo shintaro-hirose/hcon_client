@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import Skeleton from '@material-ui/lab/Skeleton';
 
 import { connect } from "react-redux";
 
@@ -200,6 +201,8 @@ function RankingTable(props) {
   const classes = useStyles();
   const userSummaries = props.user.userSummaries;
   const rows = [];
+  const skeletonRows = Array(10);
+  skeletonRows.fill(0);
   userSummaries.forEach((userSummary, index) => {
     rows.push({
       rank: index + 1,
@@ -243,7 +246,8 @@ function RankingTable(props) {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {rows.length ? (
+              stableSort(rows, getComparator(order, orderBy))
                 .slice(page * 10, page * 10 + 10)
                 .map((row, index) => {
                   return (
@@ -296,7 +300,29 @@ function RankingTable(props) {
                       </TableCell>
                     </TableRow>
                   );
-                })}
+                })) : (
+                  skeletonRows.map((row, index) => {
+                    return(
+                      <TableRow
+                      key={index}
+                      height={37.5}
+                      >
+                      <TableCell >
+                       <Skeleton variant="rectangular"/>
+                      </TableCell>
+                      <TableCell >
+                       <Skeleton variant="rectangular"/>
+                      </TableCell>
+                      <TableCell >
+                       <Skeleton variant="rectangular"/>
+                      </TableCell>
+                      <TableCell >
+                       <Skeleton variant="rectangular"/>
+                      </TableCell>
+                    </TableRow>
+                    )
+                  })
+                )}
             </TableBody>
           </Table>
         </TableContainer>
