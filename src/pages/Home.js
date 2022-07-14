@@ -10,10 +10,10 @@ import Loading from "../util/Loading";
 import About from "../util/About";
 import Notifications from "../util/Notifications";
 import TweetModal from "../util/TweetModal";
+import ExhibitionField from "../components/exibitions/ExhibitionField";
 // import Updates from '../util/Updates';
 import Contact from "../util/Contact";
 import Policy from "../util/Policy";
-import ExibitionHome from '../components/exibitions/ExibitionHome'
 
 //redux
 import { connect } from "react-redux";
@@ -50,8 +50,8 @@ function Home(props) {
           </Hidden>
         </Grid>
         <Grid item sm={8} xs={12}>
+          <ExhibitionField appState={appState}/>
           <ContestField />
-          <ExibitionHome />
           <RankingTable />
           <Notifications notifications={notifications} />
           <Hidden smUp>
@@ -71,9 +71,8 @@ function Home(props) {
           </Hidden>
         </Grid>
         <Grid item sm={8} xs={12}>
+          <ExhibitionField appState={appState}/>
           <ContestField />
-          <ExibitionHome />
-
           <RankingTable />
           <Notifications notifications={notifications} />
           <Hidden smUp>

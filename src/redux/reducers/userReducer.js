@@ -61,10 +61,11 @@ const initialState = {
   },
   exibitions: [],
   appState: {
-    state: "",
+    status: "",
     title: "",
     body: "",
     contestId: "",
+    annotation: "",
   }
 };
 
