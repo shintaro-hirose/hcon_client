@@ -351,26 +351,6 @@ export const updatePassword = (userData) => (dispatch) => {
     });
 };
 
-export const finishSignup = () => (dispatch) => {
-  dispatch({ type: LOADING_UI });
-  axios
-    .get("/finishSigninFlow")
-    .then((res) => {
-      setAuthorizationHeader(res.data.token);
-      dispatch({ type: CLEAR_ERRORS });
-      dispatch({
-        type: OPEN_SUCCESSBAR,
-        payload: "アカウント登録に成功しました",
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      });
-    });
-};
-
 export const postExibitionResult = (form, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
