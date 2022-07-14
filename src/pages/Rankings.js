@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 
 import Box from "@material-ui/core/Box";
@@ -7,12 +7,12 @@ import RatingDescription from "../components/ranking/RatingDescription";
 import Loading from "../util/Loading";
 
 import { connect } from "react-redux";
-// import { getAllUserSummary } from '../redux/actions/userActions';
+import { getAllUserSummary } from '../redux/actions/userActions';
 
 function Rankings(props) {
-  //   useEffect(() => {
-  //     props.getAllUserSummary();
-  //   },[]);
+    useEffect(() => {
+      props.getAllUserSummary();
+    },[]);
   const { loading } = props.user;
   let rankingMarkup = !loading ? (
     <div>
@@ -28,7 +28,7 @@ function Rankings(props) {
 }
 
 Rankings.propTypes = {
-  // getAllUserSummary: PropTypes.func.isRequired,
+  getAllUserSummary: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
 };
 
@@ -36,7 +36,8 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(
-  mapStateToProps
-  //   { getAllUserSummary }
-)(Rankings);
+const mapActionsToProps = {
+  getAllUserSummary,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Rankings);

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 //Redux
-import { Provider, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { SET_AUTHENTICATED, TOGGLE_DARK_MODE } from "./redux/types";
 import {
   getAuthenticatedUserSummary,
