@@ -11,6 +11,7 @@ export const SET_RESULT = "SET_RESULT";
 export const SET_USER_CREDENTIAL = "SET_USER_CREDENTIAL";
 export const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 export const SET_EXIBITIONS = "SET_EXIBITIONS";
+export const SET_APP_STATE = "SET_APP_STATE";
 
 // UI reducer types
 export const SET_ERRORS = "SET_ERRORS";
