@@ -11,6 +11,7 @@ import {
   SET_USER_CREDENTIAL,
   SET_NOTIFICATIONS,
   SET_EXIBITIONS,
+  SET_APP_STATE,
 } from "../types";
 
 const initialState = {
@@ -59,6 +60,12 @@ const initialState = {
     results: [],
   },
   exibitions: [],
+  appState: {
+    state: "",
+    title: "",
+    body: "",
+    contestId: "",
+  }
 };
 
 export default function (state = initialState, action) {
@@ -134,7 +141,12 @@ export default function (state = initialState, action) {
         loading: false,
         exibitions: action.payload,
       };
-
+    case SET_APP_STATE:
+      return {
+        ...state,
+        loading: false,
+        appState: action.payload,
+      };
     default:
       return state;
   }

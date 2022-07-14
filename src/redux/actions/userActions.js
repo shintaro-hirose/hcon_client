@@ -17,6 +17,7 @@ import {
   SET_EXIBITIONS,
   OPEN_TWEET_MODAL,
   SET_NOTIFICATIONS,
+  SET_APP_STATE,
 } from "../types";
 import axios from "axios";
 
@@ -379,6 +380,19 @@ export const getNotifications = () => (dispatch) => {
       dispatch({ type: CLEAR_ERRORS });
       dispatch({
         type: SET_NOTIFICATIONS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getAppState = () => (dispatch) => {
+
+  axios
+    .get("/getAppState")
+    .then((res) => {
+      dispatch({
+        type: SET_APP_STATE,
         payload: res.data,
       });
     })
