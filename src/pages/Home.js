@@ -13,7 +13,7 @@ import TweetModal from "../util/TweetModal";
 // import Updates from '../util/Updates';
 import Contact from "../util/Contact";
 import Policy from "../util/Policy";
-// import ExibitionHome from '../components/exibitions/ExibitionHome'
+import ExibitionHome from '../components/exibitions/ExibitionHome'
 
 //redux
 import { connect } from "react-redux";
@@ -21,14 +21,16 @@ import {
   getAllUserSummary,
   getAuthenticatedUserSummary,
   getNotifications,
+  getAppState,
 } from "../redux/actions/userActions";
 import { closeTweetModal } from "../redux/actions/uiActions";
 
 function Home(props) {
-  const { loading, authenticated, notifications} = props.user;
+  const { loading, authenticated, notifications, appState} = props.user;
   function f() {
     if (authenticated) props.getAuthenticatedUserSummary();
     props.getNotifications();
+    props.getAppState();
     if (props.user.userSummaries.length != 0) return;
     props.getAllUserSummary();
   }
@@ -49,7 +51,7 @@ function Home(props) {
         </Grid>
         <Grid item sm={8} xs={12}>
           <ContestField />
-          {/* <ExibitionHome /> */}
+          <ExibitionHome />
           <RankingTable />
           <Notifications notifications={notifications} />
           <Hidden smUp>
@@ -70,7 +72,7 @@ function Home(props) {
         </Grid>
         <Grid item sm={8} xs={12}>
           <ContestField />
-          {/* <ExibitionHome /> */}
+          <ExibitionHome />
 
           <RankingTable />
           <Notifications notifications={notifications} />
@@ -100,6 +102,7 @@ Home.propTypes = {
   getAllUserSummary: PropTypes.func.isRequired,
   getAuthenticatedUserSummary: PropTypes.func.isRequired,
   getNotifications: PropTypes.func.isRequired,
+  getAppState: PropTypes.func.isRequired,
   closeTweetModal: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
@@ -115,4 +118,5 @@ export default connect(mapStateToProps, {
   getAuthenticatedUserSummary,
   getNotifications,
   closeTweetModal,
+  getAppState,
 })(Home);
