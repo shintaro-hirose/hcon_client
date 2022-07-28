@@ -11,9 +11,6 @@ import firstFont from "../../images/first-font.svg";
 import secondFont from "../../images/second-font.svg";
 import thirdFont from "../../images/third-font.svg";
 
-//Redux
-import { connect } from "react-redux";
-
 function Badge(props) {
   const {place, backgroundImage, imgalt, imgsrc} = props;
   let fontsrc = "";
@@ -101,12 +98,4 @@ function UserExibitionBadge(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-UserExibitionBadge.propTypes = {
-  user: PropTypes.object.isRequired,
-};
-
-export default connect(mapStateToProps)(UserExibitionBadge);
+export default UserExibitionBadge;
