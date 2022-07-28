@@ -13,7 +13,6 @@ import thirdFont from "../../images/third-font.svg";
 
 //Redux
 import { connect } from "react-redux";
-import { getUserResults } from "../../redux/actions/userActions";
 
 function Badge(props) {
   const {place, backgroundImage, imgalt, imgsrc} = props;
@@ -86,6 +85,18 @@ function UserExibitionBadge(props) {
           <></>
         )
       }
+      {
+        userData.OTAWarmupResult ? (
+          <Badge 
+          place={userData.breathOfSpring2020Result} 
+          backgroundImage={sakura} 
+          imgalt="harukazeLogo" 
+          imgsrc={harukazeLogo} 
+          />
+        ) : (
+          <></>
+        )
+      }
     </Fragment>
   );
 }
@@ -94,11 +105,8 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const mapActionsToProps = { getUserResults };
-
 UserExibitionBadge.propTypes = {
-  getUserResults: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(UserExibitionBadge);
+export default connect(mapStateToProps)(UserExibitionBadge);
