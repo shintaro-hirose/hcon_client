@@ -5,14 +5,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 //images
-import sakura from "../../images/sakura.png";
 import harukazeLogo from "../../images/harukaze-logo.svg";
+import OTAWarmupLogo from "../../images/OTAWarmupLogo.svg";
 import firstFont from "../../images/first-font.svg";
 import secondFont from "../../images/second-font.svg";
 import thirdFont from "../../images/third-font.svg";
 
 function Badge(props) {
-  const {place, backgroundImage, imgalt, imgsrc} = props;
+  const {place, imgalt, imgsrc, backgroundColor} = props;
   let fontsrc = "";
   if(place === "first"){
     fontsrc = firstFont;
@@ -29,15 +29,14 @@ function Badge(props) {
       boxShadow: theme.shadows[5],
       marginTop: "10px",
       textAlign: "center",
-      backgroundImage: `url(${backgroundImage})`,
+      backgroundColor: backgroundColor,
     },
     logo: {
       width: "100px",
       height: "47px",
     },
     fontLogo: {
-      width: "50px",
-      height: "24px",
+      width: "55px"
     },
   }));
 
@@ -45,7 +44,7 @@ function Badge(props) {
   
   return (
     <Paper className={classes.paper}>
-      <Box display="flex" alignItems="center" padding="0 50px">
+      <Box display="flex" alignItems="center" padding="0 20px">
         <Box flexGrow={1}>
           <img
             alt={imgalt}
@@ -74,9 +73,9 @@ function UserExibitionBadge(props) {
         userData.breathOfSpring2020Result ? (
           <Badge 
           place={userData.breathOfSpring2020Result} 
-          backgroundImage={sakura} 
           imgalt="harukazeLogo" 
-          imgsrc={harukazeLogo} 
+          imgsrc={harukazeLogo}
+          backgroundColor="#fce4ec"
           />
         ) : (
           <></>
@@ -85,10 +84,10 @@ function UserExibitionBadge(props) {
       {
         userData.OTAWarmupResult ? (
           <Badge 
-          place={userData.breathOfSpring2020Result} 
-          backgroundImage={sakura} 
-          imgalt="harukazeLogo" 
-          imgsrc={harukazeLogo} 
+          place={userData.OTAWarmupResult} 
+          imgalt="OTAWarmupLogo" 
+          imgsrc={OTAWarmupLogo}
+          backgroundColor="#b2ebf2"
           />
         ) : (
           <></>
