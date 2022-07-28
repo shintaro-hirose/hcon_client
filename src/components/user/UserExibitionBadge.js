@@ -5,18 +5,23 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 //images
-import sakura from "../../images/sakura.png";
 import harukazeLogo from "../../images/harukaze-logo.svg";
+import OTAWarmupLogo from "../../images/OTAWarmupLogo.svg";
 import firstFont from "../../images/first-font.svg";
 import secondFont from "../../images/second-font.svg";
 import thirdFont from "../../images/third-font.svg";
 
-//Redux
-import { connect } from "react-redux";
-import { getUserResults } from "../../redux/actions/userActions";
+function Badge(props) {
+  const {place, imgalt, imgsrc, backgroundColor} = props;
+  let fontsrc = "";
+  if(place === "first"){
+    fontsrc = firstFont;
+  } else if(place === "second"){
+    fontsrc = secondFont;
+  } else if(place === "third"){
+    fontsrc = thirdFont;
+  }
 
-function UserExibitionBadge(props) {
-  const userData = props.userData;
   const useStyles = makeStyles((theme) => ({
     paper: {
       width: "100%",
@@ -24,99 +29,72 @@ function UserExibitionBadge(props) {
       boxShadow: theme.shadows[5],
       marginTop: "10px",
       textAlign: "center",
-      backgroundImage: `url(${sakura})`,
+      backgroundColor: backgroundColor,
     },
     logo: {
       width: "100px",
       height: "47px",
     },
     fontLogo: {
-      width: "50px",
-      height: "24px",
+      width: "55px"
     },
   }));
 
   const classes = useStyles();
+  
+  return (
+    <Paper className={classes.paper}>
+      <Box display="flex" alignItems="center" padding="0 20px">
+        <Box flexGrow={1}>
+          <img
+            alt={imgalt}
+            src={imgsrc}
+            className={classes.logo}
+          />
+        </Box>
+        <Box flexGrow={1}>
+          <img
+            alt="fontLogo"
+            src={fontsrc}
+            className={classes.fontLogo}
+          />
+        </Box>
+      </Box>
+    </Paper>
+  )
+}
+
+function UserExibitionBadge(props) {
+  const userData = props.userData;
 
   return (
     <Fragment>
-      {userData.breathOfSpring2020Result ? (
-        userData.breathOfSpring2020Result === "first" ? (
-          <Paper className={classes.paper}>
-            <Box display="flex" alignItems="center" padding="0 50px">
-              <Box flexGrow={1}>
-                <img
-                  alt="harukazeLogo"
-                  src={harukazeLogo}
-                  className={classes.logo}
-                />
-              </Box>
-              <Box flexGrow={1}>
-                <img
-                  alt="fontLogo"
-                  src={firstFont}
-                  className={classes.fontLogo}
-                />
-              </Box>
-            </Box>
-          </Paper>
-        ) : userData.breathOfSpring2020Result === "second" ? (
-          <Paper className={classes.paper}>
-            <Box display="flex" alignItems="center" padding="0 50px">
-              <Box flexGrow={1}>
-                <img
-                  alt="harukazeLogo"
-                  src={harukazeLogo}
-                  className={classes.logo}
-                />
-              </Box>
-              <Box flexGrow={1}>
-                <img
-                  alt="fontLogo"
-                  src={secondFont}
-                  className={classes.fontLogo}
-                />
-              </Box>
-            </Box>
-          </Paper>
-        ) : userData.breathOfSpring2020Result === "third" ? (
-          <Paper className={classes.paper}>
-            <Box display="flex" alignItems="center" padding="0 50px">
-              <Box flexGrow={1}>
-                <img
-                  alt="harukazeLogo"
-                  src={harukazeLogo}
-                  className={classes.logo}
-                />
-              </Box>
-              <Box flexGrow={1}>
-                <img
-                  alt="fontLogo"
-                  src={thirdFont}
-                  className={classes.fontLogo}
-                />
-              </Box>
-            </Box>
-          </Paper>
+      {
+        userData.breathOfSpring2020Result ? (
+          <Badge 
+          place={userData.breathOfSpring2020Result} 
+          imgalt="harukazeLogo" 
+          imgsrc={harukazeLogo}
+          backgroundColor="#fce4ec"
+          />
         ) : (
-          <p></p>
+          <></>
         )
-      ) : (
-        <p></p>
-      )}
+      }
+      {
+        userData.OTAWarmupResult ? (
+          <Badge 
+          place={userData.OTAWarmupResult} 
+          imgalt="OTAWarmupLogo" 
+          imgsrc={OTAWarmupLogo}
+          backgroundColor="#b2ebf2"
+          />
+        ) : (
+          <></>
+        )
+      }
     </Fragment>
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-const mapActionsToProps = { getUserResults };
-
-UserExibitionBadge.propTypes = {
-  getUserResults: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(UserExibitionBadge);
+export default UserExibitionBadge;

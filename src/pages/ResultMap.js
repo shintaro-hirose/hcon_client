@@ -7,6 +7,9 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import ExibitionResultSummaryButton from "../components/exibitions/ExibitionResultSummaryButton";
 
+import harukazeLogo from "../images/harukaze-logo.svg";
+import OTAWarmupLogo from "../images/OTAWarmupLogo.svg"
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "100%",
@@ -71,7 +74,24 @@ function ResultMap(props) {
         <Typography className={classes.content}>
           不定期で開催される特別大会！
         </Typography>
-        <ExibitionResultSummaryButton />
+        <ExibitionResultSummaryButton 
+        resultUrl="/result/20220723"
+        logoAlt="OTAWarmupLogo"
+        logoSrc={OTAWarmupLogo}
+        backgroundColor="#b2ebf2"
+        dayText="開催日： 2022/07/23"
+        partText="参加者： 19名"
+        winText=" 優勝： うえしゅう さん　（優勝タイム： 50.20）"
+        />
+        <ExibitionResultSummaryButton 
+        resultUrl="/exibitionAllResults/breathOfSpring2020"
+        logoAlt="harukazeLogo"
+        logoSrc={harukazeLogo}
+        backgroundColor="#fce4ec"
+        dayText="開催日： 2020/03/29"
+        partText="参加者： 24名"
+        winText=" 優勝： plus さん　（優勝タイム： 39.42）"
+        />
       </Paper>
     </React.Fragment>
   );
