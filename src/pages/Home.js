@@ -30,9 +30,9 @@ function Home(props) {
   function f() {
     if (authenticated) props.getAuthenticatedUserSummary();
     props.getNotifications();
-    props.getAppState();
-    if (props.user.userSummaries.length != 0) return;
-    props.getAllUserSummary();
+    if(appState.status == "") props.getAppState();
+    if (props.user.userSummaries.length == 0) props.getAllUserSummary();
+
   }
   useEffect(() => {
     f();
