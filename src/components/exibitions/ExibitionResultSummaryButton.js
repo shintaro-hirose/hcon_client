@@ -9,7 +9,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Paper from "@material-ui/core/Paper";
 
 function ExibitionResultSummaryButton(props) {
-  const {resultUrl, logoAlt, logoSrc, backgroundColor, dayText, partText, winText} = props;
+  const {resultUrl, logoAlt, logoSrc, backgroundColor, dayText, partText, winText, timeText} = props;
   const useStyles = makeStyles((theme) => ({
     paper: {
       width: "80%",
@@ -35,7 +35,6 @@ function ExibitionResultSummaryButton(props) {
     },
     logo: {
       width: "200px",
-      height: "95px",
     },
   }));
   const classes = useStyles();
@@ -47,7 +46,7 @@ function ExibitionResultSummaryButton(props) {
       <Tooltip title="コンテストのページに行く">
        
           <Link  to={resultUrl}>
-          <Grid container p={2}>
+          <Grid container p={2} alignItems="center">
             <Grid item sm={6} xs={12}>
               <img
                 alt={logoAlt}
@@ -58,7 +57,9 @@ function ExibitionResultSummaryButton(props) {
             <Grid item sm={6} xs={12} style={{color: "#000"}}>
               <Typography>{dayText}</Typography>
               <Typography>{partText}</Typography>
-              <p>{winText}</p>
+              <br />
+              <Typography>{winText}</Typography>
+              <Typography>{timeText}</Typography>
             </Grid>
           </Grid>
           </Link>
