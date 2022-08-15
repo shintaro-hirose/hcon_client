@@ -9,6 +9,7 @@ import ExibitionResultSummaryButton from "../components/exibitions/ExibitionResu
 
 import harukazeLogo from "../images/harukaze-logo.svg";
 import OTAWarmupLogo from "../images/OTAWarmupLogo.svg"
+import YOGA2022Logo from "../images/YOGA2022Logo.svg"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -75,13 +76,24 @@ function ResultMap(props) {
           不定期で開催される特別大会！
         </Typography>
         <ExibitionResultSummaryButton 
+        resultUrl="/result/20220814"
+        logoAlt="YOGA2022Logo"
+        logoSrc={YOGA2022Logo}
+        backgroundColor="#ffe0b2"
+        dayText="開催日： 2022/08/14"
+        partText="参加者： 33名"
+        winText=" 優勝： たけい さん"
+        timeText="（優勝タイム： 29.29）"
+        />
+        <ExibitionResultSummaryButton 
         resultUrl="/result/20220723"
         logoAlt="OTAWarmupLogo"
         logoSrc={OTAWarmupLogo}
         backgroundColor="#b2ebf2"
         dayText="開催日： 2022/07/23"
         partText="参加者： 19名"
-        winText=" 優勝： うえしゅう さん　（優勝タイム： 50.20）"
+        winText=" 優勝： うえしゅう さん"
+        timeText="（優勝タイム： 50.20）"
         />
         <ExibitionResultSummaryButton 
         resultUrl="/exibitionAllResults/breathOfSpring2020"
@@ -90,7 +102,8 @@ function ResultMap(props) {
         backgroundColor="#fce4ec"
         dayText="開催日： 2020/03/29"
         partText="参加者： 24名"
-        winText=" 優勝： plus さん　（優勝タイム： 39.42）"
+        winText=" 優勝： plus さん"
+        timeText="（優勝タイム： 39.42）"
         />
       </Paper>
     </React.Fragment>
