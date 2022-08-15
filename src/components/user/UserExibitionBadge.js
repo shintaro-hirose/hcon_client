@@ -7,6 +7,7 @@ import Box from "@material-ui/core/Box";
 //images
 import harukazeLogo from "../../images/harukaze-logo.svg";
 import OTAWarmupLogo from "../../images/OTAWarmupLogo.svg";
+import YOGA2022Logo from "../../images/YOGA2022Logo.svg";
 import firstFont from "../../images/first-font.svg";
 import secondFont from "../../images/second-font.svg";
 import thirdFont from "../../images/third-font.svg";
@@ -69,6 +70,18 @@ function UserExibitionBadge(props) {
 
   return (
     <Fragment>
+      {
+        userData.YOGA2022Result ? (
+          <Badge 
+          place={userData.YOGA2022Result} 
+          imgalt="YOGA2022Logo" 
+          imgsrc={YOGA2022Logo}
+          backgroundColor="#ffe0b2"
+          />
+        ) : (
+          <></>
+        )
+      }
       {
         userData.breathOfSpring2020Result ? (
           <Badge 
