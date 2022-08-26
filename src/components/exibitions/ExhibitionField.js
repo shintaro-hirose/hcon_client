@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 
 import Typography from "@material-ui/core/Typography";
 
-import logo from "../../images/yogafireLogo.svg"
+import logo from "../../images/syuukou-logo.svg"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
     padding: "20px 0",
     boxShadow: theme.shadows[5],
-    backgroundColor: "#ffe0b2",
+    backgroundColor: "#ff8a80",
     color: "black",
     textAlign: "center",
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     // padding: "0 10px",
   },
   logo: {
-    width: "60%",
+    width: "40%",
   },
 }));
 
