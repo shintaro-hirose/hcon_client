@@ -24,18 +24,8 @@ const useStyles = makeStyles({
   },
 });
 
-const now = new Date();
-now.setDate(now.getDate() - 1);
-let year = String(now.getFullYear());
-let month = String(now.getMonth() + 1);
-let date = String(now.getDate());
-month = ("0" + month).slice(-2);
-date = ("0" + date).slice(-2);
-const contestId = year + month + date;
-
 const SignedOutBottomNavBar = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
   return (
     <div className={classes.wrapper}>
       <BottomNavigation value={props.location.pathname}>
