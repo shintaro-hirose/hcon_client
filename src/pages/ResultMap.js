@@ -7,6 +7,8 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import ExibitionResultSummaryButton from "../components/exibitions/ExibitionResultSummaryButton";
 
+import { getYesterdayContestId } from "../util/commonFunctions";
+
 import harukazeLogo from "../images/harukaze-logo.svg";
 import OTAWarmupLogo from "../images/OTAWarmupLogo.svg"
 import YOGA2022Logo from "../images/YOGA2022Logo.svg"
@@ -50,7 +52,8 @@ let month = String(now.getMonth() + 1);
 let date = String(now.getDate());
 month = ("0" + month).slice(-2);
 date = ("0" + date).slice(-2);
-const contestId = year + month + date;
+
+const contestId = getYesterdayContestId();
 
 function ResultMap(props) {
   const classes = useStyles();

@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import ResultTable from "../components/results/ResultTable";
 import Loading from "../util/Loading";
 
+import { getCurrentContestId } from "../util/commonFunctions";
+
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -17,21 +19,17 @@ import { connect } from "react-redux";
 import { getResult } from "../redux/actions/userActions";
 
 const Results = (props) => {
-  const now = new Date();
-  let year = String(now.getFullYear());
-  let month = String(now.getMonth() + 1);
-  let date = String(now.getDate());
-  month = ("0" + month).slice(-2);
-  date = ("0" + date).slice(-2);
-  const t = year + month + date;
-  const todayDate = new Date();
+  const currentContestId = getCurrentContestId();
+  const year = currentContestId.substr(0, 4);
+  const month = currentContestId.substr(4, 2);
+  const date = currentContestId.substr(6, 2);
 
   const contestId = props.match.params.contestId;
   const refYear = contestId.substr(0, 4);
   const refMonth = contestId.substr(4, 2);
   const refDate = contestId.substr(6, 2);
 
-  if (Number(t) - Number(contestId) < 0) {
+  if (Number(currentContestId) - Number(contestId) < 0) {
     window.location.href = "/";
   }
 
@@ -54,7 +52,7 @@ const Results = (props) => {
     day = ("0" + day).slice(-2);
     const con = year + month + day;
     setSelectedDateFormatted(con);
-    if (Number(t) - Number(con) < 0) {
+    if (Number(currentContestId) - Number(con) < 0) {
       window.location.href = "/";
     }
     props.getResult(con);
@@ -73,7 +71,7 @@ const Results = (props) => {
       ) : (
         <div>
           <Box textAlign="center">
-            {Number(t) - Number(selectedDateFormatted) === 0 ? (
+            {Number(currentContestId) - Number(selectedDateFormatted) === 0 ? (
               <Typography variant="h4" align="center">
                 今日の暫定結果
               </Typography>
@@ -92,7 +90,7 @@ const Results = (props) => {
                 label="日付を選択してください"
                 value={selectedDate}
                 minDate={new Date(2020, 1, 22, 12, 12)}
-                maxDate={todayDate}
+                maxDate={new Date(Number(year), Number(month) - 1, Number(date))}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
                   "aria-label": "change date",

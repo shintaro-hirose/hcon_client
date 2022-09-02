@@ -12,15 +12,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import TimerIcon from "@material-ui/icons/Timer";
 import CreateIcon from "@material-ui/icons/Create";
 
-import { connect } from "react-redux";
+import { getCurrentContestId } from "../../util/commonFunctions";
 
-const now = new Date();
-let year = String(now.getFullYear());
-let month = String(now.getMonth() + 1);
-let date = String(now.getDate());
-month = ("0" + month).slice(-2);
-date = ("0" + date).slice(-2);
-const contestId = year + month + date;
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ContestField(props) {
+  const contestId = getCurrentContestId();
+  const year = contestId.slice(0,4);
+  const month = contestId.slice(4,6);
+  const date = contestId.slice(6,8);
+
   const [isPostable, setIsPostable] = useState(true);
   const classes = useStyles();
   const authenticated = props.user.authenticated;
