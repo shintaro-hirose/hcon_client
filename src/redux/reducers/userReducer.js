@@ -50,6 +50,7 @@ const initialState = {
       second: "",
       third: "",
     },
+    contestAltName: null,
   },
   contestData: {
     scrambles: {
@@ -58,6 +59,7 @@ const initialState = {
       third: "",
     },
     results: [],
+    contestAltName: null,
   },
   exibitions: [],
   appState: {
