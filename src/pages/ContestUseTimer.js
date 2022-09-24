@@ -178,10 +178,16 @@ function ContestUseTimer(props) {
       {loading ? (
         <Loading />
       ) : (
-        <Typography variant="h4" align="center">
-          {contestId.substr(0, 4)}/{contestId.substr(4, 2)}/
-          {contestId.substr(6, 2)} のコンテスト
-        </Typography>
+        props.user.contest.contestAltName ? (
+          <Typography variant="h4" align="center">
+            {props.user.contest.contestAltName}
+          </Typography>
+          ) : (
+          <Typography variant="h4" align="center">
+            {contestId.substr(0, 4)}/{contestId.substr(4, 2)}/
+            {contestId.substr(6, 2)} のコンテスト
+          </Typography>
+        )
       )}
       {situation === 0 ? (
         <Typography variant="h5" align="center" className={classes.scramble}>
