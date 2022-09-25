@@ -12,6 +12,7 @@ import { getYesterdayContestId } from "../util/commonFunctions";
 import harukazeLogo from "../images/harukaze-logo.svg";
 import OTAWarmupLogo from "../images/OTAWarmupLogo.svg"
 import YOGA2022Logo from "../images/YOGA2022Logo.svg"
+import SYUKO2022Logo from "../images/SYUKO2022Logo.svg"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -78,6 +79,16 @@ function ResultMap(props) {
         <Typography className={classes.content}>
           不定期で開催される特別大会！
         </Typography>
+        <ExibitionResultSummaryButton 
+        resultUrl="/result/20220925"
+        logoAlt="SYUKO2022Logo"
+        logoSrc={SYUKO2022Logo}
+        backgroundColor="#ff8a80"
+        dayText="開催日： 2022/09/25"
+        partText="参加者： 24名"
+        winText=" 優勝： Ma29KH さん"
+        timeText="（優勝タイム： 21.24）"
+        />
         <ExibitionResultSummaryButton 
         resultUrl="/result/20220814"
         logoAlt="YOGA2022Logo"
