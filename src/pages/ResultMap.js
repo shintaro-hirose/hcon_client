@@ -85,9 +85,9 @@ function ResultMap(props) {
         logoSrc={SYUKO2022Logo}
         backgroundColor="#ff8a80"
         dayText="開催日： 2022/09/25"
-        partText="参加者： 33名"
-        winText=" 優勝： たけい さん"
-        timeText="（優勝タイム： 29.29）"
+        partText="参加者： 24名"
+        winText=" 優勝： Ma29KH さん"
+        timeText="（優勝タイム： 21.24）"
         />
         <ExibitionResultSummaryButton 
         resultUrl="/result/20220814"

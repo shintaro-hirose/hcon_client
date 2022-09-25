@@ -79,26 +79,13 @@ function UserExibitionBadge(props) {
   return (
     <Fragment>
       {
-        userData.YOGA2022Result ? (
+        userData.breathOfSpring2020Result ? (
           <Badge 
-          place={userData.YOGA2022Result} 
-          imgalt="SYUKO2022Logo" 
-          imgsrc={SYUKO2022Logo}
-          backgroundColor="#ff8a80"
-          resultUrl="/result/20220925"
-          />
-        ) : (
-          <></>
-        )
-      }
-      {
-        userData.YOGA2022Result ? (
-          <Badge 
-          place={userData.YOGA2022Result} 
-          imgalt="YOGA2022Logo" 
-          imgsrc={YOGA2022Logo}
-          backgroundColor="#ffe0b2"
-          resultUrl="/result/20220814"
+          place={userData.breathOfSpring2020Result} 
+          imgalt="harukazeLogo" 
+          imgsrc={harukazeLogo}
+          backgroundColor="#fce4ec"
+          resultUrl="/exibitionAllResults/breathOfSpring2020"
           />
         ) : (
           <></>
@@ -118,13 +105,26 @@ function UserExibitionBadge(props) {
         )
       }
       {
-        userData.breathOfSpring2020Result ? (
+        userData.YOGA2022Result ? (
           <Badge 
-          place={userData.breathOfSpring2020Result} 
-          imgalt="harukazeLogo" 
-          imgsrc={harukazeLogo}
-          backgroundColor="#fce4ec"
-          resultUrl="/exibitionAllResults/breathOfSpring2020"
+          place={userData.YOGA2022Result} 
+          imgalt="YOGA2022Logo" 
+          imgsrc={YOGA2022Logo}
+          backgroundColor="#ffe0b2"
+          resultUrl="/result/20220814"
+          />
+        ) : (
+          <></>
+        )
+      }
+      {
+        userData.SYUKO2022Result ? (
+          <Badge 
+          place={userData.SYUKO2022Result} 
+          imgalt="SYUKO2022Logo" 
+          imgsrc={SYUKO2022Logo}
+          backgroundColor="#ff8a80"
+          resultUrl="/result/20220925"
           />
         ) : (
           <></>
