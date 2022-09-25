@@ -79,26 +79,13 @@ function UserExibitionBadge(props) {
   return (
     <Fragment>
       {
-        userData.breathOfSpring2020Result ? (
+        userData.SYUKO2022Result ? (
           <Badge 
-          place={userData.breathOfSpring2020Result} 
-          imgalt="harukazeLogo" 
-          imgsrc={harukazeLogo}
-          backgroundColor="#fce4ec"
-          resultUrl="/exibitionAllResults/breathOfSpring2020"
-          />
-        ) : (
-          <></>
-        )
-      }
-      {
-        userData.OTAWarmupResult ? (
-          <Badge 
-          place={userData.OTAWarmupResult} 
-          imgalt="OTAWarmupLogo" 
-          imgsrc={OTAWarmupLogo}
-          backgroundColor="#b2ebf2"
-          resultUrl="/result/20220723"
+          place={userData.SYUKO2022Result} 
+          imgalt="SYUKO2022Logo" 
+          imgsrc={SYUKO2022Logo}
+          backgroundColor="#ff8a80"
+          resultUrl="/result/20220925"
           />
         ) : (
           <></>
@@ -118,13 +105,26 @@ function UserExibitionBadge(props) {
         )
       }
       {
-        userData.SYUKO2022Result ? (
+        userData.OTAWarmupResult ? (
           <Badge 
-          place={userData.SYUKO2022Result} 
-          imgalt="SYUKO2022Logo" 
-          imgsrc={SYUKO2022Logo}
-          backgroundColor="#ff8a80"
-          resultUrl="/result/20220925"
+          place={userData.OTAWarmupResult} 
+          imgalt="OTAWarmupLogo" 
+          imgsrc={OTAWarmupLogo}
+          backgroundColor="#b2ebf2"
+          resultUrl="/result/20220723"
+          />
+        ) : (
+          <></>
+        )
+      }
+      {
+        userData.breathOfSpring2020Result ? (
+          <Badge 
+          place={userData.breathOfSpring2020Result} 
+          imgalt="harukazeLogo" 
+          imgsrc={harukazeLogo}
+          backgroundColor="#fce4ec"
+          resultUrl="/exibitionAllResults/breathOfSpring2020"
           />
         ) : (
           <></>
